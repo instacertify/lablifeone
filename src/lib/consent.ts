@@ -48,20 +48,30 @@ export function parseConsent(raw: string | null | undefined): ConsentState | nul
   }
 }
 
+let cachedConsent: ConsentState | null | undefined = undefined;
+let cachedRaw: string | null = null;
+
 export function readStoredConsent(): ConsentState | null {
   if (typeof document === "undefined") return null;
-  const fromStorage = parseConsent(window.localStorage.getItem(CONSENT_STORAGE_KEY));
-  if (fromStorage) return fromStorage;
-  const cookie = document.cookie
+  const storageValue = window.localStorage.getItem(CONSENT_STORAGE_KEY);
+  const cookieValue = document.cookie
     .split("; ")
     .find((part) => part.startsWith(`${CONSENT_COOKIE}=`));
-  if (!cookie) return null;
-  return parseConsent(decodeURIComponent(cookie.slice(CONSENT_COOKIE.length + 1)));
+  const cookieDecoded = cookieValue
+    ? decodeURIComponent(cookieValue.slice(CONSENT_COOKIE.length + 1))
+    : null;
+  const currentRaw = storageValue || cookieDecoded;
+  if (currentRaw === cachedRaw) return cachedConsent ?? null;
+  cachedRaw = currentRaw;
+  cachedConsent = parseConsent(currentRaw);
+  return cachedConsent ?? null;
 }
 
 export function writeConsent(state: ConsentState) {
   if (typeof document === "undefined") return;
   const payload = JSON.stringify(state);
+  cachedRaw = payload;
+  cachedConsent = state;
   window.localStorage.setItem(CONSENT_STORAGE_KEY, payload);
   document.cookie = `${CONSENT_COOKIE}=${encodeURIComponent(payload)}; Path=/; Max-Age=${CONSENT_MAX_AGE}; SameSite=Lax`;
   window.dispatchEvent(new CustomEvent(CHANGE_CONSENT_EVENT, { detail: state }));
