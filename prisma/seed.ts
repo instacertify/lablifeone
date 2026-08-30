@@ -830,6 +830,12 @@ async function main() {
           "The Compass inside The Conservatory scores titles, descriptions, Open Graph, canonicals, and focus keywords. Every page can be edited to current SEO practice.",
         sortOrder: 5,
       },
+      {
+        question: "How does Metrra handle cookies and privacy?",
+        answer:
+          "Essential cookies only run the site and remember your choice. Analytics and marketing wait for an explicit yes. Reject is as easy as accept. Privacy rights — access, erasure, correction — can be filed from the Privacy notice.",
+        sortOrder: 6,
+      },
     ],
   });
 
@@ -914,6 +920,26 @@ async function main() {
       ogImage: item.image || "/images/labs/instruments.jpg",
       insightId: item.id,
     })),
+    {
+      path: "/privacy",
+      title: "Privacy notice | Metrra Lab",
+      description:
+        "How Metrra Lab processes personal data for quotes, cookies, and privacy rights under GDPR and global privacy standards.",
+      keywords: "privacy, GDPR, cookie consent, data rights, Metrra Lab",
+      focusKeyword: "privacy notice",
+      ogImage: "/images/labs/hero-3.jpg",
+      canonical: "https://www.metrra.com/privacy",
+    },
+    {
+      path: "/cookies",
+      title: "Cookie policy | Metrra Lab",
+      description:
+        "How Metrra Lab uses cookies, which ones are essential, and how to accept, refuse, or change a choice.",
+      keywords: "cookie policy, consent, GDPR, Metrra Lab",
+      focusKeyword: "cookie policy",
+      ogImage: "/images/labs/hero-3.jpg",
+      canonical: "https://www.metrra.com/cookies",
+    },
     {
       path: "/contact",
       title: "Request a Quote | Contact Metrra Lab",

@@ -1,3 +1,4 @@
+import { CookieConsent, ConsentScripts } from "@/components/site/CookieConsent";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { JsonLd } from "@/components/site/JsonLd";
@@ -48,6 +49,8 @@ export default async function SiteLayout({
         ])}
         sourcePage="/"
       />
+      <CookieConsent />
+      <ConsentScripts />
     </div>
   );
 }

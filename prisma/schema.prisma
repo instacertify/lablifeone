@@ -133,16 +133,27 @@ model Banner {
 }
 
 model Lead {
-  id         String   @id @default(cuid())
-  name       String
-  email      String
-  phone      String?
-  company    String?
-  category   String?
-  message    String
-  sourcePage String?
-  status     String   @default("new")
-  createdAt  DateTime @default(now())
+  id               String   @id @default(cuid())
+  name             String
+  email            String
+  phone            String?
+  company          String?
+  category         String?
+  message          String
+  sourcePage       String?
+  privacyAccepted  Boolean  @default(false)
+  status           String   @default("new")
+  createdAt        DateTime @default(now())
+}
+
+model PrivacyRequest {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  kind      String
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
 }
 
 model MediaAsset {

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Category, Setting } from "@prisma/client";
 import { formatAddress } from "@/lib/data";
+import { CookieSettingsLink } from "@/components/site/CookieConsent";
 import { Logo } from "@/components/site/Logo";
 import { LeadForm } from "@/components/site/LeadForm";
 
@@ -72,8 +73,10 @@ export function Footer({
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-5 text-xs tracking-[0.14em] text-mist/60 uppercase lg:px-8">
           <p>© {new Date().getFullYear()} {settings.companyName}. All rights reserved.</p>
-          <div className="flex gap-5">
+          <div className="flex flex-wrap gap-5">
             <Link href="/privacy">Privacy</Link>
+            <Link href="/cookies">Cookies</Link>
+            <CookieSettingsLink className="uppercase tracking-[0.14em]" />
             <Link href="/conservatory/login">Conservatory</Link>
           </div>
         </div>

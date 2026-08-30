@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   const parsed = leadSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: "Please complete name, email, and a short brief." }, { status: 400 });
+    return NextResponse.json({ error: "Please complete name, email, a short brief, and the privacy box." }, { status: 400 });
   }
 
   const lead = await prisma.lead.create({
@@ -19,6 +19,7 @@ export async function POST(request: Request) {
       category: parsed.data.category || null,
       message: parsed.data.message,
       sourcePage: parsed.data.sourcePage || "/",
+      privacyAccepted: true,
     },
   });
 

@@ -72,6 +72,20 @@ export function LeadForm({
         rows={compact ? 3 : 4}
         className={`${field} ${compact ? "" : "sm:col-span-2"}`}
       />
+      <label
+        className={`flex items-start gap-2 text-[11px] leading-5 ${
+          compact || dark ? "text-sand/70" : "text-ink/60 sm:col-span-2"
+        }`}
+      >
+        <input name="privacyAccepted" type="checkbox" required value="true" className="mt-0.5" />
+        <span>
+          I agree that Metrra Lab may use these details to reply to this brief. See{" "}
+          <a href="/privacy" className="underline">
+            Privacy
+          </a>
+          .
+        </span>
+      </label>
       <button
         disabled={status === "sending"}
         className={`rounded-full px-5 py-2.5 text-[12px] tracking-[0.16em] uppercase transition ${

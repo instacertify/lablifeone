@@ -9,7 +9,10 @@ export const dynamic = "force-dynamic";
 export default async function ChamberPage() {
   const session = await getConservatorySession();
   if (!session) redirect("/conservatory/login");
-  const leads = await prisma.lead.findMany({ orderBy: { createdAt: "desc" } });
+  const [leads, privacyRequests] = await Promise.all([
+    prisma.lead.findMany({ orderBy: { createdAt: "desc" } }),
+    prisma.privacyRequest.findMany({ orderBy: { createdAt: "desc" } }),
+  ]);
 
   return (
     <ConservatoryShell name={session.name}>
@@ -38,6 +41,23 @@ export default async function ChamberPage() {
         ))}
         {leads.length === 0 && (
           <p className="px-5 py-10 text-sm text-sand/50">No briefs yet. The public doors are open.</p>
+        )}
+      </div>
+      <h2 className="display mt-14 text-3xl">Privacy requests</h2>
+      <p className="mt-2 max-w-2xl text-sm text-sand/60">
+        Access, erasure, and other rights filed from the Privacy notice.
+      </p>
+      <div className="mt-6 divide-y divide-white/10 rounded-2xl border border-white/10">
+        {privacyRequests.map((request) => (
+          <article key={request.id} className="px-5 py-5">
+            <p className="text-[11px] tracking-[0.14em] text-aqua uppercase">{request.kind}</p>
+            <h3 className="display mt-1 text-2xl">{request.name}</h3>
+            <p className="text-sm text-sand/70">{request.email}</p>
+            <p className="mt-3 text-sm leading-7 text-sand/80">{request.message}</p>
+          </article>
+        ))}
+        {privacyRequests.length === 0 && (
+          <p className="px-5 py-8 text-sm text-sand/50">No privacy requests yet.</p>
         )}
       </div>
     </ConservatoryShell>

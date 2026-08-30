@@ -8,6 +8,17 @@ export const leadSchema = z.object({
   category: z.string().max(120).optional().or(z.literal("")),
   message: z.string().min(8).max(4000),
   sourcePage: z.string().max(240).optional().or(z.literal("")),
+  privacyAccepted: z.preprocess(
+    (value) => value === true || value === "on" || value === "true",
+    z.literal(true),
+  ),
+});
+
+export const privacyRequestSchema = z.object({
+  name: z.string().min(2).max(120),
+  email: z.string().email(),
+  kind: z.enum(["access", "erasure", "rectification", "objection", "portability", "other"]),
+  message: z.string().min(8).max(4000),
 });
 
 export const loginSchema = z.object({
