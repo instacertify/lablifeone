@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getConservatorySession } from "@/lib/auth";
 import { insightSchema } from "@/lib/validators";
-import { emptyToNull } from "@/lib/records";
+import { normalizeInsight } from "@/lib/records";
 
 export async function PUT(
   request: Request,
@@ -17,11 +17,7 @@ export async function PUT(
   }
   const insight = await prisma.insight.update({
     where: { id },
-    data: {
-      ...parsed.data,
-      image: parsed.data.image || null,
-      industryId: emptyToNull(parsed.data.industryId),
-    },
+    data: await normalizeInsight(parsed.data),
   });
   return NextResponse.json(insight);
 }

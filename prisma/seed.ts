@@ -730,6 +730,9 @@ async function main() {
         "<p>Most laboratories sell a turnaround. Metrra sells a room you can think in. A protocol names the sample, the instrument, the uncertainty, and the sentence the client will eventually need. That is architecture, not logistics.</p><p>When we add a category — food, cosmetic, electronics, metals, polymer, or whatever the market invents next — we do not bolt on a brochure. We open a wing under Disciplines: methods, standards, timelines, images, SEO, a lead door on every landing.</p>",
       image: "/images/labs/food.jpg",
       industryId: foodIndustry.id,
+      writerName: "Ira Sen",
+      writerRole: "Method architect",
+      identityLine: "A global laboratory with global solutions",
     },
     {
       title: "What a nutrition panel must actually prove",
@@ -739,6 +742,9 @@ async function main() {
         "<p>A nutrition panel is a contract with a buyer. Energy, protein, sugars, and fortificants have to recover against the regulation the pack will meet — not the one a brochure prefers.</p>",
       image: "/images/labs/food.jpg",
       industryId: foodIndustry.id,
+      writerName: "Nalini Rao",
+      writerRole: "Food and beverage editor",
+      identityLine: "A global laboratory with global solutions",
     },
     {
       title: "Restricted lists before the face meets the formula",
@@ -748,6 +754,9 @@ async function main() {
         "<p>A cosmetic is a contract with the face. Restricted lists, microbial limits, and stability are not a brochure — they are the sentences a retailer will ask for.</p>",
       image: "/images/labs/cosmetics.jpg",
       industryId: cosmeticIndustry.id,
+      writerName: "Elise Moreau",
+      writerRole: "Cosmetic industry editor",
+      identityLine: "A global laboratory with global solutions",
     },
     {
       title: "What leaves the polymer when it meets food",
@@ -757,6 +766,9 @@ async function main() {
         "<p>A polymer is a recipe and a risk. Overall migration and metal migration are written to the simulant and time the regulation names.</p>",
       image: "/images/labs/chemistry.jpg",
       industryId: plasticsIndustry.id,
+      writerName: "Arjun Vale",
+      writerRole: "Polymer editor",
+      identityLine: "A global laboratory with global solutions",
     },
     {
       title: "Materials declarations before the shipment leaves",
@@ -766,6 +778,9 @@ async function main() {
         "<p>Electronics fail quietly until they do not. Restricted-substance screens and polymer identification belong in the same folio as the drawing.</p>",
       image: "/images/labs/electronics.jpg",
       industryId: electronicsIndustry.id,
+      writerName: "Soren Hale",
+      writerRole: "Electronics editor",
+      identityLine: "A global laboratory with global solutions",
     },
     {
       title: "Grade confirmation is a promise of chemistry",
@@ -775,6 +790,9 @@ async function main() {
         "<p>A metal is a promise of grade. Composition, hardness, and corrosion hours should be written against the specification the purchase order actually names.</p>",
       image: "/images/labs/instruments.jpg",
       industryId: metalsIndustry.id,
+      writerName: "Helena Kranz",
+      writerRole: "Metals editor",
+      identityLine: "A global laboratory with global solutions",
     },
   ];
 

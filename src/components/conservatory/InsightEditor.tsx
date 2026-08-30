@@ -13,6 +13,9 @@ type Insight = {
   excerpt: string;
   content: string;
   image: string | null;
+  writerName: string | null;
+  writerRole: string | null;
+  identityLine: string | null;
   industryId: string | null;
   seo: (SeoInput & { path?: string; robots?: string }) | null;
 };
@@ -33,6 +36,9 @@ export function InsightEditor({
   const [content, setContent] = useState(insight.content);
   const [image, setImage] = useState(insight.image || "");
   const [industryId, setIndustryId] = useState(insight.industryId || "");
+  const [writerName, setWriterName] = useState(insight.writerName || "");
+  const [writerRole, setWriterRole] = useState(insight.writerRole || "");
+  const [identityLine, setIdentityLine] = useState(insight.identityLine || "");
   const [seo, setSeo] = useState<SeoInput & { path?: string; robots?: string }>(
     insight.seo || {
       path: `/insights/${insight.slug}`,
@@ -46,7 +52,18 @@ export function InsightEditor({
     await fetch(`/api/insights/${insight.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, slug, excerpt, content, image, industryId, published: true }),
+      body: JSON.stringify({
+        title,
+        slug,
+        excerpt,
+        content,
+        image,
+        industryId,
+        writerName,
+        writerRole,
+        identityLine,
+        published: true,
+      }),
     });
     await fetch("/api/seo", {
       method: "PUT",
@@ -95,6 +112,26 @@ export function InsightEditor({
                 </option>
               ))}
             </select>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <input
+              value={writerName}
+              onChange={(e) => setWriterName(e.target.value)}
+              placeholder="Writer name"
+              className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
+            />
+            <input
+              value={writerRole}
+              onChange={(e) => setWriterRole(e.target.value)}
+              placeholder="Writer role"
+              className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
+            />
+            <input
+              value={identityLine}
+              onChange={(e) => setIdentityLine(e.target.value)}
+              placeholder="Written identity"
+              className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
+            />
           </div>
           <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm" />
           <FolioEditor value={content} onChange={setContent} />

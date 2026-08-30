@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getConservatorySession } from "@/lib/auth";
 import { insightSchema } from "@/lib/validators";
-import { emptyToNull } from "@/lib/records";
+import { normalizeInsight } from "@/lib/records";
 
 export async function POST(request: Request) {
   const session = await getConservatorySession();
@@ -11,12 +11,11 @@ export async function POST(request: Request) {
   if (!parsed.success) {
     return NextResponse.json({ error: "An industry note needs a title and folio." }, { status: 400 });
   }
+  const data = await normalizeInsight(parsed.data);
   const insight = await prisma.insight.create({
     data: {
-      ...parsed.data,
-      image: parsed.data.image || null,
-      industryId: emptyToNull(parsed.data.industryId),
-      publishedAt: parsed.data.published === false ? null : new Date(),
+      ...data,
+      publishedAt: data.published === false ? null : new Date(),
     },
   });
   return NextResponse.json(insight);

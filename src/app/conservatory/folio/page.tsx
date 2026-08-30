@@ -50,6 +50,10 @@ export default async function FolioIndexPage() {
               {item.industry?.name || "Unassigned"}
             </p>
             <p className="mt-1">{item.title}</p>
+            <p className="mt-1 text-xs text-sand/50">
+              Written by {item.writerName || "Metrra Lab"}
+              {item.writerRole ? ` · ${item.writerRole}` : ""}
+            </p>
           </Link>
         ))}
       </div>

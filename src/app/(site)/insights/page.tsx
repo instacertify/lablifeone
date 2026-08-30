@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LeadForm } from "@/components/site/LeadForm";
+import { ArticleIdentity } from "@/components/site/ArticleIdentity";
 import { IndustryFilter } from "@/components/site/IndustryFilter";
 import {
   flattenCategoryNames,
@@ -74,6 +75,14 @@ export default async function InsightsPage({
                 </p>
               )}
               <h2 className="display mt-2 text-4xl">{item.title}</h2>
+              <div className="mt-3">
+                <ArticleIdentity
+                  writerName={item.writerName}
+                  writerRole={item.writerRole}
+                  identityLine={item.identityLine}
+                  publishedAt={item.publishedAt}
+                />
+              </div>
               <p className="mt-2 text-sm text-ink/70">{item.excerpt}</p>
             </Link>
           ))}
