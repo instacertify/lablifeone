@@ -23,7 +23,21 @@ model Setting {
   linkedin      String?
   aboutExcerpt  String
   footerNote    String
+  logoUrl       String?
   updatedAt     DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String  @id @default(cuid())
+  quote     String
+  name      String
+  role      String?
+  company   String?
+  image     String?
+  published Boolean @default(true)
+  sortOrder Int     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Category {

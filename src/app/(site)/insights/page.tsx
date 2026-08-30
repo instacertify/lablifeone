@@ -7,8 +7,8 @@ import { buildMetadata } from "@/lib/metadata";
 export const dynamic = "force-dynamic";
 
 export const metadata = buildMetadata(null, {
-  title: "Insights | Mettra",
-  description: "Notes from the Mettra folio — methods, manners, and the architecture of a protocol.",
+  title: "Insights | Metrra Lab",
+  description: "Notes from the Metrra folio — methods, manners, and the architecture of a protocol.",
   path: "/insights",
 });
 

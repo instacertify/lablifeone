@@ -49,7 +49,7 @@ export function InsightEditor({ insight }: { insight: Insight }) {
         ogTitle: seo.ogTitle || title,
         ogDescription: seo.ogDescription || excerpt,
         ogImage: seo.ogImage || image,
-        canonical: seo.canonical || `https://www.mettra.com/insights/${slug}`,
+        canonical: seo.canonical || `https://www.metrra.com/insights/${slug}`,
         robots: seo.robots || "index,follow",
         focusKeyword: seo.focusKeyword || "",
       }),
@@ -69,12 +69,12 @@ export function InsightEditor({ insight }: { insight: Insight }) {
       {status && <p className="mt-3 text-sm text-sand/70">{status}</p>}
       <div className="mt-8 grid gap-8 xl:grid-cols-[minmax(0,1fr)_360px]">
         <div className="space-y-4">
-          <input value={title} onChange={(e) => setTitle(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#102226] px-4 py-3 display text-3xl" />
+          <input value={title} onChange={(e) => setTitle(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-4 py-3 display text-3xl" />
           <div className="grid gap-3 sm:grid-cols-2">
-            <input value={slug} onChange={(e) => setSlug(e.target.value)} className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2 text-sm" />
-            <input value={image} onChange={(e) => setImage(e.target.value)} className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2 text-sm" />
+            <input value={slug} onChange={(e) => setSlug(e.target.value)} className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm" />
+            <input value={image} onChange={(e) => setImage(e.target.value)} className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm" />
           </div>
-          <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#102226] px-3 py-2 text-sm" />
+          <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm" />
           <FolioEditor value={content} onChange={setContent} />
         </div>
         <SeoSidecar value={{ ...seo, content }} onChange={setSeo} />

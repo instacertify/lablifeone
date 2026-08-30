@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Category } from "@prisma/client";
+import type { Category, Setting } from "@prisma/client";
 import { Logo } from "@/components/site/Logo";
 
 const links = [
@@ -12,21 +12,28 @@ const links = [
 
 export function Header({
   categories,
+  settings,
 }: {
   categories: Pick<Category, "name" | "slug">[];
+  settings?: Pick<Setting, "companyName" | "logoUrl"> | null;
 }) {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/90 text-ivory backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/95 text-ivory backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3.5 lg:px-8">
-        <Link href="/" className="shrink-0 [&_span]:text-ivory">
-          <Logo className="h-8" />
+        <Link href="/" className="shrink-0">
+          <Logo
+            className="h-9"
+            inverted
+            src={settings?.logoUrl}
+            name={settings?.companyName || "Metrra Lab"}
+          />
         </Link>
         <nav className="hidden items-center gap-7 text-[13px] tracking-[0.14em] uppercase md:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sand/80 transition hover:text-aqua"
+              className="text-white/75 transition hover:text-white"
             >
               {link.label}
             </Link>
@@ -35,7 +42,7 @@ export function Header({
             <Link
               key={category.slug}
               href={`/disciplines/${category.slug}`}
-              className="hidden text-sand/60 transition hover:text-aqua xl:inline"
+              className="hidden text-white/55 transition hover:text-white xl:inline"
             >
               {category.name.split("&")[0].trim()}
             </Link>
@@ -43,7 +50,7 @@ export function Header({
         </nav>
         <Link
           href="/contact"
-          className="rounded-full bg-aqua px-4 py-2 text-[12px] font-medium tracking-[0.16em] text-ink uppercase transition hover:bg-white"
+          className="rounded-full bg-white px-4 py-2 text-[12px] font-medium tracking-[0.16em] text-ink uppercase transition hover:bg-sand"
         >
           Request assay
         </Link>

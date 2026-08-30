@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata() {
   const seo = await getSeoByPath("/disciplines");
   return buildMetadata(seo, {
-    title: "Testing Disciplines | Mettra",
+    title: "Testing Disciplines | Metrra Lab",
     description: "Food, cosmetics, electronics, and every category the Conservatory opens next.",
     path: "/disciplines",
   });

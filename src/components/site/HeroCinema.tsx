@@ -45,7 +45,7 @@ export function HeroCinema({ banners }: { banners: Banner[] }) {
             priority={slideIndex === 0}
             className={`object-cover ${slideIndex === index ? "ken" : ""}`}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-iris/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/35" />
           <div className="absolute inset-0 grain" />
         </div>
       ))}

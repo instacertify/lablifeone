@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata() {
   const seo = await getSeoByPath("/accreditations");
   return buildMetadata(seo, {
-    title: "Seals & Recognitions | Mettra",
+    title: "Seals & Recognitions | Metrra Lab",
     description: "The papers a serious laboratory keeps on the wall.",
     path: "/accreditations",
   });

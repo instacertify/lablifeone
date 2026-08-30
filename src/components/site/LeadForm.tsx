@@ -7,6 +7,7 @@ type Props = {
   categories?: string[];
   compact?: boolean;
   dark?: boolean;
+  replyTo?: string;
 };
 
 export function LeadForm({
@@ -14,6 +15,7 @@ export function LeadForm({
   categories = [],
   compact = false,
   dark = false,
+  replyTo = "contact@metrra.com",
 }: Props) {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
   const [error, setError] = useState("");
@@ -83,7 +85,7 @@ export function LeadForm({
       </button>
       {status === "ok" && (
         <p className={`text-xs ${compact || dark ? "text-aqua" : "text-jade sm:col-span-2"}`}>
-          The house has your brief. We reply from contact@mettra.com.
+          The house has your brief. We reply from {replyTo}.
         </p>
       )}
       {status === "error" && (

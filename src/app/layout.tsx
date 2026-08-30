@@ -6,11 +6,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl("/")),
   title: {
-    default: "Mettra | Analytical Testing Laboratory in Noida",
-    template: "%s | Mettra",
+    default: "Metrra Lab | Analytical Testing Laboratory in Noida",
+    template: "%s | Metrra Lab",
   },
   description:
-    "Mettra is a high-house of analytical testing in Sector 62, Noida. Be testing. Be unstoppable.",
+    "Metrra Lab is a high-house of analytical testing in Sector 62, Noida. Be testing. Be unstoppable.",
 };
 
 const outfit = Outfit({

@@ -15,8 +15,8 @@ export async function generateMetadata({
   const insight = await getInsightBySlug(slug);
   const seo = await getSeoByPath(`/insights/${slug}`);
   return buildMetadata(seo, {
-    title: `${insight?.title || "Insight"} | Mettra`,
-    description: insight?.excerpt || "A note from the Mettra folio.",
+    title: `${insight?.title || "Insight"} | Metrra Lab`,
+    description: insight?.excerpt || "A note from the Metrra folio.",
     path: `/insights/${slug}`,
   });
 }

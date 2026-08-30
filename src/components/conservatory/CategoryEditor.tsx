@@ -40,7 +40,7 @@ export function CategoryEditor({ category }: Props) {
   const [seo, setSeo] = useState<SeoInput & { path?: string; robots?: string }>(
     category.seo || {
       path: `/disciplines/${category.slug}`,
-      title: `${category.name} | Mettra`,
+      title: `${category.name} | Metrra Lab`,
       description: category.excerpt,
     },
   );
@@ -59,13 +59,13 @@ export function CategoryEditor({ category }: Props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         path: seo.path || `/disciplines/${slug}`,
-        title: seo.title || `${name} | Mettra`,
+        title: seo.title || `${name} | Metrra Lab`,
         description: seo.description || excerpt,
         keywords: seo.keywords || "",
         ogTitle: seo.ogTitle || seo.title,
         ogDescription: seo.ogDescription || seo.description,
         ogImage: seo.ogImage || image,
-        canonical: seo.canonical || `https://www.mettra.com/disciplines/${slug}`,
+        canonical: seo.canonical || `https://www.metrra.com/disciplines/${slug}`,
         robots: seo.robots || "index,follow",
         focusKeyword: seo.focusKeyword || name.toLowerCase(),
       }),
@@ -84,7 +84,7 @@ export function CategoryEditor({ category }: Props) {
         name: serviceName,
         slug: serviceSlug,
         excerpt: `An assay within ${name}.`,
-        description: `<p>Commission the ${serviceName} protocol from Mettra.</p>`,
+        description: `<p>Commission the ${serviceName} protocol from Metrra.</p>`,
         categoryId: category.id,
         image,
       }),
@@ -107,18 +107,18 @@ export function CategoryEditor({ category }: Props) {
       {status && <p className="mt-3 text-sm text-sand/70">{status}</p>}
       <div className="mt-8 grid gap-8 xl:grid-cols-[minmax(0,1fr)_360px]">
         <div className="space-y-4">
-          <input value={name} onChange={(e) => setName(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#102226] px-4 py-3 display text-3xl" />
+          <input value={name} onChange={(e) => setName(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-4 py-3 display text-3xl" />
           <div className="grid gap-3 sm:grid-cols-3">
-            <input value={slug} onChange={(e) => setSlug(e.target.value)} className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2 text-sm" />
-            <input value={image} onChange={(e) => setImage(e.target.value)} placeholder="Image" className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2 text-sm" />
-            <select value={accent} onChange={(e) => setAccent(e.target.value)} className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2 text-sm">
+            <input value={slug} onChange={(e) => setSlug(e.target.value)} className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm" />
+            <input value={image} onChange={(e) => setImage(e.target.value)} placeholder="Image" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm" />
+            <select value={accent} onChange={(e) => setAccent(e.target.value)} className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm">
               <option value="aqua">Aqua</option>
               <option value="iris">Iris</option>
               <option value="bronze">Bronze</option>
               <option value="jade">Jade</option>
             </select>
           </div>
-          <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#102226] px-3 py-2 text-sm" />
+          <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm" />
           <FolioEditor value={description} onChange={setDescription} />
           <div className="rounded-2xl border border-white/10 p-4">
             <h3 className="display text-2xl">Services in this wing</h3>
@@ -132,7 +132,7 @@ export function CategoryEditor({ category }: Props) {
                 value={serviceName}
                 onChange={(e) => setServiceName(e.target.value)}
                 placeholder="New assay name"
-                className="flex-1 rounded-xl border border-white/10 bg-[#102226] px-3 py-2 text-sm"
+                className="flex-1 rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
               />
               <button type="button" onClick={addService} className="rounded-full bg-iris px-4 text-[11px] tracking-[0.14em] uppercase">
                 Add

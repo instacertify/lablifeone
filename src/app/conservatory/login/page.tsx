@@ -40,7 +40,7 @@ function LoginForm() {
         name="email"
         type="email"
         required
-        defaultValue="conservatory@mettra.com"
+        defaultValue="conservatory@metrra.com"
         className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-ivory"
         placeholder="Email"
       />
@@ -64,13 +64,13 @@ function LoginForm() {
 
 export default function ConservatoryLoginPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#071316] px-5 text-ivory [color-scheme:dark]">
-      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#102226] p-8">
-        <Logo className="h-8 [&_span]:text-ivory" />
-        <p className="mt-8 text-[11px] tracking-[0.24em] text-aqua uppercase">Backstage</p>
+    <div className="flex min-h-screen items-center justify-center bg-[#061433] px-5 text-ivory [color-scheme:dark]">
+      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#0A1F44] p-8">
+        <Logo className="h-8" inverted name="Metrra Lab" src="/images/metrra-lab-logo.png" />
+        <p className="mt-8 text-[11px] tracking-[0.24em] text-white uppercase">Backstage</p>
         <h1 className="display mt-2 text-4xl">The Conservatory</h1>
-        <p className="mt-3 text-sm text-sand/70">
-          The editorial house for Mettra — folio, cinema, compass, chamber.
+        <p className="mt-3 text-sm text-white/70">
+          The editorial house for Metrra Lab — folio, cinema, voices, chamber.
         </p>
         <Suspense>
           <LoginForm />

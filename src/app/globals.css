@@ -2,19 +2,19 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --ink: #06141a;
-  --abyss: #0a2428;
-  --forest: #124e4f;
-  --jade: #1b7a78;
-  --aqua: #3ddcbf;
-  --iris: #6e56cf;
-  --violet: #9b7ede;
-  --bronze: #c4a484;
-  --sand: #e8d9c4;
-  --ivory: #f7f2ea;
-  --paper: #fbf8f3;
-  --mist: #d5e8e4;
-  --line: rgba(6, 20, 26, 0.12);
+  --ink: #061433;
+  --abyss: #0a1f44;
+  --forest: #102a56;
+  --jade: #163a73;
+  --aqua: #ffffff;
+  --iris: #1c4a8c;
+  --violet: #8fa4c4;
+  --bronze: #d6deea;
+  --sand: #e8eef6;
+  --ivory: #ffffff;
+  --paper: #f4f7fb;
+  --mist: #e4eaf3;
+  --line: rgba(6, 20, 51, 0.12);
 }
 
 @theme inline {
@@ -50,8 +50,8 @@ body {
 }
 
 ::selection {
-  background: var(--aqua);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--ivory);
 }
 
 .display {
@@ -79,7 +79,7 @@ body {
 }
 
 .ProseMirror p.is-editor-empty:first-child::before {
-  color: #7a8a86;
+  color: #8fa4c4;
   content: attr(data-placeholder);
   float: left;
   height: 0;
@@ -128,6 +128,6 @@ body {
 }
 
 .grain {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 0.6px, transparent 0.6px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 0.6px, transparent 0.6px);
   background-size: 3px 3px;
 }

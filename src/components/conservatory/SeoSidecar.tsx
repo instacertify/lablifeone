@@ -16,7 +16,7 @@ export function SeoSidecar({
   }
 
   return (
-    <div className="space-y-4 rounded-2xl border border-white/10 bg-[#102226] p-5">
+    <div className="space-y-4 rounded-2xl border border-white/10 bg-[#0A1F44] p-5">
       <div className="flex items-end justify-between">
         <div>
           <p className="text-[11px] tracking-[0.2em] text-aqua uppercase">Compass</p>
@@ -99,7 +99,7 @@ export function SeoSidecar({
       <div className="rounded-xl bg-ink/50 p-3">
         <p className="text-[10px] tracking-[0.18em] text-sand/50 uppercase">SERP preview</p>
         <p className="mt-2 text-[#8ab4f8]">{value.title || "Untitled folio"}</p>
-        <p className="text-xs text-[#3ddcbf]">{value.canonical || "https://www.mettra.com"}</p>
+        <p className="text-xs text-white/70">{value.canonical || "https://www.metrra.com"}</p>
         <p className="mt-1 text-sm text-sand/70">{value.description}</p>
       </div>
       <ul className="space-y-2">

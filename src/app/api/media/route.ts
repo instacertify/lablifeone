@@ -20,6 +20,13 @@ export async function POST(request: Request) {
   if (!(file instanceof File)) {
     return NextResponse.json({ error: "Choose an image." }, { status: 400 });
   }
+  const kind = String(form.get("kind") || "image");
+  if (kind === "logo") {
+    const allowed = ["image/png", "image/webp"];
+    if (!allowed.includes(file.type.toLowerCase())) {
+      return NextResponse.json({ error: "House logos must be PNG or WebP." }, { status: 400 });
+    }
+  }
   if (file.size > 8 * 1024 * 1024) {
     return NextResponse.json({ error: "Images must stay under 8MB." }, { status: 400 });
   }

@@ -52,9 +52,9 @@ export function CinemaBoard({ banners }: { banners: Banner[] }) {
         </div>
       ))}
       <div className="grid gap-3 rounded-2xl border border-dashed border-aqua/30 p-5">
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2" />
-        <input value={subtitle} onChange={(e) => setSubtitle(e.target.value)} placeholder="Subtitle" className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2" />
-        <input value={image} onChange={(e) => setImage(e.target.value)} placeholder="Image path" className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2" />
+        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
+        <input value={subtitle} onChange={(e) => setSubtitle(e.target.value)} placeholder="Subtitle" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
+        <input value={image} onChange={(e) => setImage(e.target.value)} placeholder="Image path" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
         <button onClick={addBanner} className="justify-self-start rounded-full bg-aqua px-5 py-2 text-[12px] tracking-[0.16em] text-ink uppercase">
           Add running frame
         </button>

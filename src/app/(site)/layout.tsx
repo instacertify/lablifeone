@@ -16,9 +16,9 @@ export default async function SiteLayout({
 
   const house = settings ?? {
     id: "house",
-    companyName: "Mettra",
+    companyName: "Metrra Lab",
     tagline: "BE TESTING BE UNSTOPPABLE",
-    email: "contact@mettra.com",
+    email: "contact@metrra.com",
     phone: "+91 120 456 6200",
     addressLine: "A Block, Sector 62, Institutional Area",
     city: "Noida",
@@ -30,13 +30,14 @@ export default async function SiteLayout({
     linkedin: null,
     aboutExcerpt: "A Noida house of analytical testing.",
     footerNote: "Protocols for industries that cannot afford doubt.",
+    logoUrl: "/images/metrra-lab-logo.png",
     updatedAt: new Date(),
   };
 
   return (
     <div className="flex min-h-full flex-col">
       <JsonLd settings={house} />
-      <Header categories={categories} />
+      <Header categories={categories} settings={house} />
       <main className="flex-1">{children}</main>
       <Footer settings={house} categories={categories} />
       <LeadDock categories={categories.map((item) => item.name)} sourcePage="/" />

@@ -16,8 +16,8 @@ export async function generateMetadata({
   const service = await getServiceBySlug(slug);
   const seo = await getSeoByPath(`/services/${slug}`);
   return buildMetadata(seo, {
-    title: `${service?.name || "Service"} | Mettra`,
-    description: service?.excerpt || "A Mettra assay.",
+    title: `${service?.name || "Service"} | Metrra Lab`,
+    description: service?.excerpt || "A Metrra assay.",
     path: `/services/${slug}`,
   });
 }

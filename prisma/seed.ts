@@ -10,37 +10,42 @@ async function main() {
   );
 
   await prisma.admin.upsert({
-    where: { email: process.env.CONSERVATORY_EMAIL || "conservatory@mettra.com" },
+    where: { email: process.env.CONSERVATORY_EMAIL || "conservatory@metrra.com" },
     update: { passwordHash, name: "Conservatory" },
     create: {
-      email: process.env.CONSERVATORY_EMAIL || "conservatory@mettra.com",
+      email: process.env.CONSERVATORY_EMAIL || "conservatory@metrra.com",
       passwordHash,
       name: "Conservatory",
     },
   });
 
+  const houseFields = {
+    companyName: "Metrra Lab",
+    tagline: "BE TESTING BE UNSTOPPABLE",
+    email: "contact@metrra.com",
+    phone: "+91 120 456 6200",
+    addressLine: "A Block, Sector 62, Institutional Area",
+    city: "Noida",
+    region: "Uttar Pradesh",
+    postalCode: "201301",
+    country: "India",
+    hours: "Monday–Saturday, 09:00–18:30 IST",
+    mapEmbed:
+      "https://www.google.com/maps?q=A+Block+Sector+62+Institutional+Area+Noida+201301&output=embed",
+    linkedin: "https://www.linkedin.com",
+    aboutExcerpt:
+      "Metrra Lab is a high-house of analytical testing in Noida’s institutional corridor — European in discipline, Indian in presence, exacting in every dossier.",
+    footerNote:
+      "Protocols written for industries that cannot afford doubt. Food, cosmetics, electronics, and every discipline you commission next.",
+    logoUrl: "/images/metrra-lab-logo.png",
+  };
+
   await prisma.setting.upsert({
     where: { id: "house" },
-    update: {},
+    update: houseFields,
     create: {
       id: "house",
-      companyName: "Mettra",
-      tagline: "BE TESTING BE UNSTOPPABLE",
-      email: "contact@mettra.com",
-      phone: "+91 120 456 6200",
-      addressLine: "A Block, Sector 62, Institutional Area",
-      city: "Noida",
-      region: "Uttar Pradesh",
-      postalCode: "201301",
-      country: "India",
-      hours: "Monday–Saturday, 09:00–18:30 IST",
-      mapEmbed:
-        "https://www.google.com/maps?q=A+Block+Sector+62+Institutional+Area+Noida+201301&output=embed",
-      linkedin: "https://www.linkedin.com",
-      aboutExcerpt:
-        "Mettra is a high-house of analytical testing in Noida’s institutional corridor — European in discipline, Indian in presence, exacting in every dossier.",
-      footerNote:
-        "Protocols written for industries that cannot afford doubt. Food, cosmetics, electronics, and every discipline you commission next.",
+      ...houseFields,
     },
   });
 
@@ -85,7 +90,7 @@ async function main() {
       name: "Food & Nutrition",
       slug: "food-nutrition",
       excerpt: "Composition, contaminants, authenticity, and fortification for brands that feed people.",
-      description: `<p>Mettra’s food atelier reads a product the way a sommelier reads a vintage — origin, integrity, and what must never be present. From residues to nutrition panels, every assay is written for regulators, retailers, and the people who will actually eat the thing.</p><h3>What we hold to account</h3><ul><li>Pesticide residues, heavy metals, and mycotoxins</li><li>Nutritional labelling and fortification recovery</li><li>Pathogen screens and shelf-life studies</li><li>Authenticity and adulteration dossiers</li></ul>`,
+      description: `<p>Metrra’s food atelier reads a product the way a sommelier reads a vintage — origin, integrity, and what must never be present. From residues to nutrition panels, every assay is written for regulators, retailers, and the people who will actually eat the thing.</p><h3>What we hold to account</h3><ul><li>Pesticide residues, heavy metals, and mycotoxins</li><li>Nutritional labelling and fortification recovery</li><li>Pathogen screens and shelf-life studies</li><li>Authenticity and adulteration dossiers</li></ul>`,
       image: "/images/labs/food.jpg",
       accent: "aqua",
       sortOrder: 0,
@@ -119,7 +124,7 @@ async function main() {
       name: "Cosmetics & Personal Care",
       slug: "cosmetics-personal-care",
       excerpt: "Safety, stability, and claim support for formulas that sit on skin.",
-      description: `<p>A cosmetic is a contract with the face. Mettra’s personal-care bench treats emulsions, serums, and ayurvedic preparations with the same severity we give a drug impurity profile — restricted substances, microbiology, and the quiet work of proving a claim.</p><h3>The folio</h3><ul><li>Restricted substances and heavy metals</li><li>Preservative efficacy and microbial limits</li><li>Stability, compatibility, and packaging interaction</li><li>Herbal and natural-origin substantiation</li></ul>`,
+      description: `<p>A cosmetic is a contract with the face. Metrra’s personal-care bench treats emulsions, serums, and ayurvedic preparations with the same severity we give a drug impurity profile — restricted substances, microbiology, and the quiet work of proving a claim.</p><h3>The folio</h3><ul><li>Restricted substances and heavy metals</li><li>Preservative efficacy and microbial limits</li><li>Stability, compatibility, and packaging interaction</li><li>Herbal and natural-origin substantiation</li></ul>`,
       image: "/images/labs/cosmetics.jpg",
       accent: "iris",
       sortOrder: 1,
@@ -153,7 +158,7 @@ async function main() {
       name: "Electronics & Electrical",
       slug: "electronics-electrical",
       excerpt: "Materials, restricted substances, and reliability for objects that carry current.",
-      description: `<p>Electronics fail quietly until they do not. Mettra’s electrical bench looks at solder, polymers, coatings, and assemblies the way a conservator looks at a clock — composition, restricted chemistry, and the manners of heat.</p><h3>Scope</h3><ul><li>Restricted substance screening for materials declarations</li><li>Polymer and coating identification</li><li>Corrosion, plating, and cleanliness</li><li>Incoming inspection for critical parts</li></ul>`,
+      description: `<p>Electronics fail quietly until they do not. Metrra’s electrical bench looks at solder, polymers, coatings, and assemblies the way a conservator looks at a clock — composition, restricted chemistry, and the manners of heat.</p><h3>Scope</h3><ul><li>Restricted substance screening for materials declarations</li><li>Polymer and coating identification</li><li>Corrosion, plating, and cleanliness</li><li>Incoming inspection for critical parts</li></ul>`,
       image: "/images/labs/electronics.jpg",
       accent: "bronze",
       sortOrder: 2,
@@ -187,7 +192,7 @@ async function main() {
       name: "Pharmaceuticals",
       slug: "pharmaceuticals",
       excerpt: "Identity, purity, and methodical release testing for medicines and actives.",
-      description: `<p>A medicine is a promise measured in milligrams. Mettra’s pharmaceutical rooms are written for identity, assay, impurities, and the documentary manners that a quality system expects.</p>`,
+      description: `<p>A medicine is a promise measured in milligrams. Metrra’s pharmaceutical rooms are written for identity, assay, impurities, and the documentary manners that a quality system expects.</p>`,
       image: "/images/labs/precision.jpg",
       accent: "jade",
       sortOrder: 3,
@@ -212,7 +217,7 @@ async function main() {
       name: "Environment & Water",
       slug: "environment-water",
       excerpt: "Air, effluent, and potable water — the rooms a factory cannot hide.",
-      description: `<p>The factory has a second body: the water it takes, the air it returns, the soil it sits on. Mettra writes those rooms into numbers a regulator can read.</p>`,
+      description: `<p>The factory has a second body: the water it takes, the air it returns, the soil it sits on. Metrra writes those rooms into numbers a regulator can read.</p>`,
       image: "/images/labs/chemistry.jpg",
       accent: "aqua",
       sortOrder: 4,
@@ -235,11 +240,11 @@ async function main() {
   await prisma.page.deleteMany();
   const home = await prisma.page.create({
     data: {
-      title: "Mettra — Be Testing Be Unstoppable",
+      title: "Metrra Lab Lab — Be Testing Be Unstoppable",
       slug: "home",
       kind: "home",
       excerpt: "A Noida house of analytical testing with European finish.",
-      content: `<p>Mettra stands in the institutional grain of Sector 62, Noida — a laboratory that treats measurement as a form of manners. We are built for brands that export, for factories that cannot bluff a regulator, and for product teams who want a number they can stand beside.</p><p>Food. Cosmetics. Electronics. And every discipline you add to the house. The Conservatory lets the laboratory grow without asking a developer for a new corridor.</p>`,
+      content: `<p>Metrra Lab stands in the institutional grain of Sector 62, Noida — a laboratory that treats measurement as a form of manners. We are built for brands that export, for factories that cannot bluff a regulator, and for product teams who want a number they can stand beside.</p><p>Food. Cosmetics. Electronics. And every discipline you add to the house. The Conservatory lets the laboratory grow without asking a developer for a new corridor.</p>`,
     },
   });
 
@@ -249,7 +254,7 @@ async function main() {
       slug: "about",
       kind: "about",
       excerpt: "A legacy laboratory written in a European key.",
-      content: `<p>Mettra was raised as a private analytical house: not a marketplace of tests, but a atelier of protocols. Our rooms sit in A Block, Sector 62 Institutional Area — the scientific spine of Noida — and our manners are older than the corridor.</p><h2>What we believe</h2><p>A result is not a PDF. It is a sentence a quality director can say aloud. We write methods, keep instruments in a climate that flatters them, and refuse the theatre of rush when the chemistry is not ready.</p><h2>How the house is kept</h2><p>Scientists with long hands. Rooms at the right humidity. A workflow from commission to dossier that a client can follow without calling twice. The Conservatory — our editorial backstage — lets the house add a new discipline, a new banner, a new address, without breaking the public face.</p><h2>Why Europe is in the grain</h2><p>We borrowed the quiet of a Swiss metrology wing and the editorial restraint of a Milanese house. Colour is teal, iris, and bronze — never the carnival of yellow and red. Legacy should look like it intends to stay.</p>`,
+      content: `<p>Metrra Lab was raised as a private analytical house: not a marketplace of tests, but an atelier of protocols. Our rooms sit in A Block, Sector 62 Institutional Area — the scientific spine of Noida — and our manners are older than the corridor.</p><h2>What we believe</h2><p>A result is not a PDF. It is a sentence a quality director can say aloud. We write methods, keep instruments in a climate that flatters them, and refuse the theatre of rush when the chemistry is not ready.</p><h2>How the house is kept</h2><p>Scientists with long hands. Rooms at the right humidity. A workflow from commission to dossier that a client can follow without calling twice. The Conservatory — our editorial backstage — lets the house add a new discipline, a new banner, a new address, without breaking the public face.</p><h2>The mark</h2><p>The Double R is the house monogram: measured twice. Navy is the field. White is the highlight. The logo can be replaced from The Conservatory as a PNG or WebP the hour a new seal is drawn.</p>`,
     },
   });
 
@@ -259,7 +264,7 @@ async function main() {
       slug: "accreditations",
       kind: "accreditations",
       excerpt: "The papers a serious laboratory keeps on the wall — and in the drawer.",
-      content: `<p>Mettra is composed to international laboratory practice. The public seals below are the house’s current ledger; the Conservatory can revise them the hour a new recognition arrives.</p><h3>Working alignment</h3><ul><li>ISO/IEC 17025 laboratory competence</li><li>Food-system recognition for sampling and analysis</li><li>Pharmaceutical and cosmetic safety manners</li><li>Environmental monitoring protocols</li></ul><p>Ask the Conservatory to publish certificate files, scope PDFs, and the exact wording legal prefers.</p>`,
+      content: `<p>Metrra is composed to international laboratory practice. The public seals below are the house’s current ledger; the Conservatory can revise them the hour a new recognition arrives.</p><h3>Working alignment</h3><ul><li>ISO/IEC 17025 laboratory competence</li><li>Food-system recognition for sampling and analysis</li><li>Pharmaceutical and cosmetic safety manners</li><li>Environmental monitoring protocols</li></ul><p>Ask the Conservatory to publish certificate files, scope PDFs, and the exact wording legal prefers.</p>`,
     },
   });
 
@@ -268,8 +273,8 @@ async function main() {
     data: {
       title: "A protocol is a piece of architecture",
       slug: "protocol-is-architecture",
-      excerpt: "Why Mettra writes methods the way a conservator writes a condition report.",
-      content: `<p>Most laboratories sell a turnaround. Mettra sells a room you can think in. A protocol names the sample, the instrument, the uncertainty, and the sentence the client will eventually need. That is architecture, not logistics.</p><p>When we add a category — food, cosmetic, electronics, or whatever the market invents next — we do not bolt on a brochure. We open a new wing of the house: methods, images, SEO, a lead door on every landing.</p>`,
+      excerpt: "Why Metrra writes methods the way a conservator writes a condition report.",
+      content: `<p>Most laboratories sell a turnaround. Metrra sells a room you can think in. A protocol names the sample, the instrument, the uncertainty, and the sentence the client will eventually need. That is architecture, not logistics.</p><p>When we add a category — food, cosmetic, electronics, or whatever the market invents next — we do not bolt on a brochure. We open a new wing of the house: methods, images, SEO, a lead door on every landing.</p>`,
       image: "/images/labs/instruments.jpg",
       published: true,
       publishedAt: new Date(),
@@ -280,7 +285,7 @@ async function main() {
   await prisma.faq.createMany({
     data: [
       {
-        question: "What does Mettra actually test?",
+        question: "What does Metrra actually test?",
         answer:
           "Food, cosmetics, electronics, pharmaceuticals, water, and any discipline you commission. New categories can be opened from The Conservatory without rebuilding the site.",
         sortOrder: 0,
@@ -288,13 +293,13 @@ async function main() {
       {
         question: "Where is the laboratory?",
         answer:
-          "A Block, Sector 62 Institutional Area, Noida, Uttar Pradesh, India 201301. Correspondence: contact@mettra.com.",
+          "A Block, Sector 62 Institutional Area, Noida, Uttar Pradesh, India 201301. Correspondence: contact@metrra.com.",
         sortOrder: 1,
       },
       {
         question: "How do I request a protocol?",
         answer:
-          "Every public page carries a lead folio. Tell us the product, the market, and the standard you must satisfy. We reply from contact@mettra.com.",
+          "Every public page carries a lead folio. Tell us the product, the market, and the standard you must satisfy. We reply from contact@metrra.com.",
         sortOrder: 2,
       },
       {
@@ -312,46 +317,84 @@ async function main() {
     ],
   });
 
+  await prisma.testimonial.deleteMany();
+  await prisma.testimonial.createMany({
+    data: [
+      {
+        quote: "They write a protocol the way a conservator writes a condition report. We ship on that number.",
+        name: "Kavya Menon",
+        role: "Quality Director",
+        company: "Aureum Nutrition",
+        sortOrder: 0,
+        published: true,
+      },
+      {
+        quote: "Metrra Lab treated our emulsion as a contract with the face. The stability dossier survived three retailers.",
+        name: "Luca Ferrante",
+        role: "Founder",
+        company: "Atelier Solenne",
+        sortOrder: 1,
+        published: true,
+      },
+      {
+        quote: "Restricted-substance work without the theatre. The materials declaration arrived before the shipment did.",
+        name: "Rohit Bhandari",
+        role: "Sourcing Lead",
+        company: "North Arc Electronics",
+        sortOrder: 2,
+        published: true,
+      },
+      {
+        quote: "The Conservatory let us open a new category without waiting on a brochure house. The public page was live the same afternoon.",
+        name: "Anika Shah",
+        role: "Regulatory Counsel",
+        company: "Veda Formulations",
+        sortOrder: 3,
+        published: true,
+      },
+    ],
+  });
+
   await prisma.seoRecord.deleteMany();
   const seos = [
     {
       path: "/",
-      title: "Mettra | Analytical Testing Laboratory in Noida",
+      title: "Metrra Lab Lab | Analytical Testing Laboratory in Noida",
       description:
-        "Mettra is a high-house of analytical testing in Sector 62, Noida. Food, cosmetics, electronics, and custom disciplines. Be testing. Be unstoppable.",
-      keywords: "testing laboratory Noida, food testing, cosmetic testing, electronics testing, Mettra",
+        "Metrra Lab is a high-house of analytical testing in Sector 62, Noida. Food, cosmetics, electronics, and custom disciplines. Be testing. Be unstoppable.",
+      keywords: "testing laboratory Noida, food testing, cosmetic testing, electronics testing, Metrra",
       focusKeyword: "analytical testing laboratory",
       ogImage: "/images/labs/hero-3.jpg",
-      canonical: "https://www.mettra.com/",
+      canonical: "https://www.metrra.com/",
       pageId: home.id,
     },
     {
       path: "/about",
-      title: "The House | Mettra Laboratory Noida",
+      title: "The House | Metrra Laboratory Noida",
       description:
-        "Meet the Mettra house: a European-mannered testing laboratory in A Block, Sector 62 Institutional Area, Noida. Legacy, instruments, and unstoppable protocols.",
-      keywords: "Mettra about, testing lab Noida, Sector 62 laboratory",
+        "Meet the Metrra house: a European-mannered testing laboratory in A Block, Sector 62 Institutional Area, Noida. Legacy, instruments, and unstoppable protocols.",
+      keywords: "Metrra about, testing lab Noida, Sector 62 laboratory",
       focusKeyword: "testing laboratory Noida",
       ogImage: "/images/labs/discipline.jpg",
-      canonical: "https://www.mettra.com/about",
+      canonical: "https://www.metrra.com/about",
       pageId: about.id,
     },
     {
       path: "/accreditations",
-      title: "Seals & Recognitions | Mettra",
+      title: "Seals & Recognitions | Metrra Lab",
       description:
-        "ISO/IEC 17025 alignment and the recognitions Mettra keeps for food, cosmetic, pharmaceutical, and environmental work. Updated from The Conservatory.",
-      keywords: "ISO 17025, laboratory accreditation, Mettra seals",
+        "ISO/IEC 17025 alignment and the recognitions Metrra keeps for food, cosmetic, pharmaceutical, and environmental work. Updated from The Conservatory.",
+      keywords: "ISO 17025, laboratory accreditation, Metrra seals",
       focusKeyword: "laboratory accreditation",
       ogImage: "/images/labs/instruments.jpg",
-      canonical: "https://www.mettra.com/accreditations",
+      canonical: "https://www.metrra.com/accreditations",
       pageId: accreditations.id,
     },
     {
       path: "/disciplines/food-nutrition",
-      title: "Food Testing Laboratory | Mettra Noida",
+      title: "Food Testing Laboratory | Metrra Noida",
       description:
-        "Food and nutrition assays at Mettra: residues, metals, mycotoxins, nutrition labels, and fortification recovery for Indian and export brands.",
+        "Food and nutrition assays at Metrra: residues, metals, mycotoxins, nutrition labels, and fortification recovery for Indian and export brands.",
       keywords: "food testing laboratory, nutrition assay, residue testing Noida",
       focusKeyword: "food testing laboratory",
       ogImage: "/images/labs/food.jpg",
@@ -359,7 +402,7 @@ async function main() {
     },
     {
       path: "/disciplines/cosmetics-personal-care",
-      title: "Cosmetic Testing Laboratory | Mettra",
+      title: "Cosmetic Testing Laboratory | Metrra Lab",
       description:
         "Cosmetic and personal-care testing in Noida: restricted substances, microbiology, stability, and claim support for formulas that sit on skin.",
       keywords: "cosmetic testing, personal care laboratory, stability testing",
@@ -369,7 +412,7 @@ async function main() {
     },
     {
       path: "/disciplines/electronics-electrical",
-      title: "Electronics Testing | Mettra Laboratory",
+      title: "Electronics Testing | Metrra Laboratory",
       description:
         "Electronics and electrical materials testing: restricted substances, polymer identification, cleanliness, and incoming inspection for assemblies.",
       keywords: "electronics testing, restricted substances, materials assay",
@@ -379,9 +422,9 @@ async function main() {
     },
     {
       path: "/disciplines/pharmaceuticals",
-      title: "Pharmaceutical Testing | Mettra",
+      title: "Pharmaceutical Testing | Metrra Lab",
       description:
-        "Pharmaceutical identity, assay, and impurity work at Mettra’s Noida house — written for quality systems that expect a defendable number.",
+        "Pharmaceutical identity, assay, and impurity work at Metrra’s Noida house — written for quality systems that expect a defendable number.",
       keywords: "pharmaceutical testing, assay, impurities laboratory",
       focusKeyword: "pharmaceutical testing",
       ogImage: "/images/labs/precision.jpg",
@@ -389,9 +432,9 @@ async function main() {
     },
     {
       path: "/disciplines/environment-water",
-      title: "Water & Environment Testing | Mettra",
+      title: "Water & Environment Testing | Metrra Lab",
       description:
-        "Water quality and environmental monitoring protocols from Mettra, Sector 62 Noida — potable, process, and effluent chemistry with chain of custody.",
+        "Water quality and environmental monitoring protocols from Metrra, Sector 62 Noida — potable, process, and effluent chemistry with chain of custody.",
       keywords: "water testing Noida, effluent, environmental laboratory",
       focusKeyword: "water testing",
       ogImage: "/images/labs/chemistry.jpg",
@@ -399,33 +442,33 @@ async function main() {
     },
     {
       path: "/insights/protocol-is-architecture",
-      title: "A Protocol is Architecture | Mettra Insights",
+      title: "A Protocol is Architecture | Metrra Insights",
       description:
-        "Why Mettra writes laboratory methods like architecture — and how new testing categories open as wings of the house, not brochures.",
-      keywords: "laboratory protocol, testing methods, Mettra insights",
+        "Why Metrra writes laboratory methods like architecture — and how new testing categories open as wings of the house, not brochures.",
+      keywords: "laboratory protocol, testing methods, Metrra insights",
       focusKeyword: "laboratory protocol",
       ogImage: "/images/labs/instruments.jpg",
       insightId: insight.id,
     },
     {
       path: "/contact",
-      title: "Commission a Protocol | Contact Mettra",
+      title: "Commission a Protocol | Contact Metrra",
       description:
-        "Write to Mettra at contact@mettra.com or visit A Block, Sector 62 Institutional Area, Noida 201301. Every page can capture a lead.",
-      keywords: "contact Mettra, testing lab Noida address, request quote",
-      focusKeyword: "contact Mettra",
+        "Write to Metrra at contact@metrra.com or visit A Block, Sector 62 Institutional Area, Noida 201301. Every page can capture a lead.",
+      keywords: "contact Metrra, testing lab Noida address, request quote",
+      focusKeyword: "contact Metrra",
       ogImage: "/images/labs/hero-2.jpg",
-      canonical: "https://www.mettra.com/contact",
+      canonical: "https://www.metrra.com/contact",
     },
     {
       path: "/disciplines",
-      title: "Testing Disciplines | Mettra",
+      title: "Testing Disciplines | Metrra Lab",
       description:
-        "Browse Mettra’s testing disciplines — food, cosmetics, electronics, pharmaceuticals, water — or ask The Conservatory to open a new category.",
+        "Browse Metrra’s testing disciplines — food, cosmetics, electronics, pharmaceuticals, water — or ask The Conservatory to open a new category.",
       keywords: "testing categories, food cosmetics electronics laboratory",
       focusKeyword: "testing disciplines",
       ogImage: "/images/labs/discipline.jpg",
-      canonical: "https://www.mettra.com/disciplines",
+      canonical: "https://www.metrra.com/disciplines",
     },
   ];
 
@@ -436,7 +479,7 @@ async function main() {
         ogTitle: seo.title,
         ogDescription: seo.description,
         robots: "index,follow",
-        canonical: seo.canonical || `https://www.mettra.com${seo.path}`,
+        canonical: seo.canonical || `https://www.metrra.com${seo.path}`,
       },
     });
   }
@@ -453,7 +496,7 @@ async function main() {
     ],
   });
 
-  console.log("Mettra house seeded.");
+  console.log("Metrra Lab house seeded.");
 }
 
 main()

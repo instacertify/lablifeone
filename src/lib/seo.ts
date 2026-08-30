@@ -106,7 +106,7 @@ export function evaluateSeo(input: SeoInput): SeoScore {
 }
 
 export function siteUrl(path = "/") {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mettra.com";
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.metrra.com";
   if (path.startsWith("http")) return path;
   return `${base.replace(/\/$/, "")}${path.startsWith("/") ? path : `/${path}`}`;
 }

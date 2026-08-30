@@ -3,8 +3,8 @@ import { getPublishedCategories } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata = buildMetadata(null, {
-  title: "Privacy | Mettra",
-  description: "How Mettra holds the briefs you leave on the site.",
+  title: "Privacy | Metrra Lab",
+  description: "How Metrra holds the briefs you leave on the site.",
   path: "/privacy",
 });
 
@@ -16,12 +16,12 @@ export default async function PrivacyPage() {
       <h1 className="display text-5xl">Privacy of the house</h1>
       <div className="prose prose-lg mt-8 max-w-none">
         <p>
-          Briefs sent through Mettra pages are stored in The Conservatory Chamber for the
+          Briefs sent through Metrra pages are stored in The Conservatory Chamber for the
           laboratory to answer. We use the details you give — name, email, telephone,
           company, and message — only to reply about testing work.
         </p>
         <p>
-          Correspondence: contact@mettra.com. House: A Block, Sector 62 Institutional Area,
+          Correspondence: contact@metrra.com. House: A Block, Sector 62 Institutional Area,
           Noida, Uttar Pradesh, India 201301.
         </p>
       </div>

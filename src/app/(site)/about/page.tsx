@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata() {
   const seo = await getSeoByPath("/about");
   return buildMetadata(seo, {
-    title: "The House | Mettra Laboratory Noida",
+    title: "The House | Metrra Laboratory Noida",
     description: "A European-mannered testing laboratory in Sector 62, Noida.",
     path: "/about",
   });
@@ -27,7 +27,7 @@ export default async function AboutPage() {
       <header className="relative overflow-hidden bg-ink py-24 text-ivory">
         <Image
           src="/images/labs/discipline.jpg"
-          alt="Mettra laboratory"
+          alt="Metrra laboratory"
           fill
           className="object-cover opacity-30"
         />
@@ -45,7 +45,7 @@ export default async function AboutPage() {
         <div
           className="folio-content prose prose-lg lg:col-span-8 prose-headings:font-serif"
           dangerouslySetInnerHTML={{
-            __html: page?.content || "<p>Mettra is a private analytical house in Noida.</p>",
+            __html: page?.content || "<p>Metrra is a private analytical house in Noida.</p>",
           }}
         />
         <aside className="lg:col-span-4">

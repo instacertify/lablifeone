@@ -94,4 +94,15 @@ export const settingsSchema = z.object({
   linkedin: z.string().optional().or(z.literal("")),
   aboutExcerpt: z.string().min(20),
   footerNote: z.string().min(8),
+  logoUrl: z.string().optional().or(z.literal("")),
+});
+
+export const testimonialSchema = z.object({
+  quote: z.string().min(12),
+  name: z.string().min(2),
+  role: z.string().optional().or(z.literal("")),
+  company: z.string().optional().or(z.literal("")),
+  image: z.string().optional().or(z.literal("")),
+  published: z.boolean().optional(),
+  sortOrder: z.number().int().optional(),
 });

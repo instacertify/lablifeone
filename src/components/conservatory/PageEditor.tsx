@@ -42,7 +42,7 @@ export function PageEditor(props: {
         ogTitle: seo.ogTitle || seo.title || title,
         ogDescription: seo.ogDescription || seo.description || excerpt,
         ogImage: seo.ogImage || "",
-        canonical: seo.canonical || `https://www.mettra.com/${slug === "home" ? "" : slug}`,
+        canonical: seo.canonical || `https://www.metrra.com/${slug === "home" ? "" : slug}`,
         robots: seo.robots || "index,follow",
         schemaJson: seo.schemaJson || "",
         focusKeyword: seo.focusKeyword || "",
@@ -69,19 +69,19 @@ export function PageEditor(props: {
           <input
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-[#102226] px-4 py-3 display text-3xl text-ivory"
+            className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-4 py-3 display text-3xl text-ivory"
           />
           <div className="grid gap-3 sm:grid-cols-2">
             <input
               value={slug}
               onChange={(event) => setSlug(event.target.value)}
-              className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2 text-sm"
+              className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
             />
             <input
               value={excerpt}
               onChange={(event) => setExcerpt(event.target.value)}
               placeholder="Excerpt"
-              className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2 text-sm"
+              className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
             />
           </div>
           <FolioEditor value={content} onChange={setContent} />

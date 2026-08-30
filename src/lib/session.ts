@@ -1,6 +1,6 @@
 import { jwtVerify, SignJWT } from "jose";
 
-export const SESSION_COOKIE = "mettra_folio";
+export const SESSION_COOKIE = "metrra_folio";
 
 function secret() {
   const value = process.env.AUTH_SECRET;

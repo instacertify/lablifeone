@@ -33,11 +33,11 @@ export default function NewInsightPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#071316] px-6 py-16 text-ivory">
+    <div className="min-h-screen bg-[#061433] px-6 py-16 text-ivory">
       <form onSubmit={onSubmit} className="mx-auto max-w-xl space-y-4">
         <h1 className="display text-4xl">New insight</h1>
-        <input name="title" required placeholder="Title" className="w-full rounded-xl border border-white/10 bg-[#102226] px-3 py-2" />
-        <textarea name="excerpt" required placeholder="Excerpt" className="w-full rounded-xl border border-white/10 bg-[#102226] px-3 py-2" />
+        <input name="title" required placeholder="Title" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
+        <textarea name="excerpt" required placeholder="Excerpt" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
         {error && <p className="text-sm text-violet">{error}</p>}
         <button className="rounded-full bg-aqua px-5 py-2 text-[12px] tracking-[0.16em] text-ink uppercase">
           Create

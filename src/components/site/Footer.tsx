@@ -15,8 +15,8 @@ export function Footer({
     <footer className="bg-ink text-ivory">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-12 lg:px-8">
         <div className="lg:col-span-4">
-          <Logo className="h-8 [&_span]:text-ivory" />
-          <p className="display mt-6 max-w-sm text-2xl leading-snug text-sand">
+          <Logo className="h-8" inverted src={settings.logoUrl} name={settings.companyName} />
+          <p className="display mt-6 max-w-sm text-2xl leading-snug text-white">
             {settings.tagline}
           </p>
           <p className="mt-4 max-w-sm text-sm leading-7 text-mist/80">
@@ -31,7 +31,7 @@ export function Footer({
             {formatAddress(settings)}
           </p>
           <p className="mt-3 text-sm">
-            <a className="text-aqua hover:underline" href={`mailto:${settings.email}`}>
+            <a className="text-white underline decoration-white/40 hover:decoration-white" href={`mailto:${settings.email}`}>
               {settings.email}
             </a>
           </p>
@@ -62,6 +62,7 @@ export function Footer({
           <LeadForm
             compact
             sourcePage="footer"
+            replyTo={settings.email}
             categories={categories.map((item) => item.name)}
           />
         </div>

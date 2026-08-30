@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 const practices = [
   "Write a unique title of 45–60 characters with the focus phrase near the front.",
   "Keep meta descriptions at 140–160 characters and make a specific promise.",
-  "Give every page a canonical https URL on www.mettra.com.",
+  "Give every page a canonical https URL on www.metrra.com.",
   "Attach a 1200×630 Open Graph image from the Vault.",
   "Use one H1 in the public template; start Folio copy with H2.",
   "Name images with alt text before they leave the Vault.",

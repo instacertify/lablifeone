@@ -16,7 +16,7 @@ export default async function ChamberPage() {
       <p className="text-[11px] tracking-[0.22em] text-aqua uppercase">Chamber</p>
       <h1 className="display mt-2 text-5xl">Leads of the house</h1>
       <p className="mt-3 max-w-2xl text-sm text-sand/70">
-        Every public page can capture a brief. Reply from contact@mettra.com.
+        Every public page can capture a brief. Reply from contact@metrra.com.
       </p>
       <div className="mt-10 divide-y divide-white/10 rounded-2xl border border-white/10">
         {leads.map((lead) => (

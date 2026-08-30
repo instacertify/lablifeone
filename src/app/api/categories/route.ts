@@ -19,10 +19,10 @@ export async function POST(request: Request) {
   await prisma.seoRecord.create({
     data: {
       path: `/disciplines/${category.slug}`,
-      title: `${category.name} | Mettra`,
+      title: `${category.name} | Metrra Lab`,
       description: category.excerpt,
       focusKeyword: category.name.toLowerCase(),
-      canonical: `https://www.mettra.com/disciplines/${category.slug}`,
+      canonical: `https://www.metrra.com/disciplines/${category.slug}`,
       categoryId: category.id,
     },
   });

@@ -16,7 +16,7 @@ export function LeadStatus({ id, status }: { id: string; status: string }) {
         });
         router.refresh();
       }}
-      className="rounded-full border border-white/10 bg-[#102226] px-3 py-1 text-[11px] tracking-[0.14em] uppercase"
+      className="rounded-full border border-white/10 bg-[#0A1F44] px-3 py-1 text-[11px] tracking-[0.14em] uppercase"
     >
       <option value="new">New</option>
       <option value="opened">Opened</option>

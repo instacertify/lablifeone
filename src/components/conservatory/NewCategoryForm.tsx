@@ -35,15 +35,15 @@ export function NewCategoryForm() {
     <form onSubmit={onSubmit} className="mt-12 rounded-3xl border border-dashed border-aqua/30 p-6">
       <h2 className="display text-3xl">Open a new category</h2>
       <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        <input name="name" required placeholder="e.g. Toys & Juvenile" className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2" />
-        <select name="accent" className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2">
+        <input name="name" required placeholder="e.g. Toys & Juvenile" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
+        <select name="accent" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2">
           <option value="aqua">Aqua</option>
           <option value="iris">Iris</option>
           <option value="bronze">Bronze</option>
           <option value="jade">Jade</option>
         </select>
-        <input name="image" placeholder="Image path or Vault URL" className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2 sm:col-span-2" />
-        <textarea name="excerpt" required placeholder="Short excerpt" className="rounded-xl border border-white/10 bg-[#102226] px-3 py-2 sm:col-span-2" />
+        <input name="image" placeholder="Image path or Vault URL" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 sm:col-span-2" />
+        <textarea name="excerpt" required placeholder="Short excerpt" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 sm:col-span-2" />
       </div>
       <button className="mt-4 rounded-full bg-aqua px-5 py-2 text-[12px] tracking-[0.16em] text-ink uppercase">
         Add discipline

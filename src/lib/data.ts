@@ -72,6 +72,13 @@ export const getSeoByPath = cache(async (path: string) => {
   return prisma.seoRecord.findUnique({ where: { path } });
 });
 
+export const getPublishedTestimonials = cache(async () => {
+  return prisma.testimonial.findMany({
+    where: { published: true },
+    orderBy: { sortOrder: "asc" },
+  });
+});
+
 export function formatAddress(settings: {
   addressLine: string;
   city: string;

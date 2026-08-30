@@ -8,6 +8,7 @@ const nav = [
   { href: "/conservatory/cinema", label: "Cinema" },
   { href: "/conservatory/vault", label: "Vault" },
   { href: "/conservatory/compass", label: "Compass" },
+  { href: "/conservatory/voices", label: "Voices" },
   { href: "/conservatory/chamber", label: "Chamber" },
   { href: "/conservatory/house", label: "House" },
 ];
@@ -20,14 +21,14 @@ export function ConservatoryShell({
   name: string;
 }) {
   return (
-    <div className="min-h-screen bg-[#071316] text-ivory">
+    <div className="min-h-screen bg-ink text-ivory">
       <aside className="fixed inset-y-0 left-0 hidden w-60 border-r border-white/10 px-5 py-6 md:block">
         <Link href="/conservatory" className="flex items-center gap-3">
           <LogoMark />
           <div>
             <p className="display text-xl leading-none">Conservatory</p>
             <p className="mt-1 text-[10px] tracking-[0.2em] text-aqua uppercase">
-              Mettra backstage
+              Metrra Lab backstage
             </p>
           </div>
         </Link>

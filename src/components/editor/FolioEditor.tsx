@@ -79,7 +79,7 @@ export function FolioEditor({ value, onChange, placeholder }: Props) {
   const words = editor.storage.characterCount?.words?.() ?? 0;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#102226]">
+    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0A1F44]">
       <div className="flex flex-wrap gap-1 border-b border-white/10 px-3 py-2">
         {(
           [

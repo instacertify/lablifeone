@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HeroCinema } from "@/components/site/HeroCinema";
 import { LeadForm } from "@/components/site/LeadForm";
+import { TestimonialLibrary } from "@/components/site/TestimonialLibrary";
 import { Ticker } from "@/components/site/Ticker";
 import {
   getBanners,
@@ -9,6 +10,7 @@ import {
   getPageBySlug,
   getPublishedCategories,
   getPublishedInsights,
+  getPublishedTestimonials,
   getSeoByPath,
   getSettings,
 } from "@/lib/data";
@@ -19,9 +21,9 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata() {
   const seo = await getSeoByPath("/");
   return buildMetadata(seo, {
-    title: "Mettra | Analytical Testing Laboratory in Noida",
+    title: "Metrra Lab | Analytical Testing Laboratory in Noida",
     description:
-      "Mettra is a high-house of analytical testing in Sector 62, Noida. Be testing. Be unstoppable.",
+      "Metrra Lab is a high-house of analytical testing in Sector 62, Noida. Be testing. Be unstoppable.",
     path: "/",
   });
 }
@@ -34,13 +36,14 @@ const steps = [
 ];
 
 export default async function HomePage() {
-  const [banners, categories, settings, faqs, page, insights] = await Promise.all([
+  const [banners, categories, settings, faqs, page, insights, voices] = await Promise.all([
     getBanners(),
     getPublishedCategories(),
     getSettings(),
     getFaqs(),
     getPageBySlug("home"),
     getPublishedInsights(),
+    getPublishedTestimonials(),
   ]);
 
   return (
@@ -62,7 +65,7 @@ export default async function HomePage() {
               dangerouslySetInnerHTML={{
                 __html:
                   page?.content ||
-                  "<p>Mettra stands in the institutional grain of Sector 62, Noida — a laboratory that treats measurement as a form of manners.</p>",
+                  "<p>Metrra Lab stands in the institutional grain of Sector 62, Noida — a laboratory that treats measurement as a form of manners.</p>",
               }}
             />
             <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -132,7 +135,7 @@ export default async function HomePage() {
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {steps.map((step) => (
             <article key={step.n} className="rounded-3xl border border-ink/8 bg-white p-6">
-              <p className="font-mono text-aqua">{step.n}</p>
+              <p className="font-mono text-jade">{step.n}</p>
               <h3 className="display mt-4 text-3xl">{step.title}</h3>
               <p className="mt-3 text-sm leading-7 text-ink/65">{step.copy}</p>
             </article>
@@ -143,7 +146,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-forest py-20 text-ivory">
         <Image
           src="/images/labs/precision.jpg"
-          alt="Mettra instruments"
+          alt="Metrra Lab instruments"
           fill
           className="object-cover opacity-20"
         />
@@ -167,16 +170,19 @@ export default async function HomePage() {
             <h3 className="display mt-2 text-4xl">Commission the next assay</h3>
             <p className="mt-3 mb-6 text-sm text-sand/80">
               Every public page can take a brief. Reply from{" "}
-              {settings?.email || "contact@mettra.com"}.
+              {settings?.email || "contact@metrra.com"}.
             </p>
             <LeadForm
               dark
               sourcePage="/"
+              replyTo={settings?.email || "contact@metrra.com"}
               categories={categories.map((item) => item.name)}
             />
           </div>
         </div>
       </section>
+
+      <TestimonialLibrary voices={voices} />
 
       <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
         <h2 className="display text-5xl">Asked of the house</h2>

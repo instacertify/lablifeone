@@ -7,8 +7,8 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata() {
   const seo = await getSeoByPath("/contact");
   return buildMetadata(seo, {
-    title: "Commission a Protocol | Contact Mettra",
-    description: "Write to contact@mettra.com or visit A Block, Sector 62, Noida 201301.",
+    title: "Commission a Protocol | Contact Metrra",
+    description: "Write to contact@metrra.com or visit A Block, Sector 62, Noida 201301.",
     path: "/contact",
   });
 }
@@ -48,7 +48,7 @@ export default async function ContactPage() {
           )}
           {settings?.mapEmbed && (
             <iframe
-              title="Mettra location"
+              title="Metrra location"
               src={settings.mapEmbed}
               className="mt-8 h-72 w-full rounded-3xl border-0"
               loading="lazy"
