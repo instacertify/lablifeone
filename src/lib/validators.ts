@@ -58,6 +58,14 @@ export const insightSchema = z.object({
   excerpt: z.string().min(8),
   content: z.string().min(8),
   image: z.string().optional().or(z.literal("")),
+  industryId: z.string().optional().or(z.literal("")),
+  published: z.boolean().optional(),
+});
+
+export const industrySchema = z.object({
+  name: z.string().min(2),
+  slug: z.string().min(2),
+  sortOrder: z.number().int().optional(),
   published: z.boolean().optional(),
 });
 

@@ -1,7 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LeadForm } from "@/components/site/LeadForm";
-import { getInsightBySlug, getPublishedCategories, getSeoByPath } from "@/lib/data";
+import {
+  flattenCategoryNames,
+  getInsightBySlug,
+  getPublishedCategories,
+  getSeoByPath,
+} from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
@@ -15,8 +21,8 @@ export async function generateMetadata({
   const insight = await getInsightBySlug(slug);
   const seo = await getSeoByPath(`/insights/${slug}`);
   return buildMetadata(seo, {
-    title: `${insight?.title || "Insight"} | Metrra Lab`,
-    description: insight?.excerpt || "A note from the Metrra folio.",
+    title: `${insight?.title || "Industry Insights"} | Metrra Lab`,
+    description: insight?.excerpt || "A note from Metrra Lab.",
     path: `/insights/${slug}`,
   });
 }
@@ -40,7 +46,22 @@ export default async function InsightPage({
           <Image src={insight.image} alt="" fill className="object-cover opacity-30" />
         )}
         <div className="relative mx-auto max-w-4xl px-5">
-          <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">Insight</p>
+          <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">
+            <Link href="/insights" className="hover:text-white">
+              Industry Insights
+            </Link>
+            {insight.industry && (
+              <>
+                <span className="mx-2 text-white/30">/</span>
+                <Link
+                  href={`/insights?industry=${insight.industry.slug}`}
+                  className="hover:text-white"
+                >
+                  {insight.industry.name}
+                </Link>
+              </>
+            )}
+          </p>
           <h1 className="display mt-4 text-5xl leading-[0.95] sm:text-6xl">{insight.title}</h1>
         </div>
       </header>
@@ -52,7 +73,10 @@ export default async function InsightPage({
         <div className="mt-16 rounded-3xl bg-mist p-8">
           <h2 className="display text-3xl">Respond to this note</h2>
           <div className="mt-5">
-            <LeadForm sourcePage={`/insights/${slug}`} categories={categories.map((c) => c.name)} />
+            <LeadForm
+              sourcePage={`/insights/${slug}`}
+              categories={flattenCategoryNames(categories)}
+            />
           </div>
         </div>
       </div>

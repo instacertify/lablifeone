@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ConservatoryShell } from "@/components/conservatory/Shell";
+import { IndustryBoard } from "@/components/conservatory/IndustryBoard";
 import { getConservatorySession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
@@ -9,9 +10,10 @@ export const dynamic = "force-dynamic";
 export default async function FolioIndexPage() {
   const session = await getConservatorySession();
   if (!session) redirect("/conservatory/login");
-  const [pages, insights] = await Promise.all([
+  const [pages, insights, industries] = await Promise.all([
     prisma.page.findMany({ orderBy: { updatedAt: "desc" }, include: { seo: true } }),
-    prisma.insight.findMany({ orderBy: { updatedAt: "desc" } }),
+    prisma.insight.findMany({ orderBy: { updatedAt: "desc" }, include: { industry: true } }),
+    prisma.industry.findMany({ orderBy: { sortOrder: "asc" } }),
   ]);
 
   return (
@@ -32,9 +34,9 @@ export default async function FolioIndexPage() {
         ))}
       </div>
       <div className="mt-12 flex items-end justify-between">
-        <h2 className="display text-3xl">Insights</h2>
+        <h2 className="display text-3xl">Industry Insights</h2>
         <Link href="/conservatory/folio/new-insight" className="text-[12px] tracking-[0.16em] text-aqua uppercase">
-          New insight
+          New note
         </Link>
       </div>
       <div className="mt-5 grid gap-3">
@@ -44,10 +46,14 @@ export default async function FolioIndexPage() {
             href={`/conservatory/folio/insight/${item.id}`}
             className="rounded-2xl border border-white/10 p-4 hover:border-aqua/40"
           >
-            {item.title}
+            <p className="text-[11px] tracking-[0.14em] text-sand/45 uppercase">
+              {item.industry?.name || "Unassigned"}
+            </p>
+            <p className="mt-1">{item.title}</p>
           </Link>
         ))}
       </div>
+      <IndustryBoard industries={industries} />
     </ConservatoryShell>
   );
 }

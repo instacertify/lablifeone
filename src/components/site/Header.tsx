@@ -31,7 +31,7 @@ export function Header({
           </Link>
           <DisciplinesMenu categories={categories} />
           <Link href="/insights" className="text-white/75 transition hover:text-white">
-            Insights
+            Industry Insights
           </Link>
           <Link href="/contact" className="text-white/75 transition hover:text-white">
             Contact
@@ -66,7 +66,7 @@ export function Header({
                 ))}
               </ul>
               <Link href="/insights" className="mt-3 block py-1.5 text-sm text-white/80">
-                Insights
+                Industry Insights
               </Link>
               <Link href="/contact" className="block py-1.5 text-sm text-white/80">
                 Contact

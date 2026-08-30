@@ -702,18 +702,94 @@ async function main() {
   });
 
   await prisma.insight.deleteMany();
-  const insight = await prisma.insight.create({
-    data: {
+  await prisma.industry.deleteMany();
+
+  const [foodIndustry, cosmeticIndustry, plasticsIndustry, electronicsIndustry, metalsIndustry] =
+    await Promise.all(
+      [
+        ["Food and Beverage Industry", "food-and-beverage-industry"],
+        ["Cosmetic Industry", "cosmetic-industry"],
+        ["Plastics Industry", "plastics-industry"],
+        ["Electronics Industry", "electronics-industry"],
+        ["Metals & Alloy Industry", "metals-alloy-industry"],
+        ["Pharmaceutical Industry", "pharmaceutical-industry"],
+        ["Environment & Water Industry", "environment-water-industry"],
+      ].map(([name, slug], index) =>
+        prisma.industry.create({
+          data: { name, slug, sortOrder: index, published: true },
+        }),
+      ),
+    );
+
+  const insightNotes = [
+    {
       title: "A protocol is a piece of architecture",
       slug: "protocol-is-architecture",
       excerpt: "Why Metrra writes methods the way a conservator writes a condition report.",
       content:
         "<p>Most laboratories sell a turnaround. Metrra sells a room you can think in. A protocol names the sample, the instrument, the uncertainty, and the sentence the client will eventually need. That is architecture, not logistics.</p><p>When we add a category — food, cosmetic, electronics, metals, polymer, or whatever the market invents next — we do not bolt on a brochure. We open a wing under Disciplines: methods, standards, timelines, images, SEO, a lead door on every landing.</p>",
-      image: "/images/labs/instruments.jpg",
-      published: true,
-      publishedAt: new Date(),
+      image: "/images/labs/food.jpg",
+      industryId: foodIndustry.id,
     },
-  });
+    {
+      title: "What a nutrition panel must actually prove",
+      slug: "nutrition-panel-must-prove",
+      excerpt: "Label claims in food and beverage only survive if the assay names the same standard the retailer will open.",
+      content:
+        "<p>A nutrition panel is a contract with a buyer. Energy, protein, sugars, and fortificants have to recover against the regulation the pack will meet — not the one a brochure prefers.</p>",
+      image: "/images/labs/food.jpg",
+      industryId: foodIndustry.id,
+    },
+    {
+      title: "Restricted lists before the face meets the formula",
+      slug: "cosmetic-restricted-lists",
+      excerpt: "Cosmetic Industry notes on restricted substances, microbiology, and the evidence a claim actually needs.",
+      content:
+        "<p>A cosmetic is a contract with the face. Restricted lists, microbial limits, and stability are not a brochure — they are the sentences a retailer will ask for.</p>",
+      image: "/images/labs/cosmetics.jpg",
+      industryId: cosmeticIndustry.id,
+    },
+    {
+      title: "What leaves the polymer when it meets food",
+      slug: "polymer-migration-food-contact",
+      excerpt: "Plastics Industry notes on overall and specific migration for food-contact articles.",
+      content:
+        "<p>A polymer is a recipe and a risk. Overall migration and metal migration are written to the simulant and time the regulation names.</p>",
+      image: "/images/labs/chemistry.jpg",
+      industryId: plasticsIndustry.id,
+    },
+    {
+      title: "Materials declarations before the shipment leaves",
+      slug: "electronics-materials-declarations",
+      excerpt: "Electronics Industry notes on restricted chemistry and the dossier an OEM can stand beside.",
+      content:
+        "<p>Electronics fail quietly until they do not. Restricted-substance screens and polymer identification belong in the same folio as the drawing.</p>",
+      image: "/images/labs/electronics.jpg",
+      industryId: electronicsIndustry.id,
+    },
+    {
+      title: "Grade confirmation is a promise of chemistry",
+      slug: "metals-grade-confirmation",
+      excerpt: "Metals & Alloy Industry notes on composition, tensile work, and salt spray without theatre.",
+      content:
+        "<p>A metal is a promise of grade. Composition, hardness, and corrosion hours should be written against the specification the purchase order actually names.</p>",
+      image: "/images/labs/instruments.jpg",
+      industryId: metalsIndustry.id,
+    },
+  ];
+
+  const createdInsights = [];
+  for (const note of insightNotes) {
+    createdInsights.push(
+      await prisma.insight.create({
+        data: {
+          ...note,
+          published: true,
+          publishedAt: new Date(),
+        },
+      }),
+    );
+  }
 
   await prisma.faq.deleteMany();
   await prisma.faq.createMany({
@@ -743,10 +819,16 @@ async function main() {
         sortOrder: 3,
       },
       {
+        question: "Where are industry notes published?",
+        answer:
+          "Industry Insights — the public menu next to Disciplines — lists notes filtered by Cosmetic Industry, Food and Beverage, Plastics, and any vertical you open from The Conservatory Folio.",
+        sortOrder: 4,
+      },
+      {
         question: "Do you help with SEO for service pages?",
         answer:
           "The Compass inside The Conservatory scores titles, descriptions, Open Graph, canonicals, and focus keywords. Every page can be edited to current SEO practice.",
-        sortOrder: 4,
+        sortOrder: 5,
       },
     ],
   });
@@ -814,15 +896,24 @@ async function main() {
       pageId: about.id,
     },
     {
-      path: "/insights/protocol-is-architecture",
-      title: "A Protocol is Architecture | Metrra Insights",
+      path: "/insights",
+      title: "Industry Insights | Metrra Lab",
       description:
-        "Why Metrra writes laboratory methods like architecture — and how new testing categories open under Disciplines, not as separate headings.",
-      keywords: "laboratory protocol, testing methods, Metrra insights",
-      focusKeyword: "laboratory protocol",
+        "Industry notes from Metrra Lab — cosmetics, food and beverage, plastics, electronics, metals, and the verticals you open next.",
+      keywords: "industry insights, cosmetic industry, food and beverage, plastics industry, Metrra",
+      focusKeyword: "industry insights",
       ogImage: "/images/labs/instruments.jpg",
-      insightId: insight.id,
+      canonical: "https://www.metrra.com/insights",
     },
+    ...createdInsights.map((item) => ({
+      path: `/insights/${item.slug}`,
+      title: `${item.title} | Metrra Lab`,
+      description: item.excerpt,
+      keywords: "industry insights, Metrra Lab",
+      focusKeyword: "industry insights",
+      ogImage: item.image || "/images/labs/instruments.jpg",
+      insightId: item.id,
+    })),
     {
       path: "/contact",
       title: "Request a Quote | Contact Metrra Lab",

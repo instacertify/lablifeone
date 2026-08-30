@@ -142,16 +142,24 @@ export default async function HomePage() {
         />
         <div className="relative mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-2 lg:px-8">
           <div>
-            <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">Insights</p>
-            <h2 className="display mt-3 text-5xl">From the folio</h2>
+            <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">Industry Insights</p>
+            <h2 className="display mt-3 text-5xl">Notes by industry</h2>
             <div className="mt-8 space-y-6">
               {insights.map((item) => (
                 <Link key={item.id} href={`/insights/${item.slug}`} className="block">
-                  <h3 className="display text-3xl hover:text-aqua">{item.title}</h3>
+                  {item.industry && (
+                    <p className="text-[11px] tracking-[0.16em] text-aqua/70 uppercase">
+                      {item.industry.name}
+                    </p>
+                  )}
+                  <h3 className="display mt-1 text-3xl hover:text-aqua">{item.title}</h3>
                   <p className="mt-2 text-sm text-sand/80">{item.excerpt}</p>
                 </Link>
               ))}
             </div>
+            <Link href="/insights" className="mt-8 inline-block text-[12px] tracking-[0.16em] text-aqua uppercase">
+              All industry insights →
+            </Link>
           </div>
           <div className="rounded-3xl bg-ink/70 p-8 backdrop-blur">
             <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">

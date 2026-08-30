@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getConservatorySession } from "@/lib/auth";
-import { insightSchema } from "@/lib/validators";
-import { emptyToNull } from "@/lib/records";
+import { industrySchema } from "@/lib/validators";
 
 export async function PUT(
   request: Request,
@@ -11,19 +10,15 @@ export async function PUT(
   const session = await getConservatorySession();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { id } = await params;
-  const parsed = insightSchema.safeParse(await request.json());
+  const parsed = industrySchema.safeParse(await request.json());
   if (!parsed.success) {
-    return NextResponse.json({ error: "An industry note needs a title and folio." }, { status: 400 });
+    return NextResponse.json({ error: "An industry needs a name." }, { status: 400 });
   }
-  const insight = await prisma.insight.update({
+  const industry = await prisma.industry.update({
     where: { id },
-    data: {
-      ...parsed.data,
-      image: parsed.data.image || null,
-      industryId: emptyToNull(parsed.data.industryId),
-    },
+    data: parsed.data,
   });
-  return NextResponse.json(insight);
+  return NextResponse.json(industry);
 }
 
 export async function DELETE(
@@ -33,6 +28,6 @@ export async function DELETE(
   const session = await getConservatorySession();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { id } = await params;
-  await prisma.insight.delete({ where: { id } });
+  await prisma.industry.delete({ where: { id } });
   return NextResponse.json({ ok: true });
 }

@@ -14,12 +14,15 @@ export default async function InsightEditPage({
   const session = await getConservatorySession();
   if (!session) redirect("/conservatory/login");
   const { id } = await params;
-  const insight = await prisma.insight.findUnique({ where: { id }, include: { seo: true } });
+  const [insight, industries] = await Promise.all([
+    prisma.insight.findUnique({ where: { id }, include: { seo: true } }),
+    prisma.industry.findMany({ orderBy: { sortOrder: "asc" } }),
+  ]);
   if (!insight) redirect("/conservatory/folio");
 
   return (
     <ConservatoryShell name={session.name}>
-      <InsightEditor insight={insight} />
+      <InsightEditor insight={insight} industries={industries} />
     </ConservatoryShell>
   );
 }

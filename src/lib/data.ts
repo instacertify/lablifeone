@@ -66,18 +66,31 @@ export const getPageBySlug = cache(async (slug: string) => {
   });
 });
 
-export const getPublishedInsights = cache(async () => {
-  return prisma.insight.findMany({
+export const getPublishedIndustries = cache(async () => {
+  return prisma.industry.findMany({
     where: { published: true },
+    orderBy: { sortOrder: "asc" },
+    include: {
+      _count: { select: { insights: { where: { published: true } } } },
+    },
+  });
+});
+
+export const getPublishedInsights = cache(async (industrySlug?: string) => {
+  return prisma.insight.findMany({
+    where: {
+      published: true,
+      ...(industrySlug ? { industry: { slug: industrySlug, published: true } } : {}),
+    },
     orderBy: { publishedAt: "desc" },
-    include: { seo: true },
+    include: { seo: true, industry: true },
   });
 });
 
 export const getInsightBySlug = cache(async (slug: string) => {
   return prisma.insight.findUnique({
     where: { slug },
-    include: { seo: true },
+    include: { seo: true, industry: true },
   });
 });
 
