@@ -20,7 +20,7 @@ export function ConservatoryShell({
   name: string;
 }) {
   return (
-    <div className="min-h-full bg-[#071316] text-ivory">
+    <div className="min-h-screen bg-[#071316] text-ivory">
       <aside className="fixed inset-y-0 left-0 hidden w-60 border-r border-white/10 px-5 py-6 md:block">
         <Link href="/conservatory" className="flex items-center gap-3">
           <LogoMark />

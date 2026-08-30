@@ -64,7 +64,7 @@ function LoginForm() {
 
 export default function ConservatoryLoginPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#071316] px-5 text-ivory">
+    <div className="flex min-h-screen items-center justify-center bg-[#071316] px-5 text-ivory [color-scheme:dark]">
       <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#102226] p-8">
         <Logo className="h-8 [&_span]:text-ivory" />
         <p className="mt-8 text-[11px] tracking-[0.24em] text-aqua uppercase">Backstage</p>

@@ -441,6 +441,18 @@ async function main() {
     });
   }
 
+  await prisma.mediaAsset.deleteMany();
+  await prisma.mediaAsset.createMany({
+    data: [
+      { filename: "hero-1.jpg", url: "/images/labs/hero-1.jpg", alt: "Scientist at the microscope", mimeType: "image/jpeg", size: 782070 },
+      { filename: "hero-2.jpg", url: "/images/labs/hero-2.jpg", alt: "Assay glassware", mimeType: "image/jpeg", size: 281406 },
+      { filename: "hero-3.jpg", url: "/images/labs/hero-3.jpg", alt: "Laboratory bench", mimeType: "image/jpeg", size: 405860 },
+      { filename: "food.jpg", url: "/images/labs/food.jpg", alt: "Food discipline", mimeType: "image/jpeg", size: 523144 },
+      { filename: "cosmetics.jpg", url: "/images/labs/cosmetics.jpg", alt: "Cosmetic discipline", mimeType: "image/jpeg", size: 361385 },
+      { filename: "electronics.jpg", url: "/images/labs/electronics.jpg", alt: "Electronics discipline", mimeType: "image/jpeg", size: 300736 },
+    ],
+  });
+
   console.log("Mettra house seeded.");
 }
 
