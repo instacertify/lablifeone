@@ -1,0 +1,205 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Setting {
+  id            String   @id @default("house")
+  companyName   String
+  tagline       String
+  email         String
+  phone         String
+  addressLine   String
+  city          String
+  region        String
+  postalCode    String
+  country       String
+  hours         String
+  mapEmbed      String?
+  linkedin      String?
+  aboutExcerpt  String
+  footerNote    String
+  logoUrl       String?
+  identityLine  String   @default("A global laboratory")
+  updatedAt     DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String  @id @default(cuid())
+  quote     String
+  name      String
+  role      String?
+  company   String?
+  image     String?
+  published Boolean @default(true)
+  sortOrder Int     @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  name        String
+  slug        String     @unique
+  excerpt     String
+  description String
+  image       String?
+  accent      String     @default("aqua")
+  sortOrder   Int        @default(0)
+  published   Boolean    @default(true)
+  parentId    String?
+  parent      Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children    Category[] @relation("CategoryTree")
+  services    Service[]
+  seo         SeoRecord?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Service {
+  id          String     @id @default(cuid())
+  name        String
+  slug        String     @unique
+  excerpt     String
+  description String
+  image       String?
+  standard    String?
+  timeline    String?
+  method      String?
+  sample      String?
+  notes       String?
+  published   Boolean    @default(true)
+  sortOrder   Int        @default(0)
+  categoryId  String
+  category    Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  seo         SeoRecord?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Page {
+  id        String     @id @default(cuid())
+  title     String
+  slug      String     @unique
+  excerpt   String?
+  content   String
+  kind      String     @default("custom")
+  published Boolean    @default(true)
+  seo       SeoRecord?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Industry {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  sortOrder Int       @default(0)
+  published Boolean   @default(true)
+  insights  Insight[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Insight {
+  id          String     @id @default(cuid())
+  title       String
+  slug        String     @unique
+  excerpt     String
+  content     String
+  image       String?
+  published   Boolean    @default(true)
+  publishedAt DateTime?
+  industryId  String?
+  industry    Industry?  @relation(fields: [industryId], references: [id], onDelete: SetNull)
+  seo         SeoRecord?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Banner {
+  id        String  @id @default(cuid())
+  title     String
+  subtitle  String?
+  image     String
+  ctaLabel  String?
+  ctaHref   String?
+  sortOrder Int     @default(0)
+  active    Boolean @default(true)
+}
+
+model Lead {
+  id               String   @id @default(cuid())
+  name             String
+  email            String
+  phone            String?
+  company          String?
+  category         String?
+  message          String
+  sourcePage       String?
+  privacyAccepted  Boolean  @default(false)
+  status           String   @default("new")
+  createdAt        DateTime @default(now())
+}
+
+model PrivacyRequest {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  kind      String
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+}
+
+model MediaAsset {
+  id        String   @id @default(cuid())
+  filename  String
+  url       String
+  alt       String?
+  mimeType  String
+  size      Int
+  createdAt DateTime @default(now())
+}
+
+model SeoRecord {
+  id            String    @id @default(cuid())
+  path          String    @unique
+  title         String
+  description   String
+  keywords      String?
+  ogTitle       String?
+  ogDescription String?
+  ogImage       String?
+  canonical     String?
+  robots        String    @default("index,follow")
+  schemaJson    String?
+  focusKeyword  String?
+  categoryId    String?   @unique
+  category      Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  serviceId     String?   @unique
+  service       Service?  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  pageId        String?   @unique
+  page          Page?     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  insightId     String?   @unique
+  insight       Insight?  @relation(fields: [insightId], references: [id], onDelete: Cascade)
+  updatedAt     DateTime  @updatedAt
+}
+
+model Faq {
+  id        String @id @default(cuid())
+  question  String
+  answer    String
+  sortOrder Int    @default(0)
+}
+
+model Admin {
+  id           String @id @default(cuid())
+  email        String @unique
+  passwordHash String
+  name         String
+}

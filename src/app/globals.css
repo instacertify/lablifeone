@@ -1,0 +1,133 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  --ink: #061433;
+  --abyss: #0a1f44;
+  --forest: #102a56;
+  --jade: #163a73;
+  --aqua: #ffffff;
+  --iris: #1c4a8c;
+  --violet: #8fa4c4;
+  --bronze: #d6deea;
+  --sand: #e8eef6;
+  --ivory: #ffffff;
+  --paper: #f4f7fb;
+  --mist: #e4eaf3;
+  --line: rgba(6, 20, 51, 0.12);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-abyss: var(--abyss);
+  --color-forest: var(--forest);
+  --color-jade: var(--jade);
+  --color-aqua: var(--aqua);
+  --color-iris: var(--iris);
+  --color-violet: var(--violet);
+  --color-bronze: var(--bronze);
+  --color-sand: var(--sand);
+  --color-ivory: var(--ivory);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
+  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-outfit);
+  --font-mono: var(--font-jetbrains);
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-outfit), sans-serif;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--ivory);
+}
+
+.display {
+  font-family: var(--font-cormorant), serif;
+}
+
+.folio-content {
+  font-family: var(--font-outfit), sans-serif;
+}
+
+.folio-content h1,
+.folio-content h2,
+.folio-content h3,
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3 {
+  font-family: var(--font-cormorant), serif;
+  letter-spacing: -0.02em;
+}
+
+.ProseMirror {
+  min-height: 22rem;
+  outline: none;
+  padding: 1.25rem 1.4rem;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #8fa4c4;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ticker {
+  animation: ticker 28s linear infinite;
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ken {
+  animation: ken 18s ease-in-out infinite alternate;
+}
+
+@keyframes ken {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.08) translate3d(-1.5%, 1%, 0);
+  }
+}
+
+.fade-slide {
+  animation: fadeSlide 900ms ease both;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 0.6px, transparent 0.6px);
+  background-size: 3px 3px;
+}
