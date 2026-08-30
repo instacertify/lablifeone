@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getConservatorySession } from "@/lib/auth";
 import { serviceSchema } from "@/lib/validators";
+import { normalizeService } from "@/lib/records";
 
 export async function PUT(
   request: Request,
@@ -16,7 +17,7 @@ export async function PUT(
   }
   const service = await prisma.service.update({
     where: { id },
-    data: { ...parsed.data, image: parsed.data.image || null },
+    data: normalizeService(parsed.data),
   });
   return NextResponse.json(service);
 }

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getConservatorySession } from "@/lib/auth";
 import { categorySchema } from "@/lib/validators";
+import { normalizeCategory } from "@/lib/records";
 
 export async function PUT(
   request: Request,
@@ -14,9 +15,13 @@ export async function PUT(
   if (!parsed.success) {
     return NextResponse.json({ error: "A category needs a name, slug, and folio." }, { status: 400 });
   }
+  const data = normalizeCategory(parsed.data);
+  if (data.parentId === id) {
+    return NextResponse.json({ error: "A category cannot sit under itself." }, { status: 400 });
+  }
   const category = await prisma.category.update({
     where: { id },
-    data: { ...parsed.data, image: parsed.data.image || null },
+    data,
   });
   return NextResponse.json(category);
 }

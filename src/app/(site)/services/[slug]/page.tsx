@@ -2,7 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LeadForm } from "@/components/site/LeadForm";
-import { getPublishedCategories, getSeoByPath, getServiceBySlug } from "@/lib/data";
+import {
+  flattenCategoryNames,
+  getPublishedCategories,
+  getSeoByPath,
+  getServiceBySlug,
+} from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
@@ -34,6 +39,14 @@ export default async function ServicePage({
   ]);
   if (!service || !service.published) notFound();
 
+  const specs = [
+    ["Standard", service.standard],
+    ["Timeline", service.timeline],
+    ["Method", service.method],
+    ["Sample", service.sample],
+    ["Notes", service.notes],
+  ].filter(([, value]) => Boolean(value));
+
   return (
     <article>
       <header className="bg-abyss px-5 py-20 text-ivory lg:px-8">
@@ -55,6 +68,16 @@ export default async function ServicePage({
               <Image src={service.image} alt={service.name} fill className="object-cover" />
             </div>
           )}
+          {specs.length > 0 && (
+            <dl className="mb-10 grid gap-4 rounded-3xl border border-ink/8 bg-white p-6 sm:grid-cols-2">
+              {specs.map(([label, value]) => (
+                <div key={label}>
+                  <dt className="text-[11px] tracking-[0.16em] text-ink/45 uppercase">{label}</dt>
+                  <dd className="mt-1 text-sm leading-6 text-ink/80">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
           <div
             className="folio-content prose prose-lg max-w-none prose-headings:font-serif"
             dangerouslySetInnerHTML={{ __html: service.description }}
@@ -65,7 +88,10 @@ export default async function ServicePage({
             <p className="text-[11px] tracking-[0.2em] text-jade uppercase">Capture a lead</p>
             <h2 className="display mt-2 text-3xl">Request a quote</h2>
             <div className="mt-5">
-              <LeadForm sourcePage={`/services/${slug}`} categories={categories.map((item) => item.name)} />
+              <LeadForm
+                sourcePage={`/services/${slug}`}
+                categories={flattenCategoryNames(categories)}
+              />
             </div>
           </div>
         </aside>

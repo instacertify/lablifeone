@@ -24,6 +24,7 @@ model Setting {
   aboutExcerpt  String
   footerNote    String
   logoUrl       String?
+  identityLine  String   @default("A global laboratory")
   updatedAt     DateTime @updatedAt
 }
 
@@ -50,6 +51,9 @@ model Category {
   accent      String     @default("aqua")
   sortOrder   Int        @default(0)
   published   Boolean    @default(true)
+  parentId    String?
+  parent      Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children    Category[] @relation("CategoryTree")
   services    Service[]
   seo         SeoRecord?
   createdAt   DateTime   @default(now())
@@ -63,6 +67,11 @@ model Service {
   excerpt     String
   description String
   image       String?
+  standard    String?
+  timeline    String?
+  method      String?
+  sample      String?
+  notes       String?
   published   Boolean    @default(true)
   sortOrder   Int        @default(0)
   categoryId  String

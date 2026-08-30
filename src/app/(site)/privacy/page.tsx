@@ -21,8 +21,8 @@ export default async function PrivacyPage() {
           company, and message — only to reply about testing work.
         </p>
         <p>
-          Correspondence: contact@metrra.com. House: A Block, Sector 62 Institutional Area,
-          Noida, Uttar Pradesh, India 201301.
+          Correspondence: contact@metrra.com. Facility address is held in The Conservatory
+          and is not the brand identity.
         </p>
       </div>
       <div className="mt-12 rounded-3xl bg-mist p-6">

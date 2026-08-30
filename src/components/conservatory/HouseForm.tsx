@@ -78,10 +78,15 @@ export function HouseForm({ settings }: { settings: Setting }) {
           </label>
         </div>
       </div>
+      <p className="text-xs text-white/50 sm:col-span-2">
+        Identity line is the public voice (for example “A global laboratory with global solutions”).
+        The address below is a facility, not the brand identity.
+      </p>
       {(
         [
           ["companyName", "Company name"],
           ["tagline", "Tagline"],
+          ["identityLine", "Identity line"],
           ["email", "Email"],
           ["phone", "Telephone"],
           ["addressLine", "Address line"],

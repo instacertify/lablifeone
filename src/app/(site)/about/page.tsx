@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { LeadForm } from "@/components/site/LeadForm";
-import { getPageBySlug, getPublishedCategories, getSeoByPath, getSettings } from "@/lib/data";
+import { flattenCategoryNames, getPageBySlug, getPublishedCategories, getSeoByPath, getSettings } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
 import { formatAddress } from "@/lib/data";
 
@@ -9,8 +9,8 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata() {
   const seo = await getSeoByPath("/about");
   return buildMetadata(seo, {
-    title: "The House | Metrra Laboratory Noida",
-    description: "A European-mannered testing laboratory in Sector 62, Noida.",
+    title: "The House | Metrra Lab",
+    description: "A global laboratory with global solutions. One facility among the work — never the identity.",
     path: "/about",
   });
 }
@@ -34,10 +34,11 @@ export default async function AboutPage() {
         <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
           <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">The house</p>
           <h1 className="display mt-4 max-w-3xl text-6xl leading-[0.92]">
-            A laboratory in Sector 62.
+            {settings?.identityLine || "A global laboratory with global solutions."}
           </h1>
           <p className="mt-6 max-w-xl text-lg text-sand/85">
-            {settings ? formatAddress(settings) : "A Block, Sector 62, Noida"}
+            A laboratory facility — not the brand identity — at{" "}
+            {settings ? formatAddress(settings) : "the address held in The Conservatory"}.
           </p>
         </div>
       </header>
@@ -45,7 +46,9 @@ export default async function AboutPage() {
         <div
           className="folio-content prose prose-lg lg:col-span-8 prose-headings:font-serif"
           dangerouslySetInnerHTML={{
-            __html: page?.content || "<p>Metrra is a private analytical house in Noida.</p>",
+            __html:
+              page?.content ||
+              "<p>Metrra Lab is a global laboratory with global solutions.</p>",
           }}
         />
         <aside className="lg:col-span-4">
@@ -55,7 +58,7 @@ export default async function AboutPage() {
             <div className="mt-5">
               <LeadForm
                 sourcePage="/about"
-                categories={categories.map((item) => item.name)}
+                categories={flattenCategoryNames(categories)}
               />
             </div>
           </div>

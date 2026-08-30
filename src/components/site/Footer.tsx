@@ -16,7 +16,10 @@ export function Footer({
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-12 lg:px-8">
         <div className="lg:col-span-4">
           <Logo className="h-8" inverted src={settings.logoUrl} name={settings.companyName} />
-          <p className="display mt-6 max-w-sm text-2xl leading-snug text-white">
+          <p className="mt-6 text-[11px] tracking-[0.2em] text-aqua uppercase">
+            {settings.identityLine}
+          </p>
+          <p className="display mt-3 max-w-sm text-2xl leading-snug text-white">
             {settings.tagline}
           </p>
           <p className="mt-4 max-w-sm text-sm leading-7 text-mist/80">

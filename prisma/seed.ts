@@ -3,6 +3,28 @@ import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
+type TestSeed = {
+  name: string;
+  slug: string;
+  excerpt: string;
+  description: string;
+  standard: string;
+  timeline: string;
+  method: string;
+  sample: string;
+  notes?: string;
+  image?: string;
+  sortOrder?: number;
+};
+
+function test(data: TestSeed) {
+  return {
+    ...data,
+    published: true,
+    sortOrder: data.sortOrder ?? 0,
+  };
+}
+
 async function main() {
   const passwordHash = await bcrypt.hash(
     process.env.CONSERVATORY_PASSWORD || "Unstoppable2026",
@@ -34,10 +56,11 @@ async function main() {
       "https://www.google.com/maps?q=A+Block+Sector+62+Institutional+Area+Noida+201301&output=embed",
     linkedin: "https://www.linkedin.com",
     aboutExcerpt:
-      "Metrra Lab is a high-house of analytical testing in Noida’s institutional corridor — European in discipline, Indian in presence, exacting in every dossier.",
+      "Metrra Lab is a global laboratory with global solutions — food, cosmetics, electronics, metals, polymers, and every discipline you commission next.",
     footerNote:
-      "Protocols written for industries that cannot afford doubt. Food, cosmetics, electronics, and every discipline you commission next.",
+      "A global laboratory with global solutions. Protocols written for industries that cannot afford doubt.",
     logoUrl: "/images/metrra-lab-logo.png",
+    identityLine: "A global laboratory with global solutions",
   };
 
   await prisma.setting.upsert({
@@ -54,7 +77,7 @@ async function main() {
     data: [
       {
         title: "The assay is the argument.",
-        subtitle: "A Noida house of measurement with a European sense of finish.",
+        subtitle: "A global laboratory with global solutions.",
         image: "/images/labs/hero-1.jpg",
         ctaLabel: "Request a quote",
         ctaHref: "/contact",
@@ -63,7 +86,7 @@ async function main() {
       },
       {
         title: "Be testing. Be unstoppable.",
-        subtitle: "Food, cosmetics, electronics — and every category you add to the ledger.",
+        subtitle: "Food, cosmetics, electronics, metals, polymers — all under Disciplines.",
         image: "/images/labs/hero-2.jpg",
         ctaLabel: "Explore disciplines",
         ctaHref: "/disciplines",
@@ -72,7 +95,7 @@ async function main() {
       },
       {
         title: "Be testing. Be unstoppable.",
-        subtitle: "A workflow that treats every sample as a reputation.",
+        subtitle: "Standards, timelines, and dossiers written for the market you ship to.",
         image: "/images/labs/hero-3.jpg",
         ctaLabel: "Request a quote",
         ctaHref: "/contact",
@@ -90,30 +113,117 @@ async function main() {
       name: "Food & Nutrition",
       slug: "food-nutrition",
       excerpt: "Composition, contaminants, authenticity, and fortification for brands that feed people.",
-      description: `<p>Metrra’s food atelier reads a product the way a sommelier reads a vintage — origin, integrity, and what must never be present. From residues to nutrition panels, every assay is written for regulators, retailers, and the people who will actually eat the thing.</p><h3>What we hold to account</h3><ul><li>Pesticide residues, heavy metals, and mycotoxins</li><li>Nutritional labelling and fortification recovery</li><li>Pathogen screens and shelf-life studies</li><li>Authenticity and adulteration dossiers</li></ul>`,
+      description:
+        "<p>Metrra’s food atelier reads a product the way a sommelier reads a vintage — origin, integrity, and what must never be present. Residues, nutrition, and microbiology sit as subcategories under this discipline, each with tests the Conservatory can extend.</p>",
       image: "/images/labs/food.jpg",
       accent: "aqua",
       sortOrder: 0,
       services: {
         create: [
-          {
-            name: "Residue & Contaminant Dossier",
-            slug: "food-residue-contaminants",
-            excerpt: "Multi-residue pesticide, metal, and mycotoxin profiles for export and domestic release.",
-            description:
-              "<p>A complete contaminant folio for food manufacturers, exporters, and private-label houses. Methods aligned to national and international residue definitions, written so a quality lead can defend the number in a meeting.</p>",
+          test({
+            name: "Food Discipline Intake",
+            slug: "food-discipline-intake",
+            excerpt: "A scoped brief that names the product, market, and the standard that must be satisfied.",
+            description: "<p>Commission the food wing with a product, a destination market, and the standard the dossier must name.</p>",
+            standard: "Client protocol / FSSAI",
+            timeline: "1–2 working days to protocol",
+            method: "Desk review + method selection",
+            sample: "Product specification and label artwork",
+            image: "/images/labs/food.jpg",
+          }),
+        ],
+      },
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Residues & Contaminants",
+      slug: "food-residues",
+      excerpt: "Pesticides, metals, and mycotoxins for domestic and export release.",
+      description: "<p>Multi-residue and contaminant work written so a quality lead can defend the number.</p>",
+      image: "/images/labs/food.jpg",
+      accent: "aqua",
+      sortOrder: 0,
+      parentId: food.id,
+      services: {
+        create: [
+          test({
+            name: "Pesticide Multi-Residue Screen",
+            slug: "food-pesticide-multi-residue",
+            excerpt: "Multi-residue pesticide profiles for export and domestic release.",
+            description: "<p>LC-MS/MS multi-residue work aligned to the residue definition the market actually uses.</p>",
+            standard: "FSSAI / SANTE 11312/2021",
+            timeline: "5–7 working days",
+            method: "LC-MS/MS",
+            sample: "250 g edible portion",
+            notes: "Export-ready residue dossier",
             image: "/images/labs/assay.jpg",
-            sortOrder: 0,
-          },
-          {
-            name: "Nutrition & Fortification Assay",
-            slug: "nutrition-fortification",
-            excerpt: "Label-ready nutrition facts and vitamin/mineral recovery for fortified foods.",
-            description:
-              "<p>We quantify what the pack claims — protein, fats, sugars, micronutrients — and recover fortificants with the patience a label audit deserves.</p>",
+          }),
+          test({
+            name: "Heavy Metals in Food",
+            slug: "food-heavy-metals",
+            excerpt: "Lead, cadmium, mercury, and arsenic for pack and export release.",
+            description: "<p>Trace metals quantified against the limit the destination market names.</p>",
+            standard: "AOAC / FSSAI",
+            timeline: "4–6 working days",
+            method: "ICP-MS",
+            sample: "100 g homogenised",
             image: "/images/labs/chemistry.jpg",
             sortOrder: 1,
-          },
+          }),
+          test({
+            name: "Mycotoxin Profile",
+            slug: "food-mycotoxins",
+            excerpt: "Aflatoxins, ochratoxin, and DON for grains, spices, and nuts.",
+            description: "<p>A mycotoxin folio written for the commodity and the buyer’s specification.</p>",
+            standard: "ISO 16050 / FSSAI",
+            timeline: "4–5 working days",
+            method: "HPLC / LC-MS/MS",
+            sample: "200 g representative lot",
+            image: "/images/labs/assay.jpg",
+            sortOrder: 2,
+          }),
+        ],
+      },
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Nutrition & Labelling",
+      slug: "food-nutrition-labelling",
+      excerpt: "Nutrition facts and fortification recovery for the pack.",
+      description: "<p>What the pack claims, recovered with the patience a label audit deserves.</p>",
+      image: "/images/labs/food.jpg",
+      accent: "aqua",
+      sortOrder: 1,
+      parentId: food.id,
+      services: {
+        create: [
+          test({
+            name: "Nutrition Facts Panel",
+            slug: "nutrition-facts-panel",
+            excerpt: "Label-ready energy, protein, fat, carbohydrate, and sugars.",
+            description: "<p>A nutrition panel written for the regulation the pack will meet.</p>",
+            standard: "FSSAI / Codex CAC/GL 2",
+            timeline: "5–8 working days",
+            method: "AOAC suite",
+            sample: "300 g finished product",
+            image: "/images/labs/chemistry.jpg",
+          }),
+          test({
+            name: "Fortification Recovery",
+            slug: "nutrition-fortification",
+            excerpt: "Vitamin and mineral recovery for fortified foods.",
+            description: "<p>We recover what the fortification claim promises.</p>",
+            standard: "FSSAI Fortification / AOAC",
+            timeline: "7–10 working days",
+            method: "HPLC / ICP-OES",
+            sample: "250 g + retained pack",
+            image: "/images/labs/chemistry.jpg",
+            sortOrder: 1,
+          }),
         ],
       },
     },
@@ -124,30 +234,78 @@ async function main() {
       name: "Cosmetics & Personal Care",
       slug: "cosmetics-personal-care",
       excerpt: "Safety, stability, and claim support for formulas that sit on skin.",
-      description: `<p>A cosmetic is a contract with the face. Metrra’s personal-care bench treats emulsions, serums, and ayurvedic preparations with the same severity we give a drug impurity profile — restricted substances, microbiology, and the quiet work of proving a claim.</p><h3>The folio</h3><ul><li>Restricted substances and heavy metals</li><li>Preservative efficacy and microbial limits</li><li>Stability, compatibility, and packaging interaction</li><li>Herbal and natural-origin substantiation</li></ul>`,
+      description:
+        "<p>A cosmetic is a contract with the face. Restricted substances, microbiology, and stability sit as subcategories — each test carrying a standard and a timeline the Conservatory can edit.</p>",
       image: "/images/labs/cosmetics.jpg",
       accent: "iris",
       sortOrder: 1,
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Safety & Restricted Lists",
+      slug: "cosmetic-safety",
+      excerpt: "Restricted substances, metals, and microbial limits.",
+      description: "<p>Map the formula against the lists a retailer or regulator will actually open.</p>",
+      image: "/images/labs/cosmetics.jpg",
+      accent: "iris",
+      sortOrder: 0,
+      parentId: cosmetics.id,
       services: {
         create: [
-          {
-            name: "Cosmetic Safety Screen",
-            slug: "cosmetic-safety-screen",
-            excerpt: "Restricted lists, metals, and microbiology for leave-on and rinse-off formulas.",
-            description:
-              "<p>From lipstick to lotion, we map the formula against restricted-substance lists and microbial limits so a brand can ship with a straight face.</p>",
+          test({
+            name: "Cosmetic Restricted Substances",
+            slug: "cosmetic-restricted-substances",
+            excerpt: "Restricted lists and heavy metals for leave-on and rinse-off formulas.",
+            description: "<p>From lipstick to lotion, a restricted-substance screen a brand can ship with.</p>",
+            standard: "IS 4707 / EU 1223/2009 Annexes",
+            timeline: "6–8 working days",
+            method: "GC-MS / ICP-MS",
+            sample: "50 g finished formula",
             image: "/images/labs/cosmetics.jpg",
-            sortOrder: 0,
-          },
-          {
-            name: "Stability & Claim Support",
-            slug: "cosmetic-stability-claims",
-            excerpt: "Accelerated stability, packaging interaction, and evidence for marketing language.",
-            description:
-              "<p>We age the formula, watch the pack, and write the evidence a claim actually needs — not the evidence a campaign wishes it had.</p>",
-            image: "/images/labs/precision.jpg",
+          }),
+          test({
+            name: "Cosmetic Microbiology",
+            slug: "cosmetic-microbiology",
+            excerpt: "Microbial limits and preservative efficacy.",
+            description: "<p>Counts and challenge tests written for the pack and the climate it will live in.</p>",
+            standard: "ISO 17516 / ISO 11930",
+            timeline: "7–28 days by protocol",
+            method: "Plate count / PET",
+            sample: "100 g unopened units",
+            notes: "PET timeline follows the challenge schedule",
+            image: "/images/labs/cosmetics.jpg",
             sortOrder: 1,
-          },
+          }),
+        ],
+      },
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Stability & Claim Support",
+      slug: "cosmetic-stability-claims",
+      excerpt: "Accelerated stability, packaging interaction, and claim evidence.",
+      description: "<p>Age the formula, watch the pack, write the evidence a claim actually needs.</p>",
+      image: "/images/labs/precision.jpg",
+      accent: "iris",
+      sortOrder: 1,
+      parentId: cosmetics.id,
+      services: {
+        create: [
+          test({
+            name: "Accelerated Stability",
+            slug: "cosmetic-accelerated-stability",
+            excerpt: "Accelerated and real-time stability for emulsions and serums.",
+            description: "<p>A stability folio that names temperature, humidity, and what changed.</p>",
+            standard: "ICH Q1A adapted / ISO 18811",
+            timeline: "4–12 weeks by protocol",
+            method: "Climate chamber + chemistry",
+            sample: "12 finished packs",
+            image: "/images/labs/precision.jpg",
+          }),
         ],
       },
     },
@@ -158,30 +316,252 @@ async function main() {
       name: "Electronics & Electrical",
       slug: "electronics-electrical",
       excerpt: "Materials, restricted substances, and reliability for objects that carry current.",
-      description: `<p>Electronics fail quietly until they do not. Metrra’s electrical bench looks at solder, polymers, coatings, and assemblies the way a conservator looks at a clock — composition, restricted chemistry, and the manners of heat.</p><h3>Scope</h3><ul><li>Restricted substance screening for materials declarations</li><li>Polymer and coating identification</li><li>Corrosion, plating, and cleanliness</li><li>Incoming inspection for critical parts</li></ul>`,
+      description:
+        "<p>Electronics fail quietly until they do not. Restricted chemistry and materials reliability live as subcategories under this discipline — never as a separate site heading.</p>",
       image: "/images/labs/electronics.jpg",
       accent: "bronze",
       sortOrder: 2,
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Restricted Substances",
+      slug: "electronics-restricted",
+      excerpt: "Materials declarations and restricted-chemistry screens.",
+      description: "<p>Know what is in the polymer, the solder, and the finish before a shipment leaves.</p>",
+      image: "/images/labs/electronics.jpg",
+      accent: "bronze",
+      sortOrder: 0,
+      parentId: electronics.id,
       services: {
         create: [
-          {
-            name: "Restricted Substance Screen",
-            slug: "electronics-restricted-substances",
-            excerpt: "Materials declarations and restricted-chemistry screens for assemblies and parts.",
-            description:
-              "<p>A materials dossier for OEMs and suppliers who must know what is in the polymer, the solder, and the finish before a shipment leaves the dock.</p>",
+          test({
+            name: "RoHS Restricted Screen",
+            slug: "electronics-rohs",
+            excerpt: "Restricted-substance screen for assemblies and parts.",
+            description: "<p>A materials dossier for OEMs who must name the chemistry before the dock.</p>",
+            standard: "IEC 62321 / RoHS",
+            timeline: "5–8 working days",
+            method: "XRF + wet chemistry",
+            sample: "Homogeneous material or part",
             image: "/images/labs/electronics.jpg",
-            sortOrder: 0,
-          },
-          {
-            name: "Materials & Reliability Assay",
-            slug: "electronics-materials-reliability",
-            excerpt: "Identification, cleanliness, and failure-adjacent materials work.",
-            description:
-              "<p>When a part misbehaves, we start with what it is made of — and whether the factory sent what the drawing promised.</p>",
+          }),
+        ],
+      },
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Materials & Reliability",
+      slug: "electronics-materials",
+      excerpt: "Identification, cleanliness, and failure-adjacent materials work.",
+      description: "<p>When a part misbehaves, we start with what it is made of.</p>",
+      image: "/images/labs/instruments.jpg",
+      accent: "bronze",
+      sortOrder: 1,
+      parentId: electronics.id,
+      services: {
+        create: [
+          test({
+            name: "Polymer & Coating Identification",
+            slug: "electronics-polymer-id",
+            excerpt: "Identification of polymers, coatings, and finishes on assemblies.",
+            description: "<p>FTIR and microscopy in the service of a drawing that must match the part.</p>",
+            standard: "ASTM E1252 / ISO 11358",
+            timeline: "3–5 working days",
+            method: "FTIR / DSC",
+            sample: "5 g or one representative part",
+            image: "/images/labs/instruments.jpg",
+          }),
+        ],
+      },
+    },
+  });
+
+  const metals = await prisma.category.create({
+    data: {
+      name: "Metals & Alloy",
+      slug: "metals-alloy",
+      excerpt: "Composition, grade confirmation, and corrosion manners for metals that must be exactly what the drawing says.",
+      description:
+        "<p>A metal is a promise of grade. Composition, mechanical behaviour, and corrosion sit as subcategories under Disciplines — generated and edited from the Conservatory, never as a separate top heading.</p>",
+      image: "/images/labs/instruments.jpg",
+      accent: "bronze",
+      sortOrder: 3,
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Composition & Grade",
+      slug: "metals-composition",
+      excerpt: "Alloy chemistry and grade confirmation.",
+      description: "<p>Name the alloy the mill claimed and the one that arrived.</p>",
+      image: "/images/labs/instruments.jpg",
+      accent: "bronze",
+      sortOrder: 0,
+      parentId: metals.id,
+      services: {
+        create: [
+          test({
+            name: "Alloy Chemistry (OES / ICP)",
+            slug: "metals-alloy-chemistry",
+            excerpt: "Grade confirmation for steels, aluminium, and copper alloys.",
+            description: "<p>Composition written against the specification the purchase order actually names.</p>",
+            standard: "ASTM E415 / IS 228",
+            timeline: "3–5 working days",
+            method: "OES / ICP-OES",
+            sample: "50 mm coupon or turnings",
+            image: "/images/labs/instruments.jpg",
+          }),
+          test({
+            name: "Inclusion & Cleanliness Rating",
+            slug: "metals-inclusion-rating",
+            excerpt: "Non-metallic inclusion rating for critical steels.",
+            description: "<p>A cleanliness number a forging house can stand beside.</p>",
+            standard: "ASTM E45 / ISO 4967",
+            timeline: "4–6 working days",
+            method: "Optical metallography",
+            sample: "Prepared coupon",
+            image: "/images/labs/precision.jpg",
+            sortOrder: 1,
+          }),
+        ],
+      },
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Mechanical & Corrosion",
+      slug: "metals-mechanical-corrosion",
+      excerpt: "Tensile, hardness, and corrosion behaviour.",
+      description: "<p>How the metal behaves when asked to work, and when asked to wait in weather.</p>",
+      image: "/images/labs/precision.jpg",
+      accent: "bronze",
+      sortOrder: 1,
+      parentId: metals.id,
+      services: {
+        create: [
+          test({
+            name: "Tensile & Hardness",
+            slug: "metals-tensile-hardness",
+            excerpt: "Tensile strength, elongation, and hardness for mill and incoming inspection.",
+            description: "<p>Mechanical numbers written to the geometry the standard allows.</p>",
+            standard: "ASTM E8 / ISO 6892-1",
+            timeline: "4–7 working days",
+            method: "Universal testing machine",
+            sample: "Machined tensile bar",
+            image: "/images/labs/precision.jpg",
+          }),
+          test({
+            name: "Salt Spray Corrosion",
+            slug: "metals-salt-spray",
+            excerpt: "Neutral salt spray for coatings and plated parts.",
+            description: "<p>Hours to first red rust, written without theatre.</p>",
+            standard: "ASTM B117 / ISO 9227",
+            timeline: "48–1000 hours by protocol",
+            method: "Neutral salt spray",
+            sample: "Finished parts",
+            notes: "Timeline follows the hours the specification names",
             image: "/images/labs/instruments.jpg",
             sortOrder: 1,
-          },
+          }),
+        ],
+      },
+    },
+  });
+
+  const plastics = await prisma.category.create({
+    data: {
+      name: "Plastics & Polymer",
+      slug: "plastics-polymer",
+      excerpt: "Identification, properties, and product-safety work for polymers that hold food, skin, or current.",
+      description:
+        "<p>A polymer is a recipe and a risk. Identification and migration sit as subcategories under this discipline. Tests, standards, and timelines are generated from the Conservatory.</p>",
+      image: "/images/labs/chemistry.jpg",
+      accent: "jade",
+      sortOrder: 4,
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Identification & Properties",
+      slug: "plastics-identification",
+      excerpt: "Resin identification, melt flow, and thermal behaviour.",
+      description: "<p>Name the resin and the manners it will keep under heat.</p>",
+      image: "/images/labs/chemistry.jpg",
+      accent: "jade",
+      sortOrder: 0,
+      parentId: plastics.id,
+      services: {
+        create: [
+          test({
+            name: "Polymer Identification (FTIR / DSC)",
+            slug: "plastics-ftir-dsc",
+            excerpt: "Resin family and thermal transitions for incoming lots.",
+            description: "<p>FTIR and DSC to confirm the resin the drawing promised.</p>",
+            standard: "ASTM D3418 / ISO 11357",
+            timeline: "3–5 working days",
+            method: "FTIR / DSC",
+            sample: "10 g pellets or part cuttings",
+            image: "/images/labs/chemistry.jpg",
+          }),
+          test({
+            name: "Melt Flow Rate",
+            slug: "plastics-melt-flow",
+            excerpt: "Melt flow for processing and grade confirmation.",
+            description: "<p>A flow number a moulder can set a machine by.</p>",
+            standard: "ASTM D1238 / ISO 1133",
+            timeline: "2–4 working days",
+            method: "Melt flow indexer",
+            sample: "50 g dry pellets",
+            image: "/images/labs/chemistry.jpg",
+            sortOrder: 1,
+          }),
+        ],
+      },
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Migration & Product Safety",
+      slug: "plastics-migration",
+      excerpt: "Overall and specific migration for food-contact and consumer goods.",
+      description: "<p>What leaves the polymer when it meets food, sweat, or solvent.</p>",
+      image: "/images/labs/assay.jpg",
+      accent: "jade",
+      sortOrder: 1,
+      parentId: plastics.id,
+      services: {
+        create: [
+          test({
+            name: "Overall Migration",
+            slug: "plastics-overall-migration",
+            excerpt: "Overall migration for food-contact articles.",
+            description: "<p>Simulants and times the regulation names, not the ones a brochure prefers.</p>",
+            standard: "EU 10/2011 / IS 9845",
+            timeline: "7–12 working days",
+            method: "Gravimetric migration",
+            sample: "Finished article or 2 dm²",
+            image: "/images/labs/assay.jpg",
+          }),
+          test({
+            name: "Specific Migration of Metals",
+            slug: "plastics-specific-migration-metals",
+            excerpt: "Specific migration of metals from food-contact polymers.",
+            description: "<p>Metals that must not leave the pack for the food.</p>",
+            standard: "EU 10/2011 Annex II",
+            timeline: "8–12 working days",
+            method: "ICP-MS after migration",
+            sample: "Finished article",
+            image: "/images/labs/assay.jpg",
+            sortOrder: 1,
+          }),
         ],
       },
     },
@@ -192,21 +572,52 @@ async function main() {
       name: "Pharmaceuticals",
       slug: "pharmaceuticals",
       excerpt: "Identity, purity, and methodical release testing for medicines and actives.",
-      description: `<p>A medicine is a promise measured in milligrams. Metrra’s pharmaceutical rooms are written for identity, assay, impurities, and the documentary manners that a quality system expects.</p>`,
+      description:
+        "<p>A medicine is a promise measured in milligrams. Identity, assay, and impurities live here as tests the Conservatory can extend.</p>",
       image: "/images/labs/precision.jpg",
       accent: "jade",
-      sortOrder: 3,
+      sortOrder: 5,
       services: {
         create: [
-          {
+          test({
             name: "Identity, Assay & Impurities",
             slug: "pharma-identity-assay",
             excerpt: "Compendial and client methods for actives, excipients, and finished dose.",
-            description:
-              "<p>Chromatography and spectroscopy in the service of a batch that must be exactly what the dossier says it is.</p>",
+            description: "<p>Chromatography and spectroscopy in the service of a batch that must be exactly what the dossier says.</p>",
+            standard: "IP / USP / Ph. Eur.",
+            timeline: "5–10 working days",
+            method: "HPLC / UV / IR",
+            sample: "As per monograph",
             image: "/images/labs/assay.jpg",
-            sortOrder: 0,
-          },
+          }),
+        ],
+      },
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Identity & Assay",
+      slug: "pharma-identity-assay-wing",
+      excerpt: "Compendial identity and assay work.",
+      description: "<p>The monograph named, the instrument ready, the sentence written.</p>",
+      image: "/images/labs/precision.jpg",
+      accent: "jade",
+      sortOrder: 0,
+      parentId: pharma.id,
+      services: {
+        create: [
+          test({
+            name: "Related Substances",
+            slug: "pharma-related-substances",
+            excerpt: "Impurity profiles for actives and finished dose.",
+            description: "<p>Related substances against the monograph or the client method.</p>",
+            standard: "ICH Q3B / USP",
+            timeline: "6–10 working days",
+            method: "HPLC",
+            sample: "As per method",
+            image: "/images/labs/assay.jpg",
+          }),
         ],
       },
     },
@@ -217,34 +628,65 @@ async function main() {
       name: "Environment & Water",
       slug: "environment-water",
       excerpt: "Air, effluent, and potable water — the rooms a factory cannot hide.",
-      description: `<p>The factory has a second body: the water it takes, the air it returns, the soil it sits on. Metrra writes those rooms into numbers a regulator can read.</p>`,
+      description:
+        "<p>The factory has a second body: the water it takes and the air it returns. Tests here carry the standard the permit actually names.</p>",
       image: "/images/labs/chemistry.jpg",
       accent: "aqua",
-      sortOrder: 4,
+      sortOrder: 6,
+    },
+  });
+
+  await prisma.category.create({
+    data: {
+      name: "Water Quality",
+      slug: "water-quality",
+      excerpt: "Potable, process, and effluent chemistry.",
+      description: "<p>Drinking water to discharge, held to the permit.</p>",
+      image: "/images/labs/chemistry.jpg",
+      accent: "aqua",
+      sortOrder: 0,
+      parentId: environment.id,
       services: {
         create: [
-          {
-            name: "Water Quality Protocol",
-            slug: "water-quality-protocol",
-            excerpt: "Potable, process, and effluent chemistry with a clean chain of custody.",
-            description:
-              "<p>From drinking water to discharge, we hold the chemistry to the standard the permit actually names.</p>",
+          test({
+            name: "Potable Water Protocol",
+            slug: "water-potable-protocol",
+            excerpt: "Potable chemistry with a clean chain of custody.",
+            description: "<p>IS 10500 parameters written so a facilities lead can post the result.</p>",
+            standard: "IS 10500",
+            timeline: "3–7 working days",
+            method: "APHA / IS methods",
+            sample: "2 L in laboratory bottles",
             image: "/images/labs/chemistry.jpg",
-            sortOrder: 0,
-          },
+          }),
+          test({
+            name: "Effluent Discharge",
+            slug: "water-effluent-discharge",
+            excerpt: "Process and effluent chemistry against the consent.",
+            description: "<p>The consent named, the chain of custody kept.</p>",
+            standard: "CPCB / EPA methods",
+            timeline: "5–8 working days",
+            method: "APHA suite",
+            sample: "Composite as specified",
+            image: "/images/labs/chemistry.jpg",
+            sortOrder: 1,
+          }),
         ],
       },
     },
   });
 
+  const allCategories = await prisma.category.findMany();
+
   await prisma.page.deleteMany();
   const home = await prisma.page.create({
     data: {
-      title: "Metrra Lab Lab — Be Testing Be Unstoppable",
+      title: "Metrra Lab — Be Testing Be Unstoppable",
       slug: "home",
       kind: "home",
-      excerpt: "A Noida house of analytical testing with European finish.",
-      content: `<p>Metrra Lab stands in the institutional grain of Sector 62, Noida — a laboratory that treats measurement as a form of manners. We are built for brands that export, for factories that cannot bluff a regulator, and for product teams who want a number they can stand beside.</p><p>Food. Cosmetics. Electronics. And every discipline you add to the house. The Conservatory lets the laboratory grow without asking a developer for a new corridor.</p>`,
+      excerpt: "A global laboratory with global solutions.",
+      content:
+        "<p>Metrra Lab is a global laboratory with global solutions. We write protocols for brands that export, factories that cannot bluff a regulator, and product teams who want a number they can stand beside.</p><p>Food, cosmetics, electronics, metals, and polymers live as a submenu under Disciplines — never as separate headings. The Conservatory lets the laboratory add a category, a subcategory, or a test with its standard and timeline, without asking a developer for a new corridor. A facility address can be held on file. It is not the identity of the house.</p>",
     },
   });
 
@@ -253,8 +695,9 @@ async function main() {
       title: "The House",
       slug: "about",
       kind: "about",
-      excerpt: "A testing laboratory in Sector 62, Noida.",
-      content: `<p>Metrra Lab is a private analytical house in A Block, Sector 62 Institutional Area, Noida. We write protocols for food, cosmetics, electronics, and any discipline you commission next.</p><h2>What we believe</h2><p>A result is not a PDF. It is a sentence a quality director can say aloud. We write methods, keep instruments in a climate that flatters them, and refuse the theatre of rush when the chemistry is not ready.</p><h2>How the house is kept</h2><p>A workflow from brief to dossier that a client can follow without calling twice. The Conservatory — our editorial backstage — lets the house add a new discipline, a new banner, or a new address, without breaking the public face.</p><h2>The mark</h2><p>The Double R is the house monogram: measured twice. Navy is the field. White is the highlight. The logo can be replaced from The Conservatory as a PNG or WebP.</p>`,
+      excerpt: "A global laboratory with global solutions.",
+      content:
+        "<p>Metrra Lab is a global laboratory with global solutions. We write protocols for food, cosmetics, electronics, metals, polymers, and any discipline you commission next.</p><h2>What we believe</h2><p>A result is not a PDF. It is a sentence a quality director can say aloud. We write methods, keep instruments in a climate that flatters them, and refuse the theatre of rush when the chemistry is not ready.</p><h2>Identity and facility</h2><p>The house is global. A laboratory facility may sit at an address the Conservatory holds — today that file lists A Block, Sector 62 Institutional Area. That address is a door, not the brand. Identity, tagline, and contact stay editable from The Conservatory.</p><h2>How the house is kept</h2><p>Every discipline lives under one public menu. Each wing can hold many subcategories and many tests. Each test carries a standard, a timeline, a method, a sample, and notes — all generated from the Conservatory, including bulk CSV upload.</p><h2>The mark</h2><p>The Double R is the house monogram: measured twice. Navy is the field. White is the highlight. The logo can be replaced from The Conservatory as a PNG or WebP.</p>",
     },
   });
 
@@ -264,7 +707,8 @@ async function main() {
       title: "A protocol is a piece of architecture",
       slug: "protocol-is-architecture",
       excerpt: "Why Metrra writes methods the way a conservator writes a condition report.",
-      content: `<p>Most laboratories sell a turnaround. Metrra sells a room you can think in. A protocol names the sample, the instrument, the uncertainty, and the sentence the client will eventually need. That is architecture, not logistics.</p><p>When we add a category — food, cosmetic, electronics, or whatever the market invents next — we do not bolt on a brochure. We open a new wing of the house: methods, images, SEO, a lead door on every landing.</p>`,
+      content:
+        "<p>Most laboratories sell a turnaround. Metrra sells a room you can think in. A protocol names the sample, the instrument, the uncertainty, and the sentence the client will eventually need. That is architecture, not logistics.</p><p>When we add a category — food, cosmetic, electronics, metals, polymer, or whatever the market invents next — we do not bolt on a brochure. We open a wing under Disciplines: methods, standards, timelines, images, SEO, a lead door on every landing.</p>",
       image: "/images/labs/instruments.jpg",
       published: true,
       publishedAt: new Date(),
@@ -277,13 +721,13 @@ async function main() {
       {
         question: "What does Metrra actually test?",
         answer:
-          "Food, cosmetics, electronics, pharmaceuticals, water, and any discipline you commission. New categories can be opened from The Conservatory without rebuilding the site.",
+          "Food, cosmetics, electronics, metals, polymers, pharmaceuticals, water, and any discipline you commission. They all live under Disciplines. New categories, subcategories, and tests — each with a standard and timeline — can be opened from The Conservatory, including bulk CSV upload.",
         sortOrder: 0,
       },
       {
-        question: "Where is the laboratory?",
+        question: "Is the Sector 62 laboratory the brand?",
         answer:
-          "A Block, Sector 62 Institutional Area, Noida, Uttar Pradesh, India 201301. Correspondence: contact@metrra.com.",
+          "No. Metrra Lab is a global laboratory with global solutions. A facility address can be held in The Conservatory for visits and correspondence. It is not the identity of the house.",
         sortOrder: 1,
       },
       {
@@ -293,9 +737,9 @@ async function main() {
         sortOrder: 2,
       },
       {
-        question: "Can the address and contact details change later?",
+        question: "Can identity, address, and tests change later?",
         answer:
-          "Yes. The Conservatory House panel updates address, hours, map, and email across the site the moment you save.",
+          "Yes. The Conservatory House panel updates identity line, address, hours, map, and email. The Atelier adds categories, subcategories, and tests with standards and timelines — one at a time or by bulk upload.",
         sortOrder: 3,
       },
       {
@@ -335,7 +779,7 @@ async function main() {
         published: true,
       },
       {
-        quote: "The Conservatory let us open a new category without waiting on a brochure house. The public page was live the same afternoon.",
+        quote: "The Conservatory let us open metals and polymers under Disciplines the same afternoon — standards and timelines included.",
         name: "Anika Shah",
         role: "Regulatory Counsel",
         company: "Veda Formulations",
@@ -349,81 +793,31 @@ async function main() {
   const seos = [
     {
       path: "/",
-      title: "Metrra Lab | Analytical Testing Laboratory in Noida",
+      title: "Metrra Lab | A global laboratory with global solutions",
       description:
-        "Metrra Lab is a high-house of analytical testing in Sector 62, Noida. Food, cosmetics, electronics, and custom disciplines. Be testing. Be unstoppable.",
-      keywords: "testing laboratory Noida, food testing, cosmetic testing, electronics testing, Metrra",
-      focusKeyword: "analytical testing laboratory",
+        "Metrra Lab is a global laboratory with global solutions. Food, cosmetics, electronics, metals, polymers, and custom disciplines. Be testing. Be unstoppable.",
+      keywords: "global laboratory, food testing, cosmetic testing, electronics testing, metals testing, polymer testing, Metrra",
+      focusKeyword: "global laboratory",
       ogImage: "/images/labs/hero-3.jpg",
       canonical: "https://www.metrra.com/",
       pageId: home.id,
     },
     {
       path: "/about",
-      title: "The House | Metrra Laboratory Noida",
+      title: "The House | Metrra Lab",
       description:
-        "Meet Metrra Lab: a testing laboratory in A Block, Sector 62 Institutional Area, Noida. Food, cosmetics, electronics, and the disciplines you commission next.",
-      keywords: "Metrra about, testing lab Noida, Sector 62 laboratory",
-      focusKeyword: "testing laboratory Noida",
+        "Meet Metrra Lab: a global laboratory with global solutions. Food, cosmetics, electronics, metals, polymers, and the disciplines you commission next.",
+      keywords: "Metrra about, global laboratory, testing laboratory",
+      focusKeyword: "global laboratory",
       ogImage: "/images/labs/discipline.jpg",
       canonical: "https://www.metrra.com/about",
       pageId: about.id,
     },
     {
-      path: "/disciplines/food-nutrition",
-      title: "Food Testing Laboratory | Metrra Noida",
-      description:
-        "Food and nutrition assays at Metrra: residues, metals, mycotoxins, nutrition labels, and fortification recovery for Indian and export brands.",
-      keywords: "food testing laboratory, nutrition assay, residue testing Noida",
-      focusKeyword: "food testing laboratory",
-      ogImage: "/images/labs/food.jpg",
-      categoryId: food.id,
-    },
-    {
-      path: "/disciplines/cosmetics-personal-care",
-      title: "Cosmetic Testing Laboratory | Metrra Lab",
-      description:
-        "Cosmetic and personal-care testing in Noida: restricted substances, microbiology, stability, and claim support for formulas that sit on skin.",
-      keywords: "cosmetic testing, personal care laboratory, stability testing",
-      focusKeyword: "cosmetic testing",
-      ogImage: "/images/labs/cosmetics.jpg",
-      categoryId: cosmetics.id,
-    },
-    {
-      path: "/disciplines/electronics-electrical",
-      title: "Electronics Testing | Metrra Laboratory",
-      description:
-        "Electronics and electrical materials testing: restricted substances, polymer identification, cleanliness, and incoming inspection for assemblies.",
-      keywords: "electronics testing, restricted substances, materials assay",
-      focusKeyword: "electronics testing",
-      ogImage: "/images/labs/electronics.jpg",
-      categoryId: electronics.id,
-    },
-    {
-      path: "/disciplines/pharmaceuticals",
-      title: "Pharmaceutical Testing | Metrra Lab",
-      description:
-        "Pharmaceutical identity, assay, and impurity work at Metrra’s Noida house — written for quality systems that expect a defendable number.",
-      keywords: "pharmaceutical testing, assay, impurities laboratory",
-      focusKeyword: "pharmaceutical testing",
-      ogImage: "/images/labs/precision.jpg",
-      categoryId: pharma.id,
-    },
-    {
-      path: "/disciplines/environment-water",
-      title: "Water & Environment Testing | Metrra Lab",
-      description:
-        "Water quality and environmental monitoring protocols from Metrra, Sector 62 Noida — potable, process, and effluent chemistry with chain of custody.",
-      keywords: "water testing Noida, effluent, environmental laboratory",
-      focusKeyword: "water testing",
-      ogImage: "/images/labs/chemistry.jpg",
-      categoryId: environment.id,
-    },
-    {
       path: "/insights/protocol-is-architecture",
       title: "A Protocol is Architecture | Metrra Insights",
       description:
-        "Why Metrra writes laboratory methods like architecture — and how new testing categories open as wings of the house, not brochures.",
+        "Why Metrra writes laboratory methods like architecture — and how new testing categories open under Disciplines, not as separate headings.",
       keywords: "laboratory protocol, testing methods, Metrra insights",
       focusKeyword: "laboratory protocol",
       ogImage: "/images/labs/instruments.jpg",
@@ -433,8 +827,8 @@ async function main() {
       path: "/contact",
       title: "Request a Quote | Contact Metrra Lab",
       description:
-        "Write to Metrra Lab at contact@metrra.com or visit A Block, Sector 62 Institutional Area, Noida 201301. Request a quote from any page.",
-      keywords: "contact Metrra Lab, testing lab Noida address, request quote",
+        "Write to Metrra Lab at contact@metrra.com. A global laboratory with global solutions. Request a quote from any page.",
+      keywords: "contact Metrra Lab, request quote, global laboratory",
       focusKeyword: "request a quote",
       ogImage: "/images/labs/hero-2.jpg",
       canonical: "https://www.metrra.com/contact",
@@ -443,12 +837,21 @@ async function main() {
       path: "/disciplines",
       title: "Testing Disciplines | Metrra Lab",
       description:
-        "Browse Metrra’s testing disciplines — food, cosmetics, electronics, pharmaceuticals, water — or ask The Conservatory to open a new category.",
-      keywords: "testing categories, food cosmetics electronics laboratory",
+        "Browse Metrra’s testing disciplines — food, cosmetics, electronics, metals, polymers — all under one menu, with subcategories and tests from the Conservatory.",
+      keywords: "testing categories, food cosmetics electronics metals polymers laboratory",
       focusKeyword: "testing disciplines",
       ogImage: "/images/labs/discipline.jpg",
       canonical: "https://www.metrra.com/disciplines",
     },
+    ...allCategories.map((category) => ({
+      path: `/disciplines/${category.slug}`,
+      title: `${category.name} | Metrra Lab`,
+      description: category.excerpt,
+      keywords: `${category.name.toLowerCase()}, testing laboratory, Metrra`,
+      focusKeyword: category.name.toLowerCase(),
+      ogImage: category.image || "/images/labs/discipline.jpg",
+      categoryId: category.id,
+    })),
   ];
 
   for (const seo of seos) {
@@ -458,7 +861,7 @@ async function main() {
         ogTitle: seo.title,
         ogDescription: seo.description,
         robots: "index,follow",
-        canonical: seo.canonical || `https://www.metrra.com${seo.path}`,
+        canonical: "canonical" in seo && seo.canonical ? seo.canonical : `https://www.metrra.com${seo.path}`,
       },
     });
   }

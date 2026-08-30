@@ -24,6 +24,7 @@ export const categorySchema = z.object({
   accent: z.string().optional(),
   sortOrder: z.number().int().optional(),
   published: z.boolean().optional(),
+  parentId: z.string().optional().or(z.literal("")),
 });
 
 export const serviceSchema = z.object({
@@ -33,6 +34,11 @@ export const serviceSchema = z.object({
   description: z.string().min(8),
   image: z.string().optional().or(z.literal("")),
   categoryId: z.string().min(1),
+  standard: z.string().optional().or(z.literal("")),
+  timeline: z.string().optional().or(z.literal("")),
+  method: z.string().optional().or(z.literal("")),
+  sample: z.string().optional().or(z.literal("")),
+  notes: z.string().optional().or(z.literal("")),
   sortOrder: z.number().int().optional(),
   published: z.boolean().optional(),
 });
@@ -95,6 +101,14 @@ export const settingsSchema = z.object({
   aboutExcerpt: z.string().min(20),
   footerNote: z.string().min(8),
   logoUrl: z.string().optional().or(z.literal("")),
+  identityLine: z.string().min(4),
+});
+
+export const bulkCsvSchema = z.object({
+  csv: z.string().optional(),
+  rows: z.array(z.record(z.string(), z.string())).optional(),
+  parentId: z.string().optional().or(z.literal("")),
+  categoryId: z.string().optional().or(z.literal("")),
 });
 
 export const testimonialSchema = z.object({

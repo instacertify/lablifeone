@@ -5,16 +5,28 @@ export const getSettings = cache(async () => {
   return prisma.setting.findUnique({ where: { id: "house" } });
 });
 
-export const getPublishedCategories = cache(async () => {
-  return prisma.category.findMany({
+const categoryTree = {
+  services: {
     where: { published: true },
-    orderBy: { sortOrder: "asc" },
+    orderBy: { sortOrder: "asc" as const },
+  },
+  children: {
+    where: { published: true },
+    orderBy: { sortOrder: "asc" as const },
     include: {
       services: {
         where: { published: true },
-        orderBy: { sortOrder: "asc" },
+        orderBy: { sortOrder: "asc" as const },
       },
     },
+  },
+};
+
+export const getPublishedCategories = cache(async () => {
+  return prisma.category.findMany({
+    where: { published: true, parentId: null },
+    orderBy: { sortOrder: "asc" },
+    include: categoryTree,
   });
 });
 
@@ -22,7 +34,8 @@ export const getCategoryBySlug = cache(async (slug: string) => {
   return prisma.category.findUnique({
     where: { slug },
     include: {
-      services: { where: { published: true }, orderBy: { sortOrder: "asc" } },
+      ...categoryTree,
+      parent: true,
       seo: true,
     },
   });
@@ -78,6 +91,15 @@ export const getPublishedTestimonials = cache(async () => {
     orderBy: { sortOrder: "asc" },
   });
 });
+
+export function flattenCategoryNames(
+  categories: { name: string; children?: { name: string }[] }[],
+) {
+  return categories.flatMap((category) => [
+    category.name,
+    ...(category.children?.map((child) => child.name) ?? []),
+  ]);
+}
 
 export function formatAddress(settings: {
   addressLine: string;

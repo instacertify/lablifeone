@@ -8,7 +8,7 @@ export async function generateMetadata() {
   const seo = await getSeoByPath("/contact");
   return buildMetadata(seo, {
     title: "Request a Quote | Contact Metrra Lab",
-    description: "Write to contact@metrra.com or visit A Block, Sector 62, Noida 201301.",
+    description: "Write to contact@metrra.com. Metrra Lab is a global laboratory with global solutions.",
     path: "/contact",
   });
 }
@@ -26,7 +26,7 @@ export default async function ContactPage() {
           <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">Contact</p>
           <h1 className="display mt-4 text-6xl">Request a quote</h1>
           <p className="mt-5 max-w-xl text-sand/80">
-            Write to the house by email. Address and hours can be updated from The Conservatory.
+            Write to the house by email. Identity, facility address, and hours are editable from The Conservatory.
           </p>
         </div>
       </header>
@@ -62,7 +62,10 @@ export default async function ContactPage() {
           <LeadForm
             sourcePage="/contact"
             replyTo={settings?.email || "contact@metrra.com"}
-            categories={categories.map((item) => item.name)}
+            categories={categories.flatMap((item) => [
+                item.name,
+                ...item.children.map((child) => child.name),
+              ])}
           />
         </div>
       </div>

@@ -21,9 +21,9 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata() {
   const seo = await getSeoByPath("/");
   return buildMetadata(seo, {
-    title: "Metrra Lab | Analytical Testing Laboratory in Noida",
+    title: "Metrra Lab | A global laboratory with global solutions",
     description:
-      "Metrra Lab is a high-house of analytical testing in Sector 62, Noida. Be testing. Be unstoppable.",
+      "Metrra Lab is a global laboratory with global solutions. Food, cosmetics, electronics, metals, polymers, and every discipline you commission. Be testing. Be unstoppable.",
     path: "/",
   });
 }
@@ -48,7 +48,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroCinema banners={banners} />
+      <HeroCinema banners={banners} identityLine={settings?.identityLine} />
       <Ticker text={settings?.tagline || "BE TESTING BE UNSTOPPABLE"} />
 
       <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
@@ -56,7 +56,7 @@ export default async function HomePage() {
           <div className="lg:col-span-5">
             <p className="text-[11px] tracking-[0.24em] text-jade uppercase">The house</p>
             <h2 className="display mt-3 text-5xl leading-[0.95] text-ink">
-              A laboratory with European manners, Indian presence.
+              {settings?.identityLine || "A global laboratory with global solutions."}
             </h2>
           </div>
           <div className="lg:col-span-7">
@@ -65,7 +65,7 @@ export default async function HomePage() {
               dangerouslySetInnerHTML={{
                 __html:
                   page?.content ||
-                  "<p>Metrra Lab stands in the institutional grain of Sector 62, Noida — a laboratory that treats measurement as a form of manners.</p>",
+                  "<p>Metrra Lab is a global laboratory with global solutions — protocols written for brands that cannot afford doubt, wherever they ship.</p>",
               }}
             />
           </div>
@@ -107,6 +107,11 @@ export default async function HomePage() {
                   </p>
                   <h3 className="display mt-2 text-3xl">{category.name}</h3>
                   <p className="mt-3 text-sm leading-6 text-sand/80">{category.excerpt}</p>
+                  {category.children.length > 0 && (
+                    <p className="mt-3 text-[11px] tracking-[0.14em] text-aqua/80 uppercase">
+                      {category.children.map((child) => child.name).join(" · ")}
+                    </p>
+                  )}
                 </div>
               </Link>
             ))}
@@ -161,7 +166,10 @@ export default async function HomePage() {
               dark
               sourcePage="/"
               replyTo={settings?.email || "contact@metrra.com"}
-              categories={categories.map((item) => item.name)}
+              categories={categories.flatMap((item) => [
+                item.name,
+                ...item.children.map((child) => child.name),
+              ])}
             />
           </div>
         </div>

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getConservatorySession } from "@/lib/auth";
 import { categorySchema } from "@/lib/validators";
+import { normalizeCategory } from "@/lib/records";
 
 export async function POST(request: Request) {
   const session = await getConservatorySession();
@@ -10,12 +11,8 @@ export async function POST(request: Request) {
   if (!parsed.success) {
     return NextResponse.json({ error: "A category needs a name, slug, and folio." }, { status: 400 });
   }
-  const category = await prisma.category.create({
-    data: {
-      ...parsed.data,
-      image: parsed.data.image || null,
-    },
-  });
+  const data = normalizeCategory(parsed.data);
+  const category = await prisma.category.create({ data });
   await prisma.seoRecord.create({
     data: {
       path: `/disciplines/${category.slug}`,

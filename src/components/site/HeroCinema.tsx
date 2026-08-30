@@ -5,14 +5,20 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Banner } from "@prisma/client";
 
-export function HeroCinema({ banners }: { banners: Banner[] }) {
+export function HeroCinema({
+  banners,
+  identityLine,
+}: {
+  banners: Banner[];
+  identityLine?: string;
+}) {
   const slides = banners.length
     ? banners
     : [
         {
           id: "fallback",
           title: "Be testing. Be unstoppable.",
-          subtitle: "A Noida house of measurement.",
+          subtitle: "A global laboratory with global solutions.",
           image: "/images/labs/hero-1.jpg",
           ctaLabel: "Request a quote",
           ctaHref: "/contact",
@@ -52,7 +58,7 @@ export function HeroCinema({ banners }: { banners: Banner[] }) {
 
       <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-end px-5 pb-16 lg:px-8 lg:pb-20">
         <p className="text-[11px] tracking-[0.32em] text-aqua uppercase">
-          Sector 62 · Noida · Institutional Area
+          {identityLine || "A global laboratory"}
         </p>
         <h1 className="display mt-4 max-w-4xl text-5xl leading-[0.9] sm:text-7xl lg:text-8xl">
           Be testing
@@ -60,7 +66,7 @@ export function HeroCinema({ banners }: { banners: Banner[] }) {
         </h1>
         <p className="fade-slide mt-6 max-w-xl text-lg leading-8 text-sand/90">
           {slide.subtitle ||
-            "A European-mannered testing house for food, cosmetics, electronics, and every category the market invents next."}
+            "A global laboratory with global solutions — food, cosmetics, electronics, metals, polymers, and every discipline you open next."}
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <Link

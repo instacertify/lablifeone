@@ -28,9 +28,10 @@ export default async function SiteLayout({
     hours: "Monday–Saturday, 09:00–18:30 IST",
     mapEmbed: null,
     linkedin: null,
-    aboutExcerpt: "A Noida house of analytical testing.",
+    aboutExcerpt: "A global laboratory with global solutions.",
     footerNote: "Protocols for industries that cannot afford doubt.",
     logoUrl: "/images/metrra-lab-logo.png",
+    identityLine: "A global laboratory with global solutions",
     updatedAt: new Date(),
   };
 
@@ -40,7 +41,13 @@ export default async function SiteLayout({
       <Header categories={categories} settings={house} />
       <main className="flex-1">{children}</main>
       <Footer settings={house} categories={categories} />
-      <LeadDock categories={categories.map((item) => item.name)} sourcePage="/" />
+      <LeadDock
+        categories={categories.flatMap((item) => [
+          item.name,
+          ...item.children.map((child) => child.name),
+        ])}
+        sourcePage="/"
+      />
     </div>
   );
 }

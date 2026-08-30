@@ -17,7 +17,8 @@ export default async function HousePage() {
       <p className="text-[11px] tracking-[0.22em] text-aqua uppercase">House</p>
       <h1 className="display mt-2 text-5xl">Address and voice</h1>
       <p className="mt-3 max-w-2xl text-sm text-sand/70">
-        Update contact, address, hours, map, and tagline. The public site reads this ledger everywhere.
+        Identity, contact, facility address, hours, map, and tagline. Sector 62 is a facility —
+        the public voice is a global laboratory with global solutions.
       </p>
       <HouseForm settings={settings} />
     </ConservatoryShell>
