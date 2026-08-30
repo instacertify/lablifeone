@@ -14,7 +14,7 @@ export function HeroCinema({ banners }: { banners: Banner[] }) {
           title: "Be testing. Be unstoppable.",
           subtitle: "A Noida house of measurement.",
           image: "/images/labs/hero-1.jpg",
-          ctaLabel: "Request assay",
+          ctaLabel: "Request a quote",
           ctaHref: "/contact",
         },
       ];
@@ -67,7 +67,7 @@ export function HeroCinema({ banners }: { banners: Banner[] }) {
             href={slide.ctaHref || "/contact"}
             className="rounded-full bg-aqua px-6 py-3 text-[12px] tracking-[0.18em] text-ink uppercase"
           >
-            {slide.ctaLabel || "Commission a protocol"}
+            {slide.ctaLabel || "Request a quote"}
           </Link>
           <Link
             href="/disciplines"

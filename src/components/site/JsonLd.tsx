@@ -15,7 +15,6 @@ export function JsonLd({
     name: settings.companyName,
     slogan: settings.tagline,
     email: settings.email,
-    telephone: settings.phone,
     url: siteUrl("/"),
     address: {
       "@type": "PostalAddress",

@@ -5,7 +5,6 @@ import { Logo } from "@/components/site/Logo";
 const links = [
   { href: "/about", label: "The House" },
   { href: "/disciplines", label: "Disciplines" },
-  { href: "/accreditations", label: "Seals" },
   { href: "/insights", label: "Insights" },
   { href: "/contact", label: "Contact" },
 ];
@@ -52,7 +51,7 @@ export function Header({
           href="/contact"
           className="rounded-full bg-white px-4 py-2 text-[12px] font-medium tracking-[0.16em] text-ink uppercase transition hover:bg-sand"
         >
-          Request assay
+          Request a quote
         </Link>
       </div>
     </header>

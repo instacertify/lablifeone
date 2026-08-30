@@ -34,7 +34,7 @@ export default async function AboutPage() {
         <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
           <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">The house</p>
           <h1 className="display mt-4 max-w-3xl text-6xl leading-[0.92]">
-            Legacy, under glass.
+            A laboratory in Sector 62.
           </h1>
           <p className="mt-6 max-w-xl text-lg text-sand/85">
             {settings ? formatAddress(settings) : "A Block, Sector 62, Noida"}

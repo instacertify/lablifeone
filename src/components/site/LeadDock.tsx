@@ -22,7 +22,7 @@ export function LeadDock({
         onClick={() => setOpen(true)}
         className="fixed right-4 bottom-4 z-50 rounded-full bg-ink px-5 py-3 text-[11px] tracking-[0.2em] text-white uppercase shadow-xl shadow-ink/30 ring-1 ring-white/20 transition hover:bg-forest md:right-7 md:bottom-7"
       >
-        Capture a lead
+        Request a quote
       </button>
       {open && (
         <div className="fixed inset-0 z-50 flex items-end justify-end bg-ink/50 p-4 backdrop-blur-sm md:p-8">

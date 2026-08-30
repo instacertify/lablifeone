@@ -56,7 +56,7 @@ async function main() {
         title: "The assay is the argument.",
         subtitle: "A Noida house of measurement with a European sense of finish.",
         image: "/images/labs/hero-1.jpg",
-        ctaLabel: "Commission a protocol",
+        ctaLabel: "Request a quote",
         ctaHref: "/contact",
         sortOrder: 0,
         active: true,
@@ -71,11 +71,11 @@ async function main() {
         active: true,
       },
       {
-        title: "Legacy, under glass.",
-        subtitle: "Instruments, scientists, and a workflow that treats every sample as a reputation.",
+        title: "Be testing. Be unstoppable.",
+        subtitle: "A workflow that treats every sample as a reputation.",
         image: "/images/labs/hero-3.jpg",
-        ctaLabel: "Visit the house",
-        ctaHref: "/about",
+        ctaLabel: "Request a quote",
+        ctaHref: "/contact",
         sortOrder: 2,
         active: true,
       },
@@ -253,18 +253,8 @@ async function main() {
       title: "The House",
       slug: "about",
       kind: "about",
-      excerpt: "A legacy laboratory written in a European key.",
-      content: `<p>Metrra Lab was raised as a private analytical house: not a marketplace of tests, but an atelier of protocols. Our rooms sit in A Block, Sector 62 Institutional Area — the scientific spine of Noida — and our manners are older than the corridor.</p><h2>What we believe</h2><p>A result is not a PDF. It is a sentence a quality director can say aloud. We write methods, keep instruments in a climate that flatters them, and refuse the theatre of rush when the chemistry is not ready.</p><h2>How the house is kept</h2><p>Scientists with long hands. Rooms at the right humidity. A workflow from commission to dossier that a client can follow without calling twice. The Conservatory — our editorial backstage — lets the house add a new discipline, a new banner, a new address, without breaking the public face.</p><h2>The mark</h2><p>The Double R is the house monogram: measured twice. Navy is the field. White is the highlight. The logo can be replaced from The Conservatory as a PNG or WebP the hour a new seal is drawn.</p>`,
-    },
-  });
-
-  const accreditations = await prisma.page.create({
-    data: {
-      title: "Seals & Recognitions",
-      slug: "accreditations",
-      kind: "accreditations",
-      excerpt: "The papers a serious laboratory keeps on the wall — and in the drawer.",
-      content: `<p>Metrra is composed to international laboratory practice. The public seals below are the house’s current ledger; the Conservatory can revise them the hour a new recognition arrives.</p><h3>Working alignment</h3><ul><li>ISO/IEC 17025 laboratory competence</li><li>Food-system recognition for sampling and analysis</li><li>Pharmaceutical and cosmetic safety manners</li><li>Environmental monitoring protocols</li></ul><p>Ask the Conservatory to publish certificate files, scope PDFs, and the exact wording legal prefers.</p>`,
+      excerpt: "A testing laboratory in Sector 62, Noida.",
+      content: `<p>Metrra Lab is a private analytical house in A Block, Sector 62 Institutional Area, Noida. We write protocols for food, cosmetics, electronics, and any discipline you commission next.</p><h2>What we believe</h2><p>A result is not a PDF. It is a sentence a quality director can say aloud. We write methods, keep instruments in a climate that flatters them, and refuse the theatre of rush when the chemistry is not ready.</p><h2>How the house is kept</h2><p>A workflow from brief to dossier that a client can follow without calling twice. The Conservatory — our editorial backstage — lets the house add a new discipline, a new banner, or a new address, without breaking the public face.</p><h2>The mark</h2><p>The Double R is the house monogram: measured twice. Navy is the field. White is the highlight. The logo can be replaced from The Conservatory as a PNG or WebP.</p>`,
     },
   });
 
@@ -297,15 +287,15 @@ async function main() {
         sortOrder: 1,
       },
       {
-        question: "How do I request a protocol?",
+        question: "How do I request a quote?",
         answer:
-          "Every public page carries a lead folio. Tell us the product, the market, and the standard you must satisfy. We reply from contact@metrra.com.",
+          "Every public page has a Request a quote form. Tell us the product, the market, and the standard you must satisfy. We reply from contact@metrra.com.",
         sortOrder: 2,
       },
       {
         question: "Can the address and contact details change later?",
         answer:
-          "Yes. The Conservatory House panel updates address, telephone, hours, map, and email across the site the moment you save.",
+          "Yes. The Conservatory House panel updates address, hours, map, and email across the site the moment you save.",
         sortOrder: 3,
       },
       {
@@ -359,7 +349,7 @@ async function main() {
   const seos = [
     {
       path: "/",
-      title: "Metrra Lab Lab | Analytical Testing Laboratory in Noida",
+      title: "Metrra Lab | Analytical Testing Laboratory in Noida",
       description:
         "Metrra Lab is a high-house of analytical testing in Sector 62, Noida. Food, cosmetics, electronics, and custom disciplines. Be testing. Be unstoppable.",
       keywords: "testing laboratory Noida, food testing, cosmetic testing, electronics testing, Metrra",
@@ -372,23 +362,12 @@ async function main() {
       path: "/about",
       title: "The House | Metrra Laboratory Noida",
       description:
-        "Meet the Metrra house: a European-mannered testing laboratory in A Block, Sector 62 Institutional Area, Noida. Legacy, instruments, and unstoppable protocols.",
+        "Meet Metrra Lab: a testing laboratory in A Block, Sector 62 Institutional Area, Noida. Food, cosmetics, electronics, and the disciplines you commission next.",
       keywords: "Metrra about, testing lab Noida, Sector 62 laboratory",
       focusKeyword: "testing laboratory Noida",
       ogImage: "/images/labs/discipline.jpg",
       canonical: "https://www.metrra.com/about",
       pageId: about.id,
-    },
-    {
-      path: "/accreditations",
-      title: "Seals & Recognitions | Metrra Lab",
-      description:
-        "ISO/IEC 17025 alignment and the recognitions Metrra keeps for food, cosmetic, pharmaceutical, and environmental work. Updated from The Conservatory.",
-      keywords: "ISO 17025, laboratory accreditation, Metrra seals",
-      focusKeyword: "laboratory accreditation",
-      ogImage: "/images/labs/instruments.jpg",
-      canonical: "https://www.metrra.com/accreditations",
-      pageId: accreditations.id,
     },
     {
       path: "/disciplines/food-nutrition",
@@ -452,11 +431,11 @@ async function main() {
     },
     {
       path: "/contact",
-      title: "Commission a Protocol | Contact Metrra",
+      title: "Request a Quote | Contact Metrra Lab",
       description:
-        "Write to Metrra at contact@metrra.com or visit A Block, Sector 62 Institutional Area, Noida 201301. Every page can capture a lead.",
-      keywords: "contact Metrra, testing lab Noida address, request quote",
-      focusKeyword: "contact Metrra",
+        "Write to Metrra Lab at contact@metrra.com or visit A Block, Sector 62 Institutional Area, Noida 201301. Request a quote from any page.",
+      keywords: "contact Metrra Lab, testing lab Noida address, request quote",
+      focusKeyword: "request a quote",
       ogImage: "/images/labs/hero-2.jpg",
       canonical: "https://www.metrra.com/contact",
     },

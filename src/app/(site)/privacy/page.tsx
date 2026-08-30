@@ -16,8 +16,8 @@ export default async function PrivacyPage() {
       <h1 className="display text-5xl">Privacy of the house</h1>
       <div className="prose prose-lg mt-8 max-w-none">
         <p>
-          Briefs sent through Metrra pages are stored in The Conservatory Chamber for the
-          laboratory to answer. We use the details you give — name, email, telephone,
+          Briefs sent through Metrra Lab pages are stored in The Conservatory Chamber for the
+          laboratory to answer. We use the details you give — name, email,
           company, and message — only to reply about testing work.
         </p>
         <p>

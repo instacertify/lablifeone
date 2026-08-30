@@ -29,9 +29,9 @@ export async function generateMetadata() {
 }
 
 const steps = [
-  { n: "01", title: "Commission", copy: "Tell us the product, the market, and the standard that must be satisfied." },
+  { n: "01", title: "Brief", copy: "Tell us the product, the market, and the standard that must be satisfied." },
   { n: "02", title: "Protocol", copy: "We write the method as architecture — instruments, uncertainty, the sentence you will need." },
-  { n: "03", title: "Assay", copy: "Rooms kept at the right humidity. Scientists with long hands. No theatre of rush." },
+  { n: "03", title: "Assay", copy: "Rooms kept at the right humidity. No theatre of rush." },
   { n: "04", title: "Dossier", copy: "A number you can stand beside in a meeting, and a file a regulator can read." },
 ];
 
@@ -68,21 +68,6 @@ export default async function HomePage() {
                   "<p>Metrra Lab stands in the institutional grain of Sector 62, Noida — a laboratory that treats measurement as a form of manners.</p>",
               }}
             />
-            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {[
-                ["4,800+", "Dossiers"],
-                ["180", "Scientists"],
-                ["28", "Years of house"],
-                ["∞", "Categories you add"],
-              ].map(([value, label]) => (
-                <div key={label} className="rounded-2xl bg-mist/60 p-4">
-                  <p className="display text-3xl text-forest">{value}</p>
-                  <p className="mt-1 text-[11px] tracking-[0.16em] text-ink/50 uppercase">
-                    {label}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -165,9 +150,9 @@ export default async function HomePage() {
           </div>
           <div className="rounded-3xl bg-ink/70 p-8 backdrop-blur">
             <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">
-              Capture a lead
+              Request a quote
             </p>
-            <h3 className="display mt-2 text-4xl">Commission the next assay</h3>
+            <h3 className="display mt-2 text-4xl">Ask Metrra Lab for a quote</h3>
             <p className="mt-3 mb-6 text-sm text-sand/80">
               Every public page can take a brief. Reply from{" "}
               {settings?.email || "contact@metrra.com"}.

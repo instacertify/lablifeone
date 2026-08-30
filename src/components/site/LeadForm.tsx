@@ -53,7 +53,6 @@ export function LeadForm({
       <input name="email" required type="email" placeholder="Work email" className={field} />
       {!compact && (
         <>
-          <input name="phone" placeholder="Telephone" className={field} />
           <input name="company" placeholder="House / company" className={field} />
           <select name="category" className={field} defaultValue="">
             <option value="">Discipline</option>
@@ -81,7 +80,7 @@ export function LeadForm({
             : "bg-ink text-ivory hover:bg-forest"
         } ${compact ? "w-full" : "sm:col-span-2"}`}
       >
-        {status === "sending" ? "Sending…" : status === "ok" ? "Received" : "Send the brief"}
+        {status === "sending" ? "Sending…" : status === "ok" ? "Received" : "Request a quote"}
       </button>
       {status === "ok" && (
         <p className={`text-xs ${compact || dark ? "text-aqua" : "text-jade sm:col-span-2"}`}>

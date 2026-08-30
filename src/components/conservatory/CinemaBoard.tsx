@@ -18,7 +18,7 @@ export function CinemaBoard({ banners }: { banners: Banner[] }) {
         title,
         subtitle,
         image,
-        ctaLabel: "Request assay",
+        ctaLabel: "Request a quote",
         ctaHref: "/contact",
         sortOrder: banners.length,
         active: true,

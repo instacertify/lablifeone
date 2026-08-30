@@ -63,7 +63,7 @@ export default async function ServicePage({
         <aside className="lg:col-span-4">
           <div className="rounded-3xl bg-mist p-6">
             <p className="text-[11px] tracking-[0.2em] text-jade uppercase">Capture a lead</p>
-            <h2 className="display mt-2 text-3xl">Commission this assay</h2>
+            <h2 className="display mt-2 text-3xl">Request a quote</h2>
             <div className="mt-5">
               <LeadForm sourcePage={`/services/${slug}`} categories={categories.map((item) => item.name)} />
             </div>

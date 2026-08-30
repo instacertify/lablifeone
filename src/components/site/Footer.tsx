@@ -35,7 +35,6 @@ export function Footer({
               {settings.email}
             </a>
           </p>
-          <p className="mt-1 text-sm text-sand/80">{settings.phone}</p>
           <p className="mt-3 text-xs tracking-wide text-mist/70">{settings.hours}</p>
         </div>
         <div className="lg:col-span-2">
