@@ -153,6 +153,10 @@ export default async function HomePage() {
                     </p>
                   )}
                   <h3 className="display mt-1 text-3xl hover:text-aqua">{item.title}</h3>
+                  <p className="mt-1 text-[12px] text-sand/65">
+                    Written by {item.writerName || "Metrra Lab"}
+                    {item.writerRole ? ` · ${item.writerRole}` : ""}
+                  </p>
                   <p className="mt-2 text-sm text-sand/80">{item.excerpt}</p>
                 </Link>
               ))}

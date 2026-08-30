@@ -1,14 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArticleIdentity } from "@/components/site/ArticleIdentity";
 import { LeadForm } from "@/components/site/LeadForm";
 import {
   flattenCategoryNames,
   getInsightBySlug,
   getPublishedCategories,
   getSeoByPath,
+  getSettings,
 } from "@/lib/data";
 import { buildMetadata } from "@/lib/metadata";
+import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -33,11 +36,36 @@ export default async function InsightPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [insight, categories] = await Promise.all([
+  const [insight, categories, settings] = await Promise.all([
     getInsightBySlug(slug),
     getPublishedCategories(),
+    getSettings(),
   ]);
   if (!insight || !insight.published) notFound();
+
+  const writerName = insight.writerName || settings?.companyName || "Metrra Lab";
+  const writerRole = insight.writerRole || "Editorial folio";
+  const identityLine =
+    insight.identityLine || settings?.identityLine || "A global laboratory with global solutions";
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: insight.title,
+    description: insight.excerpt,
+    image: insight.image ? siteUrl(insight.image) : undefined,
+    datePublished: insight.publishedAt?.toISOString(),
+    dateModified: insight.updatedAt.toISOString(),
+    author: {
+      "@type": "Person",
+      name: writerName,
+      jobTitle: writerRole,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: settings?.companyName || "Metrra Lab",
+      slogan: identityLine,
+    },
+  };
 
   return (
     <article>
@@ -63,8 +91,21 @@ export default async function InsightPage({
             )}
           </p>
           <h1 className="display mt-4 text-5xl leading-[0.95] sm:text-6xl">{insight.title}</h1>
+          <div className="mt-6">
+            <ArticleIdentity
+              writerName={writerName}
+              writerRole={writerRole}
+              identityLine={identityLine}
+              publishedAt={insight.publishedAt}
+              tone="ivory"
+            />
+          </div>
         </div>
       </header>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
       <div className="mx-auto max-w-4xl px-5 py-16">
         <div
           className="folio-content prose prose-lg max-w-none prose-headings:font-serif"

@@ -106,19 +106,22 @@ model Industry {
 }
 
 model Insight {
-  id          String     @id @default(cuid())
-  title       String
-  slug        String     @unique
-  excerpt     String
-  content     String
-  image       String?
-  published   Boolean    @default(true)
-  publishedAt DateTime?
-  industryId  String?
-  industry    Industry?  @relation(fields: [industryId], references: [id], onDelete: SetNull)
-  seo         SeoRecord?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id           String     @id @default(cuid())
+  title        String
+  slug         String     @unique
+  excerpt      String
+  content      String
+  image        String?
+  writerName   String?
+  writerRole   String?
+  identityLine String?
+  published    Boolean    @default(true)
+  publishedAt  DateTime?
+  industryId   String?
+  industry     Industry?  @relation(fields: [industryId], references: [id], onDelete: SetNull)
+  seo          SeoRecord?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
 
 model Banner {

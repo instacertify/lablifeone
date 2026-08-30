@@ -34,6 +34,9 @@ export default function NewInsightPage() {
         content: `<p>${form.get("excerpt")}</p>`,
         image: "/images/labs/instruments.jpg",
         industryId: form.get("industryId") || "",
+        writerName: form.get("writerName") || "",
+        writerRole: form.get("writerRole") || "",
+        identityLine: form.get("identityLine") || "",
         published: true,
       }),
     });
@@ -58,6 +61,9 @@ export default function NewInsightPage() {
             </option>
           ))}
         </select>
+        <input name="writerName" placeholder="Writer name" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
+        <input name="writerRole" placeholder="Writer role" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
+        <input name="identityLine" placeholder="Written identity (e.g. A global laboratory with global solutions)" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
         <textarea name="excerpt" required placeholder="Excerpt" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
         {error && <p className="text-sm text-violet">{error}</p>}
         <button className="rounded-full bg-aqua px-5 py-2 text-[12px] tracking-[0.16em] text-ink uppercase">

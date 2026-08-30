@@ -69,6 +69,9 @@ export const insightSchema = z.object({
   excerpt: z.string().min(8),
   content: z.string().min(8),
   image: z.string().optional().or(z.literal("")),
+  writerName: z.string().optional().or(z.literal("")),
+  writerRole: z.string().optional().or(z.literal("")),
+  identityLine: z.string().optional().or(z.literal("")),
   industryId: z.string().optional().or(z.literal("")),
   published: z.boolean().optional(),
 });
