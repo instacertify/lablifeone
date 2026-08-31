@@ -33,8 +33,16 @@ function resolveSqliteFile(fileUrl: string) {
     return HOUSE_SQLITE;
   }
   if (isAbsolute(path)) return path;
-  if (path.startsWith("./")) return join(process.cwd(), path.slice(2));
-  return join(process.cwd(), path);
+  if (path.startsWith("./prisma/")) {
+    return join(process.cwd(), "prisma", path.slice("./prisma/".length));
+  }
+  if (path.startsWith("prisma/")) {
+    return join(process.cwd(), "prisma", path.slice("prisma/".length));
+  }
+  if (path.startsWith("./")) {
+    return join(/*turbopackIgnore: true*/ process.cwd(), path.slice(2));
+  }
+  return join(/*turbopackIgnore: true*/ process.cwd(), path);
 }
 
 export function installBundledDatabase(dest: string) {
