@@ -5,6 +5,8 @@ import { JsonLd } from "@/components/site/JsonLd";
 import { LeadDock } from "@/components/site/LeadDock";
 import { getPublishedCategories, getSettings } from "@/lib/data";
 
+export const dynamic = "force-dynamic";
+
 export default async function SiteLayout({
   children,
 }: {
