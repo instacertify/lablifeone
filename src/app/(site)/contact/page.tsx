@@ -20,11 +20,11 @@ export default async function ContactPage() {
 
   return (
     <div>
-      <header className="bg-ink px-5 py-20 text-ivory lg:px-8">
+      <header className="border-b border-ink/10 bg-white px-5 py-20 text-ink lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">Contact</p>
+          <p className="text-[11px] tracking-[0.24em] text-jade uppercase">Contact</p>
           <h1 className="display mt-4 text-6xl">Request a quote</h1>
-          <p className="mt-5 max-w-xl text-sand/80">
+          <p className="mt-5 max-w-xl text-ink/70">
             Write to the house by email. Identity, facility address, and hours are editable from The Conservatory.
           </p>
         </div>

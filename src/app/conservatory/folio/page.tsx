@@ -25,11 +25,11 @@ export default async function FolioIndexPage() {
           <Link
             key={page.id}
             href={`/conservatory/folio/${page.id}`}
-            className="rounded-2xl border border-white/10 p-5 hover:border-aqua/40"
+            className="rounded-2xl border border-ink/10 p-5 hover:border-aqua/40"
           >
-            <p className="text-[11px] tracking-[0.16em] text-sand/50 uppercase">{page.kind}</p>
+            <p className="text-[11px] tracking-[0.16em] text-ink/50 uppercase">{page.kind}</p>
             <h2 className="display mt-1 text-3xl">{page.title}</h2>
-            <p className="mt-2 text-sm text-sand/60">/{page.slug}</p>
+            <p className="mt-2 text-sm text-ink/60">/{page.slug}</p>
           </Link>
         ))}
       </div>
@@ -44,13 +44,13 @@ export default async function FolioIndexPage() {
           <Link
             key={item.id}
             href={`/conservatory/folio/insight/${item.id}`}
-            className="rounded-2xl border border-white/10 p-4 hover:border-aqua/40"
+            className="rounded-2xl border border-ink/10 p-4 hover:border-aqua/40"
           >
-            <p className="text-[11px] tracking-[0.14em] text-sand/45 uppercase">
+            <p className="text-[11px] tracking-[0.14em] text-ink/45 uppercase">
               {item.industry?.name || "Unassigned"}
             </p>
             <p className="mt-1">{item.title}</p>
-            <p className="mt-1 text-xs text-sand/50">
+            <p className="mt-1 text-xs text-ink/50">
               Written by {item.writerName || "Metrra Lab"}
               {item.writerRole ? ` · ${item.writerRole}` : ""}
             </p>

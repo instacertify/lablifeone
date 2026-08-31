@@ -34,18 +34,18 @@ export function IndustryBoard({ industries }: { industries: Industry[] }) {
   return (
     <section className="mt-14">
       <h2 className="display text-3xl">Industries</h2>
-      <p className="mt-2 max-w-2xl text-sm text-sand/60">
+      <p className="mt-2 max-w-2xl text-sm text-ink/60">
         These filters appear on Industry Insights. Add Cosmetic Industry, Food and Beverage,
         Plastics, or any vertical the house needs next.
       </p>
       <ul className="mt-5 space-y-2">
         {industries.map((industry) => (
-          <li key={industry.id} className="flex items-center justify-between rounded-xl border border-white/10 px-4 py-3 text-sm">
+          <li key={industry.id} className="flex items-center justify-between rounded-xl border border-ink/10 px-4 py-3 text-sm">
             <span>
               {industry.name}
-              <span className="ml-2 text-[11px] text-sand/40">{industry.slug}</span>
+              <span className="ml-2 text-[11px] text-ink/40">{industry.slug}</span>
             </span>
-            <button type="button" onClick={() => remove(industry.id)} className="text-[11px] tracking-[0.14em] text-sand/50 uppercase">
+            <button type="button" onClick={() => remove(industry.id)} className="text-[11px] tracking-[0.14em] text-ink/50 uppercase">
               Remove
             </button>
           </li>
@@ -56,13 +56,13 @@ export function IndustryBoard({ industries }: { industries: Industry[] }) {
           name="name"
           required
           placeholder="e.g. Textile Industry"
-          className="min-w-64 flex-1 rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
+          className="min-w-64 flex-1 rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm"
         />
-        <button className="rounded-full bg-aqua px-4 py-2 text-[11px] tracking-[0.14em] text-ink uppercase">
+        <button className="rounded-full bg-ink px-4 py-2 text-[11px] tracking-[0.14em] text-white uppercase">
           Add industry
         </button>
       </form>
-      {status && <p className="mt-2 text-sm text-sand/60">{status}</p>}
+      {status && <p className="mt-2 text-sm text-ink/60">{status}</p>}
     </section>
   );
 }

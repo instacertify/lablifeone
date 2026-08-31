@@ -48,22 +48,22 @@ export default async function CategoryPage({
 
   return (
     <article>
-      <header className="relative overflow-hidden bg-ink py-24 text-ivory">
+      <header className="relative overflow-hidden border-b border-ink/10 bg-white py-20 text-ink">
         <Image
           src={category.image || "/images/labs/discipline.jpg"}
           alt={category.name}
           fill
-          className="object-cover opacity-35"
+          className="object-cover opacity-10"
         />
         <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
-          <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">
-            <Link href="/disciplines" className="hover:text-white">
+          <p className="text-[11px] tracking-[0.24em] text-jade uppercase">
+            <Link href="/disciplines" className="hover:text-ink">
               Disciplines
             </Link>
             {category.parent && (
               <>
-                <span className="mx-2 text-white/30">/</span>
-                <Link href={`/disciplines/${category.parent.slug}`} className="hover:text-white">
+                <span className="mx-2 text-ink/30">/</span>
+                <Link href={`/disciplines/${category.parent.slug}`} className="hover:text-ink">
                   {category.parent.name}
                 </Link>
               </>
@@ -138,7 +138,7 @@ export default async function CategoryPage({
         </div>
         <aside className="lg:col-span-4">
           <div className="sticky top-24 rounded-3xl bg-mist p-6">
-            <p className="text-[11px] tracking-[0.2em] text-jade uppercase">Lead folio</p>
+            <p className="text-[11px] tracking-[0.2em] text-jade uppercase">Request a quote</p>
             <h2 className="display mt-2 text-3xl">Request this discipline</h2>
             <div className="mt-5">
               <LeadForm

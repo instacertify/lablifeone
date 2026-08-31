@@ -14,7 +14,7 @@ export function LeadForm({
   sourcePage = "/",
   categories = [],
   compact = false,
-  dark = false,
+  dark: _dark = false,
   replyTo = "contact@metrra.com",
 }: Props) {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
@@ -41,20 +41,20 @@ export function LeadForm({
     setStatus("ok");
   }
 
-  const field = dark
-    ? "w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2.5 text-sm text-ivory placeholder:text-sand/40 focus:border-aqua focus:outline-none"
-    : compact
-      ? "w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-ivory placeholder:text-sand/40 focus:border-aqua focus:outline-none"
-      : "w-full rounded-xl border border-ink/10 bg-white px-3.5 py-3 text-sm text-ink placeholder:text-ink/35 focus:border-jade focus:outline-none";
+  const field =
+    "w-full rounded-xl border border-ink/15 bg-white px-3.5 py-3 text-sm text-ink placeholder:text-ink/35 focus:border-ink focus:outline-none";
+  const compactField =
+    "w-full rounded-lg border border-ink/15 bg-white px-3 py-2 text-sm text-ink placeholder:text-ink/35 focus:border-ink focus:outline-none";
+  const input = compact ? compactField : field;
 
   return (
     <form onSubmit={onSubmit} className={compact ? "space-y-2.5" : "grid gap-3 sm:grid-cols-2"}>
-      <input name="name" required placeholder="Name" className={field} />
-      <input name="email" required type="email" placeholder="Work email" className={field} />
+      <input name="name" required placeholder="Name" className={input} />
+      <input name="email" required type="email" placeholder="Work email" className={input} />
       {!compact && (
         <>
-          <input name="company" placeholder="House / company" className={field} />
-          <select name="category" className={field} defaultValue="">
+          <input name="company" placeholder="House / company" className={input} />
+          <select name="category" className={input} defaultValue="">
             <option value="">Discipline</option>
             {categories.map((name) => (
               <option key={name} value={name}>
@@ -70,11 +70,11 @@ export function LeadForm({
         required
         placeholder="What must be proven?"
         rows={compact ? 3 : 4}
-        className={`${field} ${compact ? "" : "sm:col-span-2"}`}
+        className={`${input} ${compact ? "" : "sm:col-span-2"}`}
       />
       <label
         className={`flex items-start gap-2 text-[11px] leading-5 ${
-          compact || dark ? "text-sand/70" : "text-ink/60 sm:col-span-2"
+          compact ? "text-ink/60" : "text-ink/60 sm:col-span-2"
         }`}
       >
         <input name="privacyAccepted" type="checkbox" required value="true" className="mt-0.5" />
@@ -89,15 +89,15 @@ export function LeadForm({
       <button
         disabled={status === "sending"}
         className={`rounded-full px-5 py-2.5 text-[12px] tracking-[0.16em] uppercase transition ${
-          compact || dark
-            ? "bg-aqua text-ink hover:bg-white"
-            : "bg-ink text-ivory hover:bg-forest"
+          compact
+            ? "bg-ink text-white hover:bg-jade"
+            : "bg-ink text-white hover:bg-jade"
         } ${compact ? "w-full" : "sm:col-span-2"}`}
       >
         {status === "sending" ? "Sending…" : status === "ok" ? "Received" : "Request a quote"}
       </button>
       {status === "ok" && (
-        <p className={`text-xs ${compact || dark ? "text-aqua" : "text-jade sm:col-span-2"}`}>
+        <p className={`text-xs ${compact ? "text-jade" : "text-jade sm:col-span-2"}`}>
           The house has your brief. We reply from {replyTo}.
         </p>
       )}

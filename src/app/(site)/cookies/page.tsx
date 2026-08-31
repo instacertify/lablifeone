@@ -96,7 +96,7 @@ export default async function CookiesPage() {
       </div>
 
       <div className="mt-10">
-        <CookieSettingsLink className="rounded-full bg-ink px-5 py-2.5 text-[12px] tracking-[0.16em] text-ivory uppercase" />
+        <CookieSettingsLink className="rounded-full bg-ink px-5 py-2.5 text-[12px] tracking-[0.16em] text-white uppercase" />
       </div>
     </div>
   );

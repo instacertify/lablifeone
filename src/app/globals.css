@@ -6,14 +6,14 @@
   --abyss: #0a1f44;
   --forest: #102a56;
   --jade: #163a73;
-  --aqua: #ffffff;
+  --aqua: #163a73;
   --iris: #1c4a8c;
   --violet: #8fa4c4;
   --bronze: #d6deea;
-  --sand: #e8eef6;
+  --sand: #5c6f8c;
   --ivory: #ffffff;
-  --paper: #f4f7fb;
-  --mist: #e4eaf3;
+  --paper: #ffffff;
+  --mist: #eef2f8;
   --line: rgba(6, 20, 51, 0.12);
 }
 
@@ -44,9 +44,24 @@ html {
 }
 
 body {
-  background: var(--paper);
+  background: #ffffff;
   color: var(--ink);
   font-family: var(--font-outfit), sans-serif;
+}
+
+.house-field {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(6, 20, 51, 0.14);
+  background: #ffffff;
+  color: var(--ink);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.house-field:focus {
+  outline: none;
+  border-color: var(--ink);
 }
 
 ::selection {

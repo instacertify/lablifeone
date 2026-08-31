@@ -56,16 +56,16 @@ export default async function ServicePage({
 
   return (
     <article>
-      <header className="bg-abyss px-5 py-20 text-ivory lg:px-8">
+      <header className="border-b border-ink/10 bg-white px-5 py-20 text-ink lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Link
             href={`/disciplines/${service.category.slug}`}
-            className="text-[11px] tracking-[0.24em] text-aqua uppercase"
+            className="text-[11px] tracking-[0.24em] text-jade uppercase"
           >
             {service.category.name}
           </Link>
           <h1 className="display mt-4 text-6xl leading-[0.92]">{service.name}</h1>
-          <p className="mt-6 max-w-2xl text-sand/80">{service.excerpt}</p>
+          <p className="mt-6 max-w-2xl text-ink/70">{service.excerpt}</p>
         </div>
       </header>
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 lg:grid-cols-12 lg:px-8">
@@ -92,7 +92,7 @@ export default async function ServicePage({
         </div>
         <aside className="lg:col-span-4">
           <div className="rounded-3xl bg-mist p-6">
-            <p className="text-[11px] tracking-[0.2em] text-jade uppercase">Capture a lead</p>
+            <p className="text-[11px] tracking-[0.2em] text-jade uppercase">Request a quote</p>
             <h2 className="display mt-2 text-3xl">Request a quote</h2>
             <div className="mt-5">
               <LeadForm

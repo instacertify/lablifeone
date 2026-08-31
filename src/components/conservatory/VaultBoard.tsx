@@ -21,7 +21,7 @@ export function VaultBoard({ assets }: { assets: Asset[] }) {
   return (
     <div className="mt-10">
       <label className="block cursor-pointer rounded-2xl border border-dashed border-aqua/40 p-8 text-center">
-        <span className="text-sm text-sand/70">Drop or choose a laboratory image</span>
+        <span className="text-sm text-ink/70">Drop or choose a laboratory image</span>
         <input
           type="file"
           accept="image/*"
@@ -35,10 +35,10 @@ export function VaultBoard({ assets }: { assets: Asset[] }) {
       {status && <p className="mt-3 text-sm text-aqua">{status}</p>}
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {assets.map((asset) => (
-          <figure key={asset.id} className="overflow-hidden rounded-2xl border border-white/10">
+          <figure key={asset.id} className="overflow-hidden rounded-2xl border border-ink/10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={asset.url} alt={asset.alt || asset.filename} className="h-48 w-full object-cover" />
-            <figcaption className="p-3 text-xs text-sand/60">{asset.url}</figcaption>
+            <figcaption className="p-3 text-xs text-ink/60">{asset.url}</figcaption>
           </figure>
         ))}
       </div>

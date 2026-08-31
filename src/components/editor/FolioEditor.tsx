@@ -79,8 +79,8 @@ export function FolioEditor({ value, onChange, placeholder }: Props) {
   const words = editor.storage.characterCount?.words?.() ?? 0;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0A1F44]">
-      <div className="flex flex-wrap gap-1 border-b border-white/10 px-3 py-2">
+    <div className="overflow-hidden rounded-2xl border border-ink/15 bg-white">
+      <div className="flex flex-wrap gap-1 border-b border-ink/10 px-3 py-2">
         {(
           [
             { label: "Para", run: () => editor.chain().focus().setParagraph().run() },
@@ -99,7 +99,7 @@ export function FolioEditor({ value, onChange, placeholder }: Props) {
             key={item.label}
             type="button"
             onClick={item.run}
-            className="rounded-md px-2 py-1 text-[11px] tracking-[0.12em] text-sand/80 uppercase hover:bg-white/10 hover:text-aqua"
+            className="rounded-md px-2 py-1 text-[11px] tracking-[0.12em] text-ink/80 uppercase hover:bg-ink/5 hover:text-ink"
           >
             {item.label}
           </button>
@@ -107,7 +107,7 @@ export function FolioEditor({ value, onChange, placeholder }: Props) {
         <button
           type="button"
           onClick={uploadImage}
-          className="rounded-md bg-aqua/15 px-2 py-1 text-[11px] tracking-[0.12em] text-aqua uppercase"
+          className="rounded-md bg-ink/10 px-2 py-1 text-[11px] tracking-[0.12em] text-aqua uppercase"
         >
           Image
         </button>
@@ -117,15 +117,15 @@ export function FolioEditor({ value, onChange, placeholder }: Props) {
             const href = window.prompt("Link URL");
             if (href) editor.chain().focus().setLink({ href }).run();
           }}
-          className="rounded-md px-2 py-1 text-[11px] tracking-[0.12em] text-sand/80 uppercase hover:bg-white/10"
+          className="rounded-md px-2 py-1 text-[11px] tracking-[0.12em] text-ink/80 uppercase hover:bg-ink/5"
         >
           Link
         </button>
-        <span className="ml-auto self-center font-mono text-[11px] text-sand/50">
+        <span className="ml-auto self-center font-mono text-[11px] text-ink/50">
           {words} words
         </span>
       </div>
-      <EditorContent editor={editor} className="bg-[#0d1c1f] text-ivory" />
+      <EditorContent editor={editor} className="bg-white text-ink" />
     </div>
   );
 }

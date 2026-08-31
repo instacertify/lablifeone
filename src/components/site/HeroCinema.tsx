@@ -36,7 +36,7 @@ export function HeroCinema({
   const slide = slides[index];
 
   return (
-    <section className="relative min-h-[88vh] overflow-hidden bg-ink text-ivory">
+    <section className="relative min-h-[88vh] overflow-hidden bg-ink text-white">
       {slides.map((item, slideIndex) => (
         <div
           key={item.id}
@@ -51,33 +51,33 @@ export function HeroCinema({
             priority={slideIndex === 0}
             className={`object-cover ${slideIndex === index ? "ken" : ""}`}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/35" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/45 to-white/10" />
           <div className="absolute inset-0 grain" />
         </div>
       ))}
 
       <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-end px-5 pb-16 lg:px-8 lg:pb-20">
-        <p className="text-[11px] tracking-[0.32em] text-aqua uppercase">
+        <p className="text-[11px] tracking-[0.32em] text-white uppercase">
           {identityLine || "A global laboratory"}
         </p>
         <h1 className="display mt-4 max-w-4xl text-5xl leading-[0.9] sm:text-7xl lg:text-8xl">
           Be testing
-          <span className="block text-aqua">Be unstoppable</span>
+          <span className="block text-white">Be unstoppable</span>
         </h1>
-        <p className="fade-slide mt-6 max-w-xl text-lg leading-8 text-sand/90">
+        <p className="fade-slide mt-6 max-w-xl text-lg leading-8 text-white/90">
           {slide.subtitle ||
             "A global laboratory with global solutions — food, cosmetics, electronics, metals, polymers, and every discipline you open next."}
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <Link
             href={slide.ctaHref || "/contact"}
-            className="rounded-full bg-aqua px-6 py-3 text-[12px] tracking-[0.18em] text-ink uppercase"
+            className="rounded-full bg-white px-6 py-3 text-[12px] tracking-[0.18em] text-ink uppercase"
           >
             {slide.ctaLabel || "Request a quote"}
           </Link>
           <Link
             href="/disciplines"
-            className="rounded-full border border-white/20 px-6 py-3 text-[12px] tracking-[0.18em] uppercase hover:border-aqua"
+            className="rounded-full border border-white/60 px-6 py-3 text-[12px] tracking-[0.18em] uppercase hover:bg-white hover:text-ink"
           >
             Open the disciplines
           </Link>
@@ -89,7 +89,7 @@ export function HeroCinema({
               type="button"
               onClick={() => setIndex(slideIndex)}
               className={`h-1.5 rounded-full transition-all ${
-                slideIndex === index ? "w-10 bg-aqua" : "w-4 bg-white/30"
+                slideIndex === index ? "w-10 bg-white" : "w-4 bg-white/30"
               }`}
               aria-label={`Show banner ${slideIndex + 1}`}
             />

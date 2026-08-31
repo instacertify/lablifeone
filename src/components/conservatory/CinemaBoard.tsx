@@ -41,10 +41,10 @@ export function CinemaBoard({ banners }: { banners: Banner[] }) {
   return (
     <div className="mt-10 space-y-4">
       {banners.map((banner) => (
-        <div key={banner.id} className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/10 p-4">
+        <div key={banner.id} className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-ink/10 p-4">
           <div>
             <p className="display text-2xl">{banner.title}</p>
-            <p className="text-sm text-sand/60">{banner.image}</p>
+            <p className="text-sm text-ink/60">{banner.image}</p>
           </div>
           <button onClick={() => remove(banner.id)} className="text-xs tracking-[0.14em] text-violet uppercase">
             Retire
@@ -52,10 +52,10 @@ export function CinemaBoard({ banners }: { banners: Banner[] }) {
         </div>
       ))}
       <div className="grid gap-3 rounded-2xl border border-dashed border-aqua/30 p-5">
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
-        <input value={subtitle} onChange={(e) => setSubtitle(e.target.value)} placeholder="Subtitle" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
-        <input value={image} onChange={(e) => setImage(e.target.value)} placeholder="Image path" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
-        <button onClick={addBanner} className="justify-self-start rounded-full bg-aqua px-5 py-2 text-[12px] tracking-[0.16em] text-ink uppercase">
+        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" className="rounded-xl border border-ink/15 bg-white px-3 py-2" />
+        <input value={subtitle} onChange={(e) => setSubtitle(e.target.value)} placeholder="Subtitle" className="rounded-xl border border-ink/15 bg-white px-3 py-2" />
+        <input value={image} onChange={(e) => setImage(e.target.value)} placeholder="Image path" className="rounded-xl border border-ink/15 bg-white px-3 py-2" />
+        <button onClick={addBanner} className="justify-self-start rounded-full bg-ink px-5 py-2 text-[12px] tracking-[0.16em] text-white uppercase">
           Add running frame
         </button>
       </div>
