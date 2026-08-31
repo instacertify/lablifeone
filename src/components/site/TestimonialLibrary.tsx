@@ -19,7 +19,7 @@ export function TestimonialLibrary({ voices }: { voices: Testimonial[] }) {
           {voices.map((voice) => (
             <figure
               key={voice.id}
-              className="flex flex-col justify-between rounded-3xl border border-ink/8 bg-paper p-7"
+              className="flex flex-col justify-between rounded-3xl border border-ink/8 bg-mist p-7"
             >
               <blockquote className="display text-2xl leading-snug text-ink">
                 “{voice.quote}”

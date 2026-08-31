@@ -28,7 +28,7 @@ export default async function CompassPage() {
     <ConservatoryShell name={session.name}>
       <p className="text-[11px] tracking-[0.22em] text-aqua uppercase">Compass</p>
       <h1 className="display mt-2 text-5xl">SEO practice of the house</h1>
-      <ol className="mt-8 space-y-2 text-sm text-sand/75">
+      <ol className="mt-8 space-y-2 text-sm text-ink/75">
         {practices.map((practice, index) => (
           <li key={practice} className="flex gap-3">
             <span className="font-mono text-aqua">{String(index + 1).padStart(2, "0")}</span>
@@ -36,14 +36,14 @@ export default async function CompassPage() {
           </li>
         ))}
       </ol>
-      <div className="mt-12 divide-y divide-white/10 rounded-2xl border border-white/10">
+      <div className="mt-12 divide-y divide-ink/10 rounded-2xl border border-ink/10">
         {records.map((record) => {
           const score = evaluateSeo(record);
           return (
             <div key={record.id} className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
               <div>
-                <p className="text-ivory">{record.path}</p>
-                <p className="text-xs text-sand/50">{record.title}</p>
+                <p className="text-ink">{record.path}</p>
+                <p className="text-xs text-ink/50">{record.title}</p>
               </div>
               <p className="font-mono text-aqua">
                 {score.score} {score.grade}
@@ -52,7 +52,7 @@ export default async function CompassPage() {
           );
         })}
       </div>
-      <p className="mt-6 text-sm text-sand/60">
+      <p className="mt-6 text-sm text-ink/60">
         Edit titles and descriptions inside each Folio or Atelier manuscript.{" "}
         <Link className="text-aqua" href="/conservatory/folio">
           Open the Folio

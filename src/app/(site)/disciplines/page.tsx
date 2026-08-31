@@ -20,13 +20,13 @@ export default async function DisciplinesPage() {
 
   return (
     <div>
-      <header className="bg-abyss px-5 py-20 text-ivory lg:px-8">
+      <header className="border-b border-ink/10 bg-white px-5 py-20 text-ink lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">Disciplines</p>
+          <p className="text-[11px] tracking-[0.24em] text-jade uppercase">Disciplines</p>
           <h1 className="display mt-4 max-w-3xl text-6xl leading-[0.92]">
             One menu. Every discipline.
           </h1>
-          <p className="mt-6 max-w-2xl text-sand/80">
+          <p className="mt-6 max-w-2xl text-ink/70">
             Food, cosmetics, electronics, metals, polymers — they are not separate headings.
             They live as a submenu under Disciplines, with subcategories and tests the Conservatory
             can generate at any time.

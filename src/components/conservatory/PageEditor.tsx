@@ -59,29 +59,29 @@ export function PageEditor(props: {
           <p className="text-[11px] tracking-[0.22em] text-aqua uppercase">Folio</p>
           <h1 className="display mt-2 text-4xl">Compose</h1>
         </div>
-        <button onClick={save} className="rounded-full bg-aqua px-5 py-2 text-[12px] tracking-[0.16em] text-ink uppercase">
+        <button onClick={save} className="rounded-full bg-ink px-5 py-2 text-[12px] tracking-[0.16em] text-white uppercase">
           Save manuscript
         </button>
       </div>
-      {status && <p className="mt-3 text-sm text-sand/70">{status}</p>}
+      {status && <p className="mt-3 text-sm text-ink/70">{status}</p>}
       <div className="mt-8 grid gap-8 xl:grid-cols-[minmax(0,1fr)_360px]">
         <div className="space-y-4">
           <input
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-4 py-3 display text-3xl text-ivory"
+            className="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 display text-3xl text-ink"
           />
           <div className="grid gap-3 sm:grid-cols-2">
             <input
               value={slug}
               onChange={(event) => setSlug(event.target.value)}
-              className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
+              className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm"
             />
             <input
               value={excerpt}
               onChange={(event) => setExcerpt(event.target.value)}
               placeholder="Excerpt"
-              className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
+              className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm"
             />
           </div>
           <FolioEditor value={content} onChange={setContent} />

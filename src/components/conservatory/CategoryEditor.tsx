@@ -86,7 +86,7 @@ export function CategoryEditor({ category, parents }: Props) {
   const [testCsv, setTestCsv] = useState("");
   const [categoryCsv, setCategoryCsv] = useState("");
 
-  const field = "w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm";
+  const field = "w-full rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm";
 
   async function save() {
     setStatus("Saving…");
@@ -235,19 +235,19 @@ export function CategoryEditor({ category, parents }: Props) {
         <div>
           <p className="text-[11px] tracking-[0.22em] text-aqua uppercase">Atelier</p>
           <h1 className="display mt-2 text-4xl">Edit discipline</h1>
-          <p className="mt-2 max-w-2xl text-sm text-sand/65">
+          <p className="mt-2 max-w-2xl text-sm text-ink/65">
             Food, cosmetics, electronics, metals, and polymers stay under Disciplines — never as
             separate top headings. Tests, standards, timelines, and subcategories are all editable here.
           </p>
         </div>
-        <button onClick={save} className="rounded-full bg-aqua px-5 py-2 text-[12px] tracking-[0.16em] text-ink uppercase">
+        <button onClick={save} className="rounded-full bg-ink px-5 py-2 text-[12px] tracking-[0.16em] text-white uppercase">
           Save wing
         </button>
       </div>
-      {status && <p className="mt-3 text-sm text-sand/70">{status}</p>}
+      {status && <p className="mt-3 text-sm text-ink/70">{status}</p>}
       <div className="mt-8 grid gap-8 xl:grid-cols-[minmax(0,1fr)_360px]">
         <div className="space-y-4">
-          <input value={name} onChange={(e) => setName(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-4 py-3 display text-3xl" />
+          <input value={name} onChange={(e) => setName(e.target.value)} className="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 display text-3xl" />
           <div className="grid gap-3 sm:grid-cols-2">
             <input value={slug} onChange={(e) => setSlug(e.target.value)} className={field} />
             <select value={parentId} onChange={(e) => setParentId(e.target.value)} className={field}>
@@ -269,17 +269,17 @@ export function CategoryEditor({ category, parents }: Props) {
           <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} className={field} />
           <FolioEditor value={description} onChange={setDescription} />
 
-          <section className="rounded-2xl border border-white/10 p-4">
+          <section className="rounded-2xl border border-ink/10 p-4">
             <h3 className="display text-2xl">Subcategories</h3>
-            <p className="mt-1 text-xs text-sand/55">
+            <p className="mt-1 text-xs text-ink/55">
               Multiple categories can live under this discipline. Each gets its own public page and tests.
             </p>
-            <ul className="mt-3 space-y-2 text-sm text-sand/80">
+            <ul className="mt-3 space-y-2 text-sm text-ink/80">
               {category.children.map((child) => (
                 <li key={child.id} className="flex items-center justify-between gap-3">
                   <span>
                     {child.name}
-                    <span className="ml-2 text-[11px] text-sand/45">{child.services.length} tests</span>
+                    <span className="ml-2 text-[11px] text-ink/45">{child.services.length} tests</span>
                   </span>
                   <Link href={`/conservatory/atelier/${child.id}`} className="text-[11px] tracking-[0.14em] text-aqua uppercase">
                     Edit
@@ -287,7 +287,7 @@ export function CategoryEditor({ category, parents }: Props) {
                 </li>
               ))}
               {category.children.length === 0 && (
-                <li className="text-sand/45">No subcategories yet.</li>
+                <li className="text-ink/45">No subcategories yet.</li>
               )}
             </ul>
             <div className="mt-4 grid gap-2 sm:grid-cols-[1fr_1fr_auto]">
@@ -307,7 +307,7 @@ export function CategoryEditor({ category, parents }: Props) {
                 Add
               </button>
             </div>
-            <label className="mt-5 block text-[11px] tracking-[0.16em] text-sand/50 uppercase">
+            <label className="mt-5 block text-[11px] tracking-[0.16em] text-ink/50 uppercase">
               Bulk upload subcategories (CSV)
             </label>
             <textarea
@@ -318,7 +318,7 @@ export function CategoryEditor({ category, parents }: Props) {
               className={`mt-2 ${field} font-mono text-xs`}
             />
             <div className="mt-3 flex flex-wrap items-center gap-3">
-              <label className="cursor-pointer rounded-full border border-white/20 px-4 py-1.5 text-[11px] tracking-[0.14em] uppercase">
+              <label className="cursor-pointer rounded-full border border-ink/20 px-4 py-1.5 text-[11px] tracking-[0.14em] uppercase">
                 Choose CSV
                 <input
                   type="file"
@@ -339,20 +339,20 @@ export function CategoryEditor({ category, parents }: Props) {
             </div>
           </section>
 
-          <section className="rounded-2xl border border-white/10 p-4">
+          <section className="rounded-2xl border border-ink/10 p-4">
             <h3 className="display text-2xl">Tests in this discipline</h3>
-            <p className="mt-1 text-xs text-sand/55">
+            <p className="mt-1 text-xs text-ink/55">
               Each test carries a standard, timeline, method, sample, and notes — all generated from the Conservatory.
             </p>
             <ul className="mt-4 space-y-3">
               {category.services.map((service) => (
-                <li key={service.id} className="rounded-xl border border-white/8 p-3">
+                <li key={service.id} className="rounded-xl border border-ink/10 p-3">
                   {editingId === service.id ? (
                     <TestFields value={editDraft} onChange={setEditDraft} field={field} />
                   ) : (
                     <div>
                       <p className="display text-xl">{service.name}</p>
-                      <p className="mt-1 text-xs text-sand/55">
+                      <p className="mt-1 text-xs text-ink/55">
                         {service.standard || "Standard unset"} · {service.timeline || "Timeline unset"}
                       </p>
                     </div>
@@ -362,7 +362,7 @@ export function CategoryEditor({ category, parents }: Props) {
                       <button
                         type="button"
                         onClick={() => saveService(service.id)}
-                        className="rounded-full bg-aqua px-3 py-1 text-[11px] tracking-[0.14em] text-ink uppercase"
+                        className="rounded-full bg-ink px-3 py-1 text-[11px] tracking-[0.14em] text-white uppercase"
                       >
                         Save test
                       </button>
@@ -383,7 +383,7 @@ export function CategoryEditor({ category, parents }: Props) {
                             notes: service.notes || "",
                           });
                         }}
-                        className="rounded-full border border-white/20 px-3 py-1 text-[11px] tracking-[0.14em] uppercase"
+                        className="rounded-full border border-ink/20 px-3 py-1 text-[11px] tracking-[0.14em] uppercase"
                       >
                         Edit
                       </button>
@@ -391,7 +391,7 @@ export function CategoryEditor({ category, parents }: Props) {
                     <button
                       type="button"
                       onClick={() => deleteService(service.id)}
-                      className="rounded-full border border-white/20 px-3 py-1 text-[11px] tracking-[0.14em] uppercase"
+                      className="rounded-full border border-ink/20 px-3 py-1 text-[11px] tracking-[0.14em] uppercase"
                     >
                       Remove
                     </button>
@@ -399,12 +399,12 @@ export function CategoryEditor({ category, parents }: Props) {
                 </li>
               ))}
               {category.services.length === 0 && (
-                <li className="text-sm text-sand/45">No tests yet. Add one or upload a CSV.</li>
+                <li className="text-sm text-ink/45">No tests yet. Add one or upload a CSV.</li>
               )}
             </ul>
 
-            <div className="mt-6 border-t border-white/10 pt-4">
-              <p className="text-[11px] tracking-[0.16em] text-sand/50 uppercase">Add a test</p>
+            <div className="mt-6 border-t border-ink/10 pt-4">
+              <p className="text-[11px] tracking-[0.16em] text-ink/50 uppercase">Add a test</p>
               <div className="mt-3">
                 <TestFields value={draft} onChange={setDraft} field={field} />
               </div>
@@ -413,8 +413,8 @@ export function CategoryEditor({ category, parents }: Props) {
               </button>
             </div>
 
-            <div className="mt-6 border-t border-white/10 pt-4">
-              <p className="text-[11px] tracking-[0.16em] text-sand/50 uppercase">
+            <div className="mt-6 border-t border-ink/10 pt-4">
+              <p className="text-[11px] tracking-[0.16em] text-ink/50 uppercase">
                 Bulk upload tests and standards
               </p>
               <textarea
@@ -425,7 +425,7 @@ export function CategoryEditor({ category, parents }: Props) {
                 className={`mt-3 ${field} font-mono text-xs`}
               />
               <div className="mt-3 flex flex-wrap items-center gap-3">
-                <label className="cursor-pointer rounded-full border border-white/20 px-4 py-1.5 text-[11px] tracking-[0.14em] uppercase">
+                <label className="cursor-pointer rounded-full border border-ink/20 px-4 py-1.5 text-[11px] tracking-[0.14em] uppercase">
                   Choose CSV
                   <input
                     type="file"

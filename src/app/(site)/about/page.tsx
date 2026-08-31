@@ -23,19 +23,19 @@ export default async function AboutPage() {
 
   return (
     <article>
-      <header className="relative overflow-hidden bg-ink py-24 text-ivory">
+      <header className="relative overflow-hidden border-b border-ink/10 bg-white py-20 text-ink">
         <Image
           src="/images/labs/discipline.jpg"
           alt="Metrra laboratory"
           fill
-          className="object-cover opacity-30"
+          className="object-cover opacity-10"
         />
         <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
-          <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">The house</p>
+          <p className="text-[11px] tracking-[0.24em] text-jade uppercase">The house</p>
           <h1 className="display mt-4 max-w-3xl text-6xl leading-[0.92]">
             {settings?.identityLine || "A global laboratory with global solutions."}
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-sand/85">
+          <p className="mt-6 max-w-xl text-lg text-ink/70">
             A laboratory facility — not the brand identity — at{" "}
             {settings ? formatAddress(settings) : "the address held in The Conservatory"}.
           </p>
@@ -53,7 +53,7 @@ export default async function AboutPage() {
         <aside className="lg:col-span-4">
           <div className="rounded-3xl bg-mist p-6">
             <p className="text-[11px] tracking-[0.2em] text-jade uppercase">Write to the house</p>
-            <h2 className="display mt-2 text-3xl">A brief, from this page</h2>
+            <h2 className="display mt-2 text-3xl">Request a quote</h2>
             <div className="mt-5">
               <LeadForm
                 sourcePage="/about"

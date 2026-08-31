@@ -71,16 +71,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-abyss py-20 text-ivory">
+      <section className="border-y border-ink/10 bg-white py-20">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">
-                Disciplines
-              </p>
-              <h2 className="display mt-3 text-5xl">Open a wing of the house</h2>
+              <p className="text-[11px] tracking-[0.24em] text-jade uppercase">Disciplines</p>
+              <h2 className="display mt-3 text-5xl text-ink">Open a wing of the house</h2>
             </div>
-            <Link href="/disciplines" className="text-[12px] tracking-[0.16em] text-aqua uppercase">
+            <Link href="/disciplines" className="text-[12px] tracking-[0.16em] text-jade uppercase">
               All categories →
             </Link>
           </div>
@@ -89,7 +87,7 @@ export default async function HomePage() {
               <Link
                 key={category.id}
                 href={`/disciplines/${category.slug}`}
-                className="group overflow-hidden rounded-3xl bg-ink"
+                className="group overflow-hidden rounded-3xl border border-ink/10 bg-white"
               >
                 <div className="relative h-52">
                   <Image
@@ -98,16 +96,12 @@ export default async function HomePage() {
                     fill
                     className="object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
                 </div>
                 <div className="p-6">
-                  <p className="text-[11px] tracking-[0.2em] text-aqua uppercase">
-                    {category.accent}
-                  </p>
-                  <h3 className="display mt-2 text-3xl">{category.name}</h3>
-                  <p className="mt-3 text-sm leading-6 text-sand/80">{category.excerpt}</p>
+                  <h3 className="display mt-0 text-3xl text-ink">{category.name}</h3>
+                  <p className="mt-3 text-sm leading-6 text-ink/70">{category.excerpt}</p>
                   {category.children.length > 0 && (
-                    <p className="mt-3 text-[11px] tracking-[0.14em] text-aqua/80 uppercase">
+                    <p className="mt-3 text-[11px] tracking-[0.14em] text-jade uppercase">
                       {category.children.map((child) => child.name).join(" · ")}
                     </p>
                   )}
@@ -132,49 +126,37 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-forest py-20 text-ivory">
-        <Image
-          src="/images/labs/precision.jpg"
-          alt="Metrra Lab instruments"
-          fill
-          className="object-cover opacity-20"
-        />
+      <section className="border-y border-ink/10 bg-mist py-20">
         <div className="relative mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-2 lg:px-8">
           <div>
-            <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">Industry Insights</p>
-            <h2 className="display mt-3 text-5xl">Notes by industry</h2>
+            <p className="text-[11px] tracking-[0.24em] text-jade uppercase">Industry Insights</p>
+            <h2 className="display mt-3 text-5xl text-ink">Notes by industry</h2>
             <div className="mt-8 space-y-6">
               {insights.map((item) => (
                 <Link key={item.id} href={`/insights/${item.slug}`} className="block">
                   {item.industry && (
-                    <p className="text-[11px] tracking-[0.16em] text-aqua/70 uppercase">
-                      {item.industry.name}
-                    </p>
+                    <p className="text-[11px] tracking-[0.16em] text-jade uppercase">{item.industry.name}</p>
                   )}
-                  <h3 className="display mt-1 text-3xl hover:text-aqua">{item.title}</h3>
-                  <p className="mt-1 text-[12px] text-sand/65">
+                  <h3 className="display mt-1 text-3xl text-ink hover:text-jade">{item.title}</h3>
+                  <p className="mt-1 text-[12px] text-ink/50">
                     Written by {item.writerName || "Metrra Lab"}
                     {item.writerRole ? ` · ${item.writerRole}` : ""}
                   </p>
-                  <p className="mt-2 text-sm text-sand/80">{item.excerpt}</p>
+                  <p className="mt-2 text-sm text-ink/70">{item.excerpt}</p>
                 </Link>
               ))}
             </div>
-            <Link href="/insights" className="mt-8 inline-block text-[12px] tracking-[0.16em] text-aqua uppercase">
+            <Link href="/insights" className="mt-8 inline-block text-[12px] tracking-[0.16em] text-jade uppercase">
               All industry insights →
             </Link>
           </div>
-          <div className="rounded-3xl bg-ink/70 p-8 backdrop-blur">
-            <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">
-              Request a quote
-            </p>
-            <h3 className="display mt-2 text-4xl">Ask Metrra Lab for a quote</h3>
-            <p className="mt-3 mb-6 text-sm text-sand/80">
-              Every public page can take a brief. Reply from{" "}
-              {settings?.email || "contact@metrra.com"}.
+          <div className="rounded-3xl border border-ink/10 bg-white p-8">
+            <p className="text-[11px] tracking-[0.24em] text-jade uppercase">Request a quote</p>
+            <h3 className="display mt-2 text-4xl text-ink">Ask Metrra Lab for a quote</h3>
+            <p className="mt-3 mb-6 text-sm text-ink/65">
+              Tell us the product and the standard. Reply from {settings?.email || "contact@metrra.com"}.
             </p>
             <LeadForm
-              dark
               sourcePage="/"
               replyTo={settings?.email || "contact@metrra.com"}
               categories={categories.flatMap((item) => [

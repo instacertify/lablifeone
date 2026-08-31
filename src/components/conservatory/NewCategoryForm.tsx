@@ -63,7 +63,7 @@ export function NewCategoryForm({ parents = [] }: { parents?: Parent[] }) {
     <div className="mt-12 space-y-8">
       <form onSubmit={onSubmit} className="rounded-3xl border border-dashed border-aqua/30 p-6">
         <h2 className="display text-3xl">Open categories</h2>
-        <p className="mt-2 text-sm text-sand/60">
+        <p className="mt-2 text-sm text-ink/60">
           One name per line to create multiple disciplines at once. Leave parent empty to place them
           under the Disciplines menu.
         </p>
@@ -73,9 +73,9 @@ export function NewCategoryForm({ parents = [] }: { parents?: Parent[] }) {
             required
             placeholder={"Food & Nutrition\nMetals & Alloy\nPlastics & Polymer"}
             rows={4}
-            className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 sm:col-span-2"
+            className="rounded-xl border border-ink/15 bg-white px-3 py-2 sm:col-span-2"
           />
-          <select name="parentId" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2">
+          <select name="parentId" className="rounded-xl border border-ink/15 bg-white px-3 py-2">
             <option value="">Top-level under Disciplines</option>
             {parents.map((parent) => (
               <option key={parent.id} value={parent.id}>
@@ -83,29 +83,29 @@ export function NewCategoryForm({ parents = [] }: { parents?: Parent[] }) {
               </option>
             ))}
           </select>
-          <select name="accent" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2">
+          <select name="accent" className="rounded-xl border border-ink/15 bg-white px-3 py-2">
             <option value="aqua">Aqua</option>
             <option value="iris">Iris</option>
             <option value="bronze">Bronze</option>
             <option value="jade">Jade</option>
           </select>
-          <input name="image" placeholder="Image path or Vault URL" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 sm:col-span-2" />
-          <textarea name="excerpt" placeholder="Shared excerpt (optional)" className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 sm:col-span-2" />
+          <input name="image" placeholder="Image path or Vault URL" className="rounded-xl border border-ink/15 bg-white px-3 py-2 sm:col-span-2" />
+          <textarea name="excerpt" placeholder="Shared excerpt (optional)" className="rounded-xl border border-ink/15 bg-white px-3 py-2 sm:col-span-2" />
         </div>
-        <button className="mt-4 rounded-full bg-aqua px-5 py-2 text-[12px] tracking-[0.16em] text-ink uppercase">
+        <button className="mt-4 rounded-full bg-ink px-5 py-2 text-[12px] tracking-[0.16em] text-white uppercase">
           Add categories
         </button>
       </form>
 
-      <div className="rounded-3xl border border-white/10 p-6">
+      <div className="rounded-3xl border border-ink/10 p-6">
         <h2 className="display text-3xl">Bulk upload categories</h2>
-        <p className="mt-2 text-sm text-sand/60">
+        <p className="mt-2 text-sm text-ink/60">
           CSV columns: name, slug, excerpt, accent, parentSlug. Or attach every row under one parent.
         </p>
         <select
           value={bulkParentId}
           onChange={(event) => setBulkParentId(event.target.value)}
-          className="mt-4 rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2"
+          className="mt-4 rounded-xl border border-ink/15 bg-white px-3 py-2"
         >
           <option value="">Use parentSlug column or top-level</option>
           {parents.map((parent) => (
@@ -119,10 +119,10 @@ export function NewCategoryForm({ parents = [] }: { parents?: Parent[] }) {
           onChange={(event) => setCsv(event.target.value)}
           rows={5}
           placeholder="name,slug,excerpt,accent,parentSlug"
-          className="mt-3 w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 font-mono text-xs"
+          className="mt-3 w-full rounded-xl border border-ink/15 bg-white px-3 py-2 font-mono text-xs"
         />
         <div className="mt-3 flex flex-wrap items-center gap-3">
-          <label className="cursor-pointer rounded-full border border-white/20 px-4 py-1.5 text-[11px] tracking-[0.14em] uppercase">
+          <label className="cursor-pointer rounded-full border border-ink/20 px-4 py-1.5 text-[11px] tracking-[0.14em] uppercase">
             Choose CSV
             <input
               type="file"
@@ -142,7 +142,7 @@ export function NewCategoryForm({ parents = [] }: { parents?: Parent[] }) {
           </button>
         </div>
       </div>
-      {status && <p className="text-sm text-sand/60">{status}</p>}
+      {status && <p className="text-sm text-ink/60">{status}</p>}
     </div>
   );
 }

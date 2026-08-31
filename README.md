@@ -12,7 +12,7 @@ A Block, Sector 62, Institutional Area, Noida, Uttar Pradesh, India 201301
 - Running laboratory cinema on the home page
 - Disciplines you can grow (food, cosmetics, electronics, and any new category)
 - Testimonial library on the public house
-- Lead capture on every public page
+- Request a quote on every public page
 - SEO metadata, sitemap, robots, and laboratory JSON-LD
 - House mark: the Double R (measured twice). PNG or WebP logo upload from The Conservatory
 

@@ -49,11 +49,11 @@ export default function NewInsightPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#061433] px-6 py-16 text-ivory">
+    <div className="min-h-screen bg-white px-6 py-16 text-ink">
       <form onSubmit={onSubmit} className="mx-auto max-w-xl space-y-4">
         <h1 className="display text-4xl">New industry note</h1>
-        <input name="title" required placeholder="Title" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
-        <select name="industryId" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2">
+        <input name="title" required placeholder="Title" className="w-full rounded-xl border border-ink/15 bg-white px-3 py-2" />
+        <select name="industryId" className="w-full rounded-xl border border-ink/15 bg-white px-3 py-2">
           <option value="">Choose industry</option>
           {industries.map((industry) => (
             <option key={industry.id} value={industry.id}>
@@ -61,12 +61,12 @@ export default function NewInsightPage() {
             </option>
           ))}
         </select>
-        <input name="writerName" placeholder="Writer name" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
-        <input name="writerRole" placeholder="Writer role" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
-        <input name="identityLine" placeholder="Written identity (e.g. A global laboratory with global solutions)" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
-        <textarea name="excerpt" required placeholder="Excerpt" className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2" />
+        <input name="writerName" placeholder="Writer name" className="w-full rounded-xl border border-ink/15 bg-white px-3 py-2" />
+        <input name="writerRole" placeholder="Writer role" className="w-full rounded-xl border border-ink/15 bg-white px-3 py-2" />
+        <input name="identityLine" placeholder="Written identity (e.g. A global laboratory with global solutions)" className="w-full rounded-xl border border-ink/15 bg-white px-3 py-2" />
+        <textarea name="excerpt" required placeholder="Excerpt" className="w-full rounded-xl border border-ink/15 bg-white px-3 py-2" />
         {error && <p className="text-sm text-violet">{error}</p>}
-        <button className="rounded-full bg-aqua px-5 py-2 text-[12px] tracking-[0.16em] text-ink uppercase">
+        <button className="rounded-full bg-ink px-5 py-2 text-[12px] tracking-[0.16em] text-white uppercase">
           Create
         </button>
       </form>

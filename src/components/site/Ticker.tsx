@@ -1,8 +1,8 @@
 export function Ticker({ text = "BE TESTING BE UNSTOPPABLE" }: { text?: string }) {
   const phrase = `${text}  ·  `;
   return (
-    <div className="overflow-hidden border-y border-white/10 bg-ink py-3">
-      <div className="ticker flex w-max whitespace-nowrap font-mono text-[12px] tracking-[0.35em] text-white uppercase">
+    <div className="overflow-hidden border-y border-ink/10 bg-white py-3">
+      <div className="ticker flex w-max whitespace-nowrap font-mono text-[12px] tracking-[0.35em] text-ink uppercase">
         {Array.from({ length: 12 }).map((_, index) => (
           <span key={index}>{phrase}</span>
         ))}

@@ -39,10 +39,10 @@ export function VoicesBoard({ voices }: { voices: Testimonial[] }) {
     <div className="mt-10 space-y-8">
       <div className="grid gap-4">
         {voices.map((voice) => (
-          <article key={voice.id} className="rounded-2xl border border-white/10 p-5">
-            <p className="display text-2xl text-white">“{voice.quote}”</p>
+          <article key={voice.id} className="rounded-2xl border border-ink/10 p-5">
+            <p className="display text-2xl text-ink">“{voice.quote}”</p>
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-              <p className="text-sm text-white/70">
+              <p className="text-sm text-ink/70">
                 {voice.name}
                 {voice.role ? ` · ${voice.role}` : ""}
                 {voice.company ? ` · ${voice.company}` : ""}
@@ -50,7 +50,7 @@ export function VoicesBoard({ voices }: { voices: Testimonial[] }) {
               <button
                 type="button"
                 onClick={() => retire(voice.id)}
-                className="text-[11px] tracking-[0.14em] text-white/50 uppercase hover:text-white"
+                className="text-[11px] tracking-[0.14em] text-ink/45 uppercase hover:text-ink"
               >
                 Retire
               </button>
@@ -58,18 +58,18 @@ export function VoicesBoard({ voices }: { voices: Testimonial[] }) {
           </article>
         ))}
       </div>
-      <form onSubmit={onSubmit} className="grid gap-3 rounded-3xl border border-dashed border-white/25 p-6">
+      <form onSubmit={onSubmit} className="grid gap-3 rounded-3xl border border-dashed border-ink/20 p-6">
         <h2 className="display text-3xl">Add a voice</h2>
         <div className="grid gap-3 sm:grid-cols-3">
-          <input name="name" required placeholder="Name" className="rounded-xl border border-white/10 bg-ink px-3 py-2 text-sm" />
-          <input name="role" placeholder="Role" className="rounded-xl border border-white/10 bg-ink px-3 py-2 text-sm" />
-          <input name="company" placeholder="Company" className="rounded-xl border border-white/10 bg-ink px-3 py-2 text-sm" />
+          <input name="name" required placeholder="Name" className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm" />
+          <input name="role" placeholder="Role" className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm" />
+          <input name="company" placeholder="Company" className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm" />
         </div>
-        <textarea name="quote" required placeholder="What they said" rows={3} className="rounded-xl border border-white/10 bg-ink px-3 py-2 text-sm" />
-        <button className="justify-self-start rounded-full bg-white px-5 py-2 text-[12px] tracking-[0.16em] text-ink uppercase">
+        <textarea name="quote" required placeholder="What they said" rows={3} className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm" />
+        <button className="justify-self-start rounded-full bg-ink px-5 py-2 text-[12px] tracking-[0.16em] text-white uppercase">
           Add to library
         </button>
-        {status && <p className="text-sm text-white/70">{status}</p>}
+        {status && <p className="text-sm text-ink/70">{status}</p>}
       </form>
     </div>
   );

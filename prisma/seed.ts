@@ -725,7 +725,7 @@ export async function seedHouse(prisma: PrismaClient) {
       slug: "protocol-is-architecture",
       excerpt: "Why Metrra writes methods the way a conservator writes a condition report.",
       content:
-        "<p>Most laboratories sell a turnaround. Metrra sells a room you can think in. A protocol names the sample, the instrument, the uncertainty, and the sentence the client will eventually need. That is architecture, not logistics.</p><p>When we add a category — food, cosmetic, electronics, metals, polymer, or whatever the market invents next — we do not bolt on a brochure. We open a wing under Disciplines: methods, standards, timelines, images, SEO, a lead door on every landing.</p>",
+        "<p>Most laboratories sell a turnaround. Metrra sells a room you can think in. A protocol names the sample, the instrument, the uncertainty, and the sentence the client will eventually need. That is architecture, not logistics.</p><p>When we add a category — food, cosmetic, electronics, metals, polymer, or whatever the market invents next — we do not bolt on a brochure. We open a wing under Disciplines: methods, standards, timelines, images, SEO, and a quote form on every landing.</p>",
       image: "/images/labs/food.jpg",
       industryId: foodIndustry.id,
       writerName: "Ira Sen",

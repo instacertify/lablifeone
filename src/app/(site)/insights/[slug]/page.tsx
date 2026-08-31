@@ -76,21 +76,21 @@ export default async function InsightPage({
 
   return (
     <article>
-      <header className="relative overflow-hidden bg-ink py-24 text-ivory">
+      <header className="relative overflow-hidden border-b border-ink/10 bg-white py-20 text-ink">
         {insight.image && (
-          <Image src={insight.image} alt="" fill className="object-cover opacity-30" />
+          <Image src={insight.image} alt="" fill className="object-cover opacity-10" />
         )}
         <div className="relative mx-auto max-w-4xl px-5">
-          <p className="text-[11px] tracking-[0.24em] text-aqua uppercase">
-            <Link href="/insights" className="hover:text-white">
+          <p className="text-[11px] tracking-[0.24em] text-jade uppercase">
+            <Link href="/insights" className="hover:text-ink">
               Industry Insights
             </Link>
             {insight.industry && (
               <>
-                <span className="mx-2 text-white/30">/</span>
+                <span className="mx-2 text-ink/30">/</span>
                 <Link
                   href={`/insights?industry=${insight.industry.slug}`}
-                  className="hover:text-white"
+                  className="hover:text-ink"
                 >
                   {insight.industry.name}
                 </Link>
@@ -104,7 +104,6 @@ export default async function InsightPage({
               writerRole={writerRole}
               identityLine={identityLine}
               publishedAt={insight.publishedAt}
-              tone="ivory"
             />
           </div>
         </div>

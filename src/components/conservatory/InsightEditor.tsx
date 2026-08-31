@@ -89,21 +89,21 @@ export function InsightEditor({
     <div>
       <div className="flex items-end justify-between gap-4">
         <h1 className="display text-4xl">Compose industry note</h1>
-        <button onClick={save} className="rounded-full bg-aqua px-5 py-2 text-[12px] tracking-[0.16em] text-ink uppercase">
+        <button onClick={save} className="rounded-full bg-ink px-5 py-2 text-[12px] tracking-[0.16em] text-white uppercase">
           Save
         </button>
       </div>
-      {status && <p className="mt-3 text-sm text-sand/70">{status}</p>}
+      {status && <p className="mt-3 text-sm text-ink/70">{status}</p>}
       <div className="mt-8 grid gap-8 xl:grid-cols-[minmax(0,1fr)_360px]">
         <div className="space-y-4">
-          <input value={title} onChange={(e) => setTitle(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-4 py-3 display text-3xl" />
+          <input value={title} onChange={(e) => setTitle(e.target.value)} className="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 display text-3xl" />
           <div className="grid gap-3 sm:grid-cols-3">
-            <input value={slug} onChange={(e) => setSlug(e.target.value)} className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm" />
-            <input value={image} onChange={(e) => setImage(e.target.value)} className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm" />
+            <input value={slug} onChange={(e) => setSlug(e.target.value)} className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm" />
+            <input value={image} onChange={(e) => setImage(e.target.value)} className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm" />
             <select
               value={industryId}
               onChange={(e) => setIndustryId(e.target.value)}
-              className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
+              className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm"
             >
               <option value="">Choose industry</option>
               {industries.map((industry) => (
@@ -118,22 +118,22 @@ export function InsightEditor({
               value={writerName}
               onChange={(e) => setWriterName(e.target.value)}
               placeholder="Writer name"
-              className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
+              className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm"
             />
             <input
               value={writerRole}
               onChange={(e) => setWriterRole(e.target.value)}
               placeholder="Writer role"
-              className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
+              className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm"
             />
             <input
               value={identityLine}
               onChange={(e) => setIdentityLine(e.target.value)}
               placeholder="Written identity"
-              className="rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm"
+              className="rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm"
             />
           </div>
-          <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} className="w-full rounded-xl border border-white/10 bg-[#0A1F44] px-3 py-2 text-sm" />
+          <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} className="w-full rounded-xl border border-ink/15 bg-white px-3 py-2 text-sm" />
           <FolioEditor value={content} onChange={setContent} />
         </div>
         <SeoSidecar value={{ ...seo, content }} onChange={setSeo} />

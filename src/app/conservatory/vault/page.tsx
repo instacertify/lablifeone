@@ -15,7 +15,7 @@ export default async function VaultPage() {
     <ConservatoryShell name={session.name}>
       <p className="text-[11px] tracking-[0.22em] text-aqua uppercase">Vault</p>
       <h1 className="display mt-2 text-5xl">Images of the house</h1>
-      <p className="mt-3 max-w-2xl text-sm text-sand/70">
+      <p className="mt-3 max-w-2xl text-sm text-ink/70">
         Upload laboratory photography for heroes, disciplines, and the Folio editor.
       </p>
       <VaultBoard assets={assets} />
