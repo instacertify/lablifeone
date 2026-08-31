@@ -8,7 +8,7 @@ import {
   getSeoByPath,
   getServiceBySlug,
 } from "@/lib/data";
-import { buildMetadata } from "@/lib/metadata";
+import { safeMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
 
@@ -18,13 +18,20 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const service = await getServiceBySlug(slug);
-  const seo = await getSeoByPath(`/services/${slug}`);
-  return buildMetadata(seo, {
-    title: `${service?.name || "Service"} | Metrra Lab`,
-    description: service?.excerpt || "A Metrra assay.",
-    path: `/services/${slug}`,
-  });
+  try {
+    const service = await getServiceBySlug(slug);
+    return safeMetadata(() => getSeoByPath(`/services/${slug}`), {
+      title: `${service?.name || "Service"} | Metrra Lab`,
+      description: service?.excerpt || "A Metrra assay.",
+      path: `/services/${slug}`,
+    });
+  } catch {
+    return safeMetadata(async () => null, {
+      title: "Service | Metrra Lab",
+      description: "A Metrra assay.",
+      path: `/services/${slug}`,
+    });
+  }
 }
 
 export default async function ServicePage({

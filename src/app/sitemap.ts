@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { ensureDatabase } from "@/lib/ensure-db";
 import { prisma } from "@/lib/prisma";
 import { siteUrl } from "@/lib/seo";
 
@@ -13,6 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   try {
+    await ensureDatabase();
     const [categories, services, insights] = await Promise.all([
       prisma.category.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
       prisma.service.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),

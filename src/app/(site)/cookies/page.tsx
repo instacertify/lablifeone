@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { CookieSettingsLink } from "@/components/site/CookieConsent";
 import { getSeoByPath } from "@/lib/data";
-import { buildMetadata } from "@/lib/metadata";
+import { safeMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
-  const seo = await getSeoByPath("/cookies");
-  return buildMetadata(seo, {
+  return safeMetadata(() => getSeoByPath("/cookies"), {
     title: "Cookie policy | Metrra Lab",
     description:
       "How Metrra Lab uses cookies and similar technologies, and how to accept, refuse, or change a choice.",

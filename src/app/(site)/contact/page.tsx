@@ -1,12 +1,11 @@
 import { LeadForm } from "@/components/site/LeadForm";
 import { formatAddress, getPublishedCategories, getSeoByPath, getSettings } from "@/lib/data";
-import { buildMetadata } from "@/lib/metadata";
+import { safeMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
-  const seo = await getSeoByPath("/contact");
-  return buildMetadata(seo, {
+  return safeMetadata(() => getSeoByPath("/contact"), {
     title: "Request a Quote | Contact Metrra Lab",
     description: "Write to contact@metrra.com. Metrra Lab is a global laboratory with global solutions.",
     path: "/contact",

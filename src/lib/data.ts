@@ -1,8 +1,19 @@
 import { cache } from "react";
 import { prisma } from "@/lib/prisma";
+import { ensureDatabase } from "@/lib/ensure-db";
+
+async function safe<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
+  try {
+    await ensureDatabase();
+    return await fn();
+  } catch (error) {
+    console.error(error);
+    return fallback;
+  }
+}
 
 export const getSettings = cache(async () => {
-  return prisma.setting.findUnique({ where: { id: "house" } });
+  return safe(() => prisma.setting.findUnique({ where: { id: "house" } }), null);
 });
 
 const categoryTree = {
@@ -23,86 +34,103 @@ const categoryTree = {
 };
 
 export const getPublishedCategories = cache(async () => {
-  return prisma.category.findMany({
-    where: { published: true, parentId: null },
-    orderBy: { sortOrder: "asc" },
-    include: categoryTree,
-  });
+  return safe(
+    () =>
+      prisma.category.findMany({
+        where: { published: true, parentId: null },
+        orderBy: { sortOrder: "asc" },
+        include: categoryTree,
+      }),
+    [],
+  );
 });
 
 export const getCategoryBySlug = cache(async (slug: string) => {
-  return prisma.category.findUnique({
-    where: { slug },
-    include: {
-      ...categoryTree,
-      parent: true,
-      seo: true,
-    },
-  });
+  return safe(
+    () =>
+      prisma.category.findUnique({
+        where: { slug },
+        include: {
+          ...categoryTree,
+          parent: true,
+          seo: true,
+        },
+      }),
+    null,
+  );
 });
 
 export const getServiceBySlug = cache(async (slug: string) => {
-  return prisma.service.findUnique({
-    where: { slug },
-    include: { category: true, seo: true },
-  });
+  return safe(
+    () => prisma.service.findUnique({ where: { slug }, include: { category: true, seo: true } }),
+    null,
+  );
 });
 
 export const getBanners = cache(async () => {
-  return prisma.banner.findMany({
-    where: { active: true },
-    orderBy: { sortOrder: "asc" },
-  });
+  return safe(
+    () => prisma.banner.findMany({ where: { active: true }, orderBy: { sortOrder: "asc" } }),
+    [],
+  );
 });
 
 export const getFaqs = cache(async () => {
-  return prisma.faq.findMany({ orderBy: { sortOrder: "asc" } });
+  return safe(() => prisma.faq.findMany({ orderBy: { sortOrder: "asc" } }), []);
 });
 
 export const getPageBySlug = cache(async (slug: string) => {
-  return prisma.page.findUnique({
-    where: { slug },
-    include: { seo: true },
-  });
+  return safe(() => prisma.page.findUnique({ where: { slug }, include: { seo: true } }), null);
 });
 
 export const getPublishedIndustries = cache(async () => {
-  return prisma.industry.findMany({
-    where: { published: true },
-    orderBy: { sortOrder: "asc" },
-    include: {
-      _count: { select: { insights: { where: { published: true } } } },
-    },
-  });
+  return safe(
+    () =>
+      prisma.industry.findMany({
+        where: { published: true },
+        orderBy: { sortOrder: "asc" },
+        include: {
+          _count: { select: { insights: { where: { published: true } } } },
+        },
+      }),
+    [],
+  );
 });
 
 export const getPublishedInsights = cache(async (industrySlug?: string) => {
-  return prisma.insight.findMany({
-    where: {
-      published: true,
-      ...(industrySlug ? { industry: { slug: industrySlug, published: true } } : {}),
-    },
-    orderBy: { publishedAt: "desc" },
-    include: { seo: true, industry: true },
-  });
+  return safe(
+    () =>
+      prisma.insight.findMany({
+        where: {
+          published: true,
+          ...(industrySlug ? { industry: { slug: industrySlug, published: true } } : {}),
+        },
+        orderBy: { publishedAt: "desc" },
+        include: { seo: true, industry: true },
+      }),
+    [],
+  );
 });
 
 export const getInsightBySlug = cache(async (slug: string) => {
-  return prisma.insight.findUnique({
-    where: { slug },
-    include: { seo: true, industry: true },
-  });
+  return safe(
+    () => prisma.insight.findUnique({ where: { slug }, include: { seo: true, industry: true } }),
+    null,
+  );
 });
 
 export const getSeoByPath = cache(async (path: string) => {
-  return prisma.seoRecord.findUnique({ where: { path } });
+  return safe(() => prisma.seoRecord.findUnique({ where: { path } }), null);
 });
 
 export const getPublishedTestimonials = cache(async () => {
-  return prisma.testimonial.findMany({
-    where: { published: true },
-    orderBy: { sortOrder: "asc" },
-  });
+  return safe(
+    () =>
+      prisma.testimonial.findMany({
+        where: { published: true },
+        orderBy: { sortOrder: "asc" },
+      }),
+    [],
+  );
 });
 
 export function flattenCategoryNames(

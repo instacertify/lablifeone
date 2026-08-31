@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { PrivacyRequestForm } from "@/components/site/PrivacyRequestForm";
 import { getSeoByPath, getSettings } from "@/lib/data";
-import { buildMetadata } from "@/lib/metadata";
+import { safeMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
-  const seo = await getSeoByPath("/privacy");
-  return buildMetadata(seo, {
+  return safeMetadata(() => getSeoByPath("/privacy"), {
     title: "Privacy notice | Metrra Lab",
     description:
       "How Metrra Lab processes personal data for quotes, cookies, and privacy rights — GDPR and global privacy standards.",

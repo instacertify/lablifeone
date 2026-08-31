@@ -1,14 +1,13 @@
 import Image from "next/image";
 import { LeadForm } from "@/components/site/LeadForm";
 import { flattenCategoryNames, getPageBySlug, getPublishedCategories, getSeoByPath, getSettings } from "@/lib/data";
-import { buildMetadata } from "@/lib/metadata";
+import { safeMetadata } from "@/lib/metadata";
 import { formatAddress } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
-  const seo = await getSeoByPath("/about");
-  return buildMetadata(seo, {
+  return safeMetadata(() => getSeoByPath("/about"), {
     title: "The House | Metrra Lab",
     description: "A global laboratory with global solutions. One facility among the work — never the identity.",
     path: "/about",

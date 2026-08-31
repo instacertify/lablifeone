@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
-const prisma = new PrismaClient();
-
 type TestSeed = {
   name: string;
   slug: string;
@@ -25,7 +23,7 @@ function test(data: TestSeed) {
   };
 }
 
-async function main() {
+export async function seedHouse(prisma: PrismaClient) {
   const passwordHash = await bcrypt.hash(
     process.env.CONSERVATORY_PASSWORD || "Unstoppable2026",
     12,
@@ -1016,11 +1014,15 @@ async function main() {
   console.log("Metrra Lab house seeded.");
 }
 
-main()
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+const isSeedScript = /(?:^|[\\/])seed\.(?:ts|js|mts|mjs|cjs)$/.test(process.argv[1] ?? "");
+if (isSeedScript) {
+  const prisma = new PrismaClient();
+  seedHouse(prisma)
+    .catch((error) => {
+      console.error(error);
+      process.exit(1);
+    })
+    .finally(async () => {
+      await prisma.$disconnect();
+    });
+}

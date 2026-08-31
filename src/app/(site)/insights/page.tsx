@@ -10,7 +10,7 @@ import {
   getPublishedInsights,
   getSeoByPath,
 } from "@/lib/data";
-import { buildMetadata } from "@/lib/metadata";
+import { safeMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
 
@@ -20,8 +20,7 @@ export async function generateMetadata({
   searchParams: Promise<{ industry?: string }>;
 }) {
   const { industry } = await searchParams;
-  const seo = await getSeoByPath("/insights");
-  return buildMetadata(seo, {
+  return safeMetadata(() => getSeoByPath("/insights"), {
     title: "Industry Insights | Metrra Lab",
     description:
       "Industry notes from Metrra Lab — cosmetics, food and beverage, plastics, electronics, metals, and the verticals you open next.",

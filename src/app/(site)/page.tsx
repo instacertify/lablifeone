@@ -14,13 +14,12 @@ import {
   getSeoByPath,
   getSettings,
 } from "@/lib/data";
-import { buildMetadata } from "@/lib/metadata";
+import { safeMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
-  const seo = await getSeoByPath("/");
-  return buildMetadata(seo, {
+  return safeMetadata(() => getSeoByPath("/"), {
     title: "Metrra Lab | A global laboratory with global solutions",
     description:
       "Metrra Lab is a global laboratory with global solutions. Food, cosmetics, electronics, metals, polymers, and every discipline you commission. Be testing. Be unstoppable.",

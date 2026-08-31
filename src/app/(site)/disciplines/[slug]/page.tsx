@@ -8,7 +8,7 @@ import {
   getPublishedCategories,
   getSeoByPath,
 } from "@/lib/data";
-import { buildMetadata } from "@/lib/metadata";
+import { safeMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
 
@@ -18,13 +18,20 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const category = await getCategoryBySlug(slug);
-  const seo = await getSeoByPath(`/disciplines/${slug}`);
-  return buildMetadata(seo, {
-    title: `${category?.name || "Discipline"} | Metrra Lab`,
-    description: category?.excerpt || "A Metrra testing discipline.",
-    path: `/disciplines/${slug}`,
-  });
+  try {
+    const category = await getCategoryBySlug(slug);
+    return safeMetadata(() => getSeoByPath(`/disciplines/${slug}`), {
+      title: `${category?.name || "Discipline"} | Metrra Lab`,
+      description: category?.excerpt || "A Metrra testing discipline.",
+      path: `/disciplines/${slug}`,
+    });
+  } catch {
+    return safeMetadata(async () => null, {
+      title: "Discipline | Metrra Lab",
+      description: "A Metrra testing discipline.",
+      path: `/disciplines/${slug}`,
+    });
+  }
 }
 
 export default async function CategoryPage({

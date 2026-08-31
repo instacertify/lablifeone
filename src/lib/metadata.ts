@@ -12,6 +12,17 @@ type SeoLike = {
   robots?: string | null;
 };
 
+export async function safeMetadata(
+  load: () => Promise<SeoLike | null | undefined>,
+  fallback: { title: string; description: string; path: string },
+): Promise<Metadata> {
+  try {
+    return buildMetadata(await load(), fallback);
+  } catch {
+    return buildMetadata(null, fallback);
+  }
+}
+
 export function buildMetadata(
   seo: SeoLike | null | undefined,
   fallback: { title: string; description: string; path: string },
