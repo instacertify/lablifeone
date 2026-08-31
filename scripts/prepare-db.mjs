@@ -1,25 +1,28 @@
-import { execFileSync } from "node:child_process";
-import { join } from "node:path";
-import { createRequire } from "node:module";
+import { copyFileSync, existsSync, mkdirSync, statSync } from "node:fs";
+import { dirname, join } from "node:path";
 
-const require = createRequire(import.meta.url);
+const house = join(process.cwd(), "prisma", "house.sqlite");
+const current = process.env.DATABASE_URL?.trim();
+let dest = house;
 
-if (!process.env.DATABASE_URL || process.env.DATABASE_URL.startsWith("file:./")) {
-  process.env.DATABASE_URL = `file:${join(process.cwd(), "prisma", "dev.db")}`;
+if (current?.startsWith("file:")) {
+  const path = current.slice(5).replace(/^['"]|['"]$/g, "");
+  const legacy = path === "./dev.db" || path === "dev.db" || path === "./prisma/dev.db" || path === "prisma/dev.db";
+  if (legacy) {
+    dest = house;
+  } else if (path.startsWith("/")) {
+    dest = path;
+  } else {
+    dest = join(process.cwd(), path.replace(/^\.\//, ""));
+  }
 }
 
-execFileSync("npx", ["prisma", "db", "push", "--skip-generate"], {
-  stdio: "inherit",
-  env: process.env,
-});
-
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
-const house = await prisma.setting.findUnique({ where: { id: "house" } });
-if (!house) {
-  execFileSync("npx", ["tsx", "prisma/seed.ts"], {
-    stdio: "inherit",
-    env: process.env,
-  });
+if (existsSync(house) && dest !== house) {
+  const destReady = existsSync(dest) && statSync(dest).size >= 20_000;
+  if (!destReady) {
+    mkdirSync(dirname(dest), { recursive: true });
+    copyFileSync(house, dest);
+  }
 }
-await prisma.$disconnect();
+
+process.env.DATABASE_URL = `file:${existsSync(dest) ? dest : house}`;

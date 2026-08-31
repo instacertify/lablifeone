@@ -2,13 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { LeadForm } from "@/components/site/LeadForm";
 import { flattenCategoryNames, getPublishedCategories, getSeoByPath } from "@/lib/data";
-import { buildMetadata } from "@/lib/metadata";
+import { safeMetadata } from "@/lib/metadata";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
-  const seo = await getSeoByPath("/disciplines");
-  return buildMetadata(seo, {
+  return safeMetadata(() => getSeoByPath("/disciplines"), {
     title: "Testing Disciplines | Metrra Lab",
     description:
       "Food, cosmetics, electronics, metals, polymers, and every category the Conservatory opens next — all under Disciplines.",

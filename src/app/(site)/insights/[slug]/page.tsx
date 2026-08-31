@@ -10,7 +10,7 @@ import {
   getSeoByPath,
   getSettings,
 } from "@/lib/data";
-import { buildMetadata } from "@/lib/metadata";
+import { safeMetadata } from "@/lib/metadata";
 import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -21,13 +21,20 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const insight = await getInsightBySlug(slug);
-  const seo = await getSeoByPath(`/insights/${slug}`);
-  return buildMetadata(seo, {
-    title: `${insight?.title || "Industry Insights"} | Metrra Lab`,
-    description: insight?.excerpt || "A note from Metrra Lab.",
-    path: `/insights/${slug}`,
-  });
+  try {
+    const insight = await getInsightBySlug(slug);
+    return safeMetadata(() => getSeoByPath(`/insights/${slug}`), {
+      title: `${insight?.title || "Industry Insights"} | Metrra Lab`,
+      description: insight?.excerpt || "A note from Metrra Lab.",
+      path: `/insights/${slug}`,
+    });
+  } catch {
+    return safeMetadata(async () => null, {
+      title: "Industry Insights | Metrra Lab",
+      description: "A note from Metrra Lab.",
+      path: `/insights/${slug}`,
+    });
+  }
 }
 
 export default async function InsightPage({

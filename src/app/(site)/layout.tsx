@@ -13,10 +13,16 @@ export default async function SiteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [settings, categories] = await Promise.all([
-    getSettings(),
-    getPublishedCategories(),
-  ]);
+  let settings = null;
+  let categories: Awaited<ReturnType<typeof getPublishedCategories>> = [];
+  try {
+    [settings, categories] = await Promise.all([
+      getSettings(),
+      getPublishedCategories(),
+    ]);
+  } catch (error) {
+    console.error(error);
+  }
 
   const house = settings ?? fallbackHouse;
 
